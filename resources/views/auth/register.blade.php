@@ -39,6 +39,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Sucursal</label>
+
+                            <div class="col-md-6">
+                                <input id="sucursal" type="text" class="form-control" name="sucursal" value="{{ old('sucursal') }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Permisos</label>
+
+                            <div class="col-md-6">
+                                <input id="permisos" type="text" class="form-control" name="permisos" value="{{ old('permisos') }}" required>
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
