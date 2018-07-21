@@ -13,10 +13,10 @@ class CreateSucursalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sucursals', function (Blueprint $table) {
+        Schema::create('sucursales', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Nombre');
-            $table->string('Direccion');
+            $table->string('nombre');
+            $table->string('direccion');
             $table->timestamps();
         });
     }

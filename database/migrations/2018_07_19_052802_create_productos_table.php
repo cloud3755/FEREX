@@ -15,9 +15,13 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Nombre');
-            $table->string('Descripcion');
-            $table->double('Precio',5,2);
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('claveProdServ');
+            $table->string('codigoBarras')->unique();
+            $table->boolean('activo')->default(true);
+            $table->decimal('precio',5,2);
+            
             $table->timestamps();
         });
     }
