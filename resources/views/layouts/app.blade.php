@@ -12,10 +12,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/personalizado.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top navbarPersonal">
             <div class="container">
                 <div class="navbar-header">
 
@@ -70,11 +71,36 @@
                 </div>
             </div>
         </nav>
-
+        @section('mensajesBackEnd')
+            @if(Session::has('Guardado'))
+                <div class="alert alert-success"><span></span><em> {!! session('Guardado') !!}</em></div>
+            @endif
+            @if(Session::has('Warning'))
+                <div class="alert alert-warning"><span></span><em> {!! session('Warning') !!}</em></div>
+            @endif
+        @show
         @yield('content')
     </div>
 
-    <!-- Scripts -->
+  @section('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/bootstrap/popper.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
+    <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
+
+    @show
+
+    @section('scripts.DataTable')
+        <script src="{{ asset('js//bootstrap/datatables.js') }}"></script>
+        <script src="{{ asset('js/utils/datatable.js') }}"></script>
+    @show
+
+    @section('scripts.Select')
+    <!--Script select 2 -->
+        <script src="{{ asset('js//bootstrap/bootstrap-select.min.js') }}"></script>
+        <script src="{{ asset('js//bootstrap/bootstrap-select.js') }}"></script>
+    <!--  -->
+    @show
+    
 </body>
 </html>

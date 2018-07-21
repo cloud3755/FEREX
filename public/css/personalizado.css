@@ -1,0 +1,24 @@
+.navbarPersonal, .btn-primary
+{
+    background: #871818;
+}
+
+.navbar-default .navbar-brand
+{
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a
+{
+    color: #fff;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-brand:hover
+{
+    color: #fe8383;
+    background-color: transparent;
+}
+
+textarea {
+  resize: none;
+}
+

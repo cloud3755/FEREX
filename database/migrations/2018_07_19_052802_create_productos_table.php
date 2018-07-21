@@ -17,10 +17,11 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('claveProdServ');
-            $table->string('codigoBarras')->unique();
+            $table->string('claveProdServ')->nullable()->default("");
+            $table->integer('minimoAlarma')->nullable();
+            $table->string('codigoBarras')->unique()->nullable();
             $table->boolean('activo')->default(true);
-            $table->decimal('precio',5,2);
+            $table->decimal('precio',5,2)->default(0);;
             
             $table->timestamps();
         });
