@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Inventario;
+
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $productos =  DB::table('inventarios')
+        ->join('productos', "inventarios.idProducto", "=", "productos.id")
+        ->where('inventarios.cantidad', '<', 'productos.minimoAlarma')
+        ->select("productos.nombre" , "productos.descripcion", "inventarios.cantidad as stock", "productos.minimoAlarma as alarma" )
+        
+        ->get();
+//dd($productos);
+        return view('home' , compact('productos'));
     }
 }

@@ -67,7 +67,7 @@
                       </div>
                       <br/>
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
 
                           <div class="input-group">
 
@@ -78,13 +78,24 @@
                           </div>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
 
                           <div class="input-group">
 
                             <label class="sr-only" for="unidadMedida">Precio</label>
                             <div class="input-group-addon">Precio</div>
                             <input type="number" min="0.01"  class="form-control" name="precio" id="precio" placeholder="precio">
+
+                          </div>
+
+                        </div>
+                        <div class="col-md-4">
+
+                          <div class="input-group">
+
+                            <label class="sr-only" for="unidadMedida">Inventario inicial</label>
+                            <div class="input-group-addon">Inventario inicial</div>
+                            <input type="number" min="1"  class="form-control" name="inicial" id="inicial" placeholder="precio" required>
 
                           </div>
 
@@ -111,10 +122,19 @@
                           <tr>
                             <th>Nombre</th>
                             <th>Descripci&oacute;n</th>
+                            <th>Clave producto servicio</th>
+                            <th>Precio</th>
                           </tr>
                         </thead>
                         <tbody>
-                        
+                          @foreach($productos as $producto)
+                          <tr>
+                            <td>{{$producto->nombre}}</td>
+                            <td>{{$producto->descripcion}}</td>
+                            <td>{{$producto->claveProdServ}}</td>
+                            <td>{{$producto->precio}}</td>
+                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
