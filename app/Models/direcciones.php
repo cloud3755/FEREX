@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sucursal extends Model
+class direcciones extends Model
 {
-   protected $table = 'sucursales';
+    //
 }

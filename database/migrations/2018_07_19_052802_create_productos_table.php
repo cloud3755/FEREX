@@ -21,8 +21,9 @@ class CreateProductosTable extends Migration
             $table->integer('minimoAlarma')->nullable();
             $table->string('codigoBarras')->unique()->nullable();
             $table->boolean('activo')->default(true);
-            $table->decimal('precio',5,2)->default(0);;
-            
+            $table->decimal('precioA',5,2)->default(0);
+            $table->decimal('precioB',5,2)->default(0);
+            $table->decimal('precioC',5,2)->default(0);
             $table->timestamps();
         });
     }
