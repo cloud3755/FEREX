@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/productos', 'productosController@index')->name('productos');
+Route::get('/productos/get', 'productosController@getProductos')->name('productos');
+Route::get('/productos/get/{id}', 'productosController@get')->name('productos');
 Route::post('/productos/nuevo', 'productosController@nuevo');
 
 

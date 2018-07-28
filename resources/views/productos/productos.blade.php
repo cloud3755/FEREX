@@ -1,22 +1,26 @@
 @extends('layouts.app')
 @section('styles')
-@parent
+  @parent
 @endsection
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Nuevo producto</div>
+                <div class="panel-heading">
+                  <span>Nuevo producto</span>
+                  <button id="btnAgregar" class="btn btn-success">Agregar</button>
+                  <button id="btnCerrar" class="btn btn-danger">Cerrar</button>
+                </div>
 
-                <div class="panel-body">
+                <div hidden id="panelAgregar" class="panel-body">
                     <!-- @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif -->
                     @section('mensajesBackEnd')
-                    @parent
+                      @parent
                     @endsection
                     <form class="form" method="POST" action="/productos/nuevo">
                      {{ csrf_field() }}
@@ -104,7 +108,7 @@
                       <br/>
                       <div class="text-center">
                         <button type="submit"  class="btn btn-primary">Agregar</button>
-                        <button class="btn btn-danger" onclick="$('form').reset">Limpiar datos</button>
+                        <button class="btn btn-warning" onclick="$('form').reset">Limpiar datos</button>
                       </div>
                    
                     </form>
@@ -124,17 +128,11 @@
                             <th>Descripci&oacute;n</th>
                             <th>Clave producto servicio</th>
                             <th>Precio</th>
+                            <th>Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($productos as $producto)
-                          <tr>
-                            <td>{{$producto->nombre}}</td>
-                            <td>{{$producto->descripcion}}</td>
-                            <td>{{$producto->claveProdServ}}</td>
-                            <td>{{$producto->precio}}</td>
-                          </tr>
-                          @endforeach
+                         
                         </tbody>
                       </table>
                     </div>
@@ -148,3 +146,7 @@
   
 
 @endsection
+  @section('scripts.personalizados')
+  @parent
+    <script src="{{ asset('js/productos/productosApp.js') }}"></script>
+  @endsection

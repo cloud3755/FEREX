@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('idSucursal');
             $table->integer('permisos');
+            $table->boolean('activo')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder {
                    'descripcion'     => 'Producto dummie',
                    'claveProdServ'     => '0101010101',
                    'codigoBarras'     => '000000',
-                   'precio'     => 99.99,
+                   'precioA'     => 99.99,
             ));        
 
         }

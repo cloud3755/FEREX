@@ -9,6 +9,8 @@ function thedataTables($id = "dataTable" ,  ajaxRoute = "", columns="")
 {
     dtObject = 
     {
+    processing: false,
+    serverSide: true,
     searching: true,
     pageLength: 5,
     paging: true,

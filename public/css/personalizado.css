@@ -1,4 +1,4 @@
-.navbarPersonal, .btn-primary
+.navbarPersonal
 {
     background: #871818;
 }
@@ -16,6 +16,11 @@
 {
     color: #fe8383;
     background-color: transparent;
+}
+
+.btn-danger
+{
+    background : #ff0f0f;
 }
 
 textarea {

@@ -22,6 +22,7 @@ class CreateDireccionesTable extends Migration
             $table->string('entre2');
             $table->string('referencia');
             $table->string('colonia');
+            $table->string('CP');
             $table->string('ciudad');
             $table->string('estado');
             $table->string('pais');

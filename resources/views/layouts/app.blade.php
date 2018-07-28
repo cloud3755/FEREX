@@ -85,7 +85,7 @@
         @yield('content')
     </div>
 
-  @section('scripts')
+  @section('scripts.basic')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap/popper.js') }}"></script>
     <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
@@ -105,5 +105,8 @@
     <!--  -->
     @show
 
+    @section('scripts.personalizados')
+
+    @show
 </body>
 </html>

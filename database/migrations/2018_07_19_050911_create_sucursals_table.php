@@ -17,6 +17,7 @@ class CreateSucursalsTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('direccion');
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use App\Models\Inventario;
+use Yajra\Datatables\Datatables;//Prueba dataTables Ajax
 
 class productosController extends Controller
 {
@@ -16,6 +17,32 @@ class productosController extends Controller
         return view('productos.productos', compact('productos'));
 
     }
+
+    public function get($id)
+    {
+        return Producto::find($id);
+    } 
+
+    public function getProductos($activos = true)
+    {
+        $productos;
+        if($activos)
+            $productos = Producto::where('activo', true);
+        else
+            $productos = Producto::all();
+
+        return Datatables::of($productos)
+        ->addColumn('Acciones', 
+            function($productos) 
+            {
+                // return "HOLA";
+                return '<a data-id="'.$productos->id.'" href="#" class="Editar btn  btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a>
+                 <a data-id="'.$productos->id.'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Desactivar</a>';
+            })
+        ->rawColumns(['Acciones'])
+        ->make(true);
+    }
+
     public function nuevo(Request $request)
     {
         try

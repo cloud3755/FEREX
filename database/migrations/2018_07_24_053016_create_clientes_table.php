@@ -17,10 +17,20 @@ class CreateClientesTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('razonSocial');
+            $table->string('contacto');
             $table->string('rfc');
-            $table->decimal('limiteCredito',7,3);//el limite para enviar notificaciones;
-            $table->decimal('credito',7,3);//credito actual;
+            $table->string('email' , 30);
+            $table->decimal('limiteCredito',7,2);//el limite para enviar notificaciones;
+            $table->decimal('credito',7,2);//credito actual;
+            
+            $table->string('telefono1' , 30);
+            $table->string('telefono2' , 30);
+            $table->string('telefono3' , 30);
 
+            $table->decimal('consumoTotal' , 10,2);// Total hisotorico de venta
+
+
+            $table->boolean('activo')->default(true);
             $table->integer('idDireccion');
             $table->timestamps();
         });
