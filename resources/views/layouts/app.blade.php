@@ -40,6 +40,13 @@
                         @guest
                         @else
                          <li><a href="/productos">Productos</a></li>
+                         <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Altas
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="/AltaClientes">Alta de clientes</a></li>
+                            </ul>
+                          </li>
                          @endguest
                     </ul>
 

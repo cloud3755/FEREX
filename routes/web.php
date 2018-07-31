@@ -23,5 +23,4 @@ Route::get('/productos', 'productosController@index')->name('productos');
 Route::get('/productos/get', 'productosController@getProductos')->name('productos');
 Route::get('/productos/get/{id}', 'productosController@get')->name('productos');
 Route::post('/productos/nuevo', 'productosController@nuevo');
-
-
+Route::get('/AltaClientes', 'altaclientesController@index')->name('AltaClientes');
