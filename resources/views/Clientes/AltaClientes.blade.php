@@ -142,7 +142,7 @@
   </div>
 
   <div class="panel panel-default">
-      <div class="panel-heading">Productos</div>
+      <div class="panel-heading">Clientes</div>
 
       <div class="panel-body">
           <div class="table-responsive">
@@ -164,7 +164,11 @@
                 </tr>
               </thead>
               <tbody>
-
+                <tr>
+                  @foreach ($clientes as $cliente)
+                  <td>{{$cliente->nombre}}</td>
+                  @endforeach
+                </tr>
               </tbody>
             </table>
           </div>
