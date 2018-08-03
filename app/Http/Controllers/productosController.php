@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use App\Models\Inventario;
+use App\Models\Sucursal;
 use Yajra\Datatables\Datatables;//Prueba dataTables Ajax
 
-class productosController extends Controller
+class productosController extends Controller 
 {
     public function index()
     {
-        $productos = new Producto();
-        $productos = $productos->all();
-        return view('productos.productos', compact('productos'));
+        $sucursales  =  Sucursal::where('activo', true);
+        return view('productos.productos', compact('sucursales'));
 
     }
 
@@ -49,12 +49,7 @@ class productosController extends Controller
         {
         //$prod->save();
         $producto = new Producto();
-        $producto->nombre = $request->nombre;
-        $producto->descripcion = $request->descripcion;
-        
-        $producto->claveProdServ = $request->claveProdServ;
-        $producto->minimoAlarma = $request->minimoAlarma;
-        $producto->codigoBarras = $request->codigoBarras;
+        $producto->setFields($request);
         
         $inicial = $request->inicial;
         

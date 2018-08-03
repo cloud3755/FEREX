@@ -2,14 +2,16 @@
 $(function(){
 thedataTables("dataTable", '/productos/get',
 [
+    {data: 'Acciones', name: 'Acciones', orderable: false, searchable: false},
     {data: 'nombre', name: 'nombre'},
     {data: 'descripcion', name: 'descripcion'},
     {data: 'claveProdServ', name: 'claveProdServ'},
     {data: 'precioA', name: 'precioA'},
-    {data: 'Acciones', name: 'Acciones', orderable: false, searchable: false}
-    
-]
+    {data: 'precioB', name: 'precioB'},
+    {data: 'precioC', name: 'precioC'},
+    {data: 'codigoBarras', name: 'codigoBarras'},
 
+]
 );
 
 $("#btnAgregar").on('click', showPanelAgregar);
