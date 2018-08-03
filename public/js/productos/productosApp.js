@@ -9,7 +9,7 @@ thedataTables("dataTable", '/productos/get',
     {data: 'precioA', name: 'precioA'},
     {data: 'precioB', name: 'precioB'},
     {data: 'precioC', name: 'precioC'},
-    {data: 'codigoBarras', name: 'codigoBarras'},
+    {data: 'codigoBarras', name: 'codigoBarras'}
 
 ]
 );
@@ -17,23 +17,36 @@ thedataTables("dataTable", '/productos/get',
 $("#btnAgregar").on('click', showPanelAgregar);
 $("#btnCerrar").on('click', hidePanelAgregar);
 
+$('#form').submit(
+    function(event)
+    {
+        setInventarioInicial();
+        return true;
+    }
+
+);
+
 $(document).on('click', '.Editar', 
     function()
     {
         editar($(this).data('id'));
     }
 );
-$(".Desactivar").on('click', 
+$(document).on('click',  ".Desactivar",
     function()
     {
         desactivar($(this).data('id'));
     }
 );
 
-function showPanelAgregar()
+function showPanelAgregar(isCreate = true)
 {
     $("#panelAgregar").show(500);
-    //$('form').reset
+    if(isCreate)
+    {
+        $('#form').reset();
+        $('#form').attr("action", "/productos/nuevo");
+    }
 }
 
 function hidePanelAgregar()
@@ -49,13 +62,32 @@ function editar(id)
         {
             $('form').find('#'+key).val(data[key]);
         }
-        showPanelAgregar();
+        showPanelAgregar(false);
+        $('#idProducto').val(id);
+        $('#form').attr("action", "/productos/editar");
     });
 }
 
 function desactivar(id)
 {
-    alert(id);  
+    if(confirm("Seguro que desea desactivar este producto"))
+    {
+        $("#idProductoCambioStatus").val(id);
+        $("#formDesactivar").submit();
+        
+    }
+    
 }
 
+
+function  setInventarioInicial()
+{
+    var inventarioInicial = {};
+    $(".inventarioSucursal").each(function()
+    {
+        var idSucursal = $(this).data("idsucursal");
+        inventarioInicial[idSucursal] = $(this).val();
+    });
+    $("#dataInventarioInicial").val(JSON.stringify(inventarioInicial));
+}
 });

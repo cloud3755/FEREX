@@ -17,7 +17,7 @@
                     @section('mensajesBackEnd')
                       @parent
                     @endsection
-                    <form class="form" method="POST" action="/productos/nuevo">
+                    <form id="form" class="form" method="POST" action="/productos/nuevo">
                      {{ csrf_field() }}
                       <div class="row">
                         <div class="col-md-6">
@@ -111,11 +111,11 @@
                       </div>
                       <br/>
                       <div class="row text-center">
-                        <button class="btn btn-default" id="setInventario" data-toggle="modal" data-target="#modalExistencia">Inventario inicial</button>
+                        <button type="button" class="btn btn-default" id="setInventario" data-toggle="modal" data-target="#modalExistencia">Inventario inicial</button>
                       </div>
                       <br/>
                       <div class="text-center">
-                        <button type="submit"  class="btn btn-primary">Agregar</button>
+                        <button type="submit" id="guardar"  class="btn btn-primary">Agregar</button>
                         <button class="btn btn-warning" onclick="$('form').reset">Limpiar datos</button>
                       </div>
                     <!-- Modal -->
@@ -129,18 +129,37 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                            
+                            @foreach($sucursales as $sucursal)
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Id </th>
+                                  <th>Sucursal</th>
+                                  <th>Inventario inicial</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              <td>{{$sucursal->id}}</td>
+                              <td>{{$sucursal->nombre}}</td>
+                              <td><input class="inventarioSucursal" value="0" min="0" data-idSucursal="{{$sucursal->id}}" type="number"></td>
+                              </tbody>
+                            </table>
+                            @endforeach
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Save changes</button>
+                              <input hidden type="text" name="dataInventarioInicial" id="dataInventarioInicial">
+                              <input hidden type="text" name="idProducto" id="idProducto">
+                              <button type="button" id="guardarInventario" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
                             </div>
                           </div>
                         </div>
                       </div>
                       <!-- Modal -->
                     </form>
-
+                    <form hidden id="formDesactivar" class="form" method="POST" action="/productos/cambioEstatus" >
+                      <input hidden type="text" name="idProducto" id="idProductoCambioStatus">
+                      {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
             <!-- aqui va la informacion que se va a cargar a la tabla de entradas -->

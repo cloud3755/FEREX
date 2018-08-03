@@ -13,7 +13,8 @@ class productosController extends Controller
 {
     public function index()
     {
-        $sucursales  =  Sucursal::where('activo', true);
+        $sucursales  =  Sucursal::where('activo', true)->get();
+        
         return view('productos.productos', compact('sucursales'));
 
     }
@@ -27,7 +28,7 @@ class productosController extends Controller
     {
         $productos;
         if($activos)
-            $productos = Producto::where('activo', true);
+            $productos = Producto::where('activo', true)->get();
         else
             $productos = Producto::all();
 
@@ -47,19 +48,23 @@ class productosController extends Controller
     {
         try
         {
-        //$prod->save();
+        //dd($request);
         $producto = new Producto();
         $producto->setFields($request);
-        
-        $inicial = $request->inicial;
-        
-        $producto->save();
-        $inventario = new Inventario();
-        $inventario->idSucursal = 1;
-        $inventario->idProducto = $producto->id;
-        $inventario->cantidad = $inicial;
-        $inventario->save();
-        \Session::flash('Guardado','Se Guardo el número de parte correctamente');
+        $producto->save(); 
+
+        $inventarioInicial = json_decode($request->dataInventarioInicial);
+
+        foreach($inventarioInicial as $key=>$val)
+        {
+            $inventario = new Inventario();
+            $inventario->idSucursal = $key;
+            $inventario->idProducto = $producto->id;
+            $inventario->cantidad = $val;
+            $inventario->save();
+            $inventario = null;
+        }
+        \Session::flash('Guardado','Se Guardo el producto correctamente');
         return redirect()->route("productos"); 
         }
         catch(Exception $e)
@@ -67,5 +72,33 @@ class productosController extends Controller
             \Session::flash('Warning','Ocurrio un error en el servidor '. $e->getMessage());
             return redirect()->route("productos"); 
         }
+    }
+
+    public function editar(Request $request)
+    {
+        try
+        {
+        $idProducto = $request->idProducto;
+        $producto = Producto::find($idProducto);
+        $producto->setFields($request);
+        $producto->save();
+        \Session::flash('Guardado','Se edito el producto correctamente');
+        return redirect()->route("productos"); 
+        }
+        catch(Exception $e)
+        {
+            \Session::flash('Warning','Ocurrio un error en el servidor '. $e->getMessage());
+            return redirect()->route("productos"); 
+        }
+    }
+
+    public function cambioEstatus(Request $request)
+    {
+        $idProducto = $request->idProducto;
+        $producto = Producto::find($idProducto);
+        $producto->activo = !($producto->activo);
+        $producto->save();
+        \Session::flash('Guardado','Se desactivo el producto correctamente');
+        return redirect()->route("productos"); 
     }
 }

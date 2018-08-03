@@ -19,8 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//productos*******************************************
+
 Route::get('/productos', 'productosController@index')->name('productos');
-Route::get('/productos/get', 'productosController@getProductos')->name('productos');
-Route::get('/productos/get/{id}', 'productosController@get')->name('productos');
+Route::get('/productos/get', 'productosController@getProductos');
+Route::get('/productos/get/{id}', 'productosController@get');
 Route::post('/productos/nuevo', 'productosController@nuevo');
+Route::post('/productos/editar', 'productosController@editar');
+Route::post('/productos/cambioEstatus', 'productosController@cambioEstatus');
+
+//productos*******************************************
+
 Route::get('/AltaClientes', 'altaclientesController@index')->name('AltaClientes');
