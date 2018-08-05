@@ -30,4 +30,7 @@ Route::post('/productos/cambioEstatus', 'productosController@cambioEstatus');
 
 //productos*******************************************
 
+//---------------------------------------------------MODULO DE CLIENTES INICIO---------------------------------------------------------------------------------------------------------------------
 Route::get('/AltaClientes', 'altaclientesController@index')->name('AltaClientes');
+Route::post('/AltaCliente/nuevo', 'altaclientesController@nuevo');
+//---------------------------------------------------MODULO DE CLIENTES FIN---------------------------------------------------------------------------------------------------------------------

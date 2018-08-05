@@ -17,7 +17,7 @@
           @section('mensajesBackEnd')
             @parent
           @endsection
-          <form class="form" method="POST" action="/productos/nuevo">
+          <form class="form" method="POST" action="/AltaCliente/nuevo">
            {{ csrf_field() }}
             <div class="row">
               <div class="col-md-6">
@@ -115,27 +115,6 @@
               <button type="submit"  class="btn btn-primary">Agregar</button>
               <button class="btn btn-warning" onclick="$('form').reset">Limpiar datos</button>
             </div>
-          <!-- Modal -->
-          <div class="modal fade" id="modalExistencia" tabindex="-1" role="dialog" aria-labelledby="modalExistenciaLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modalExistenciaLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Modal -->
           </form>
 
       </div>
@@ -166,7 +145,20 @@
               <tbody>
                 <tr>
                   @foreach ($clientes as $cliente)
+                  <td>{{$cliente->id}}</td>
                   <td>{{$cliente->nombre}}</td>
+                  <td>{{$cliente->razonSocial}}</td>
+                  <td>{{$cliente->contacto}}</td>
+                  <td>{{$cliente->rfc}}</td>
+                  <td>{{$cliente->email}}</td>
+                  <td>{{$cliente->limiteCredito}}</td>
+                  <td>{{$cliente->telefono1}}</td>
+                  <td>{{$cliente->consumoTotal}}</td>
+
+                  @if($cliente->activo==1)
+                  <td>Activo</td>
+                  @endif
+
                   @endforeach
                 </tr>
               </tbody>
