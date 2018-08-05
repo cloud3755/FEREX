@@ -109,10 +109,36 @@
 
                 </div>
             </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+
+                <div class="input-group">
+
+                  <label class="sr-only" for="unidadMedida">Telefono 2</label>
+                  <div class="input-group-addon">Telefono 2</div>
+                  <input type="text"  class="form-control" name="Telefono2" id="precioA" placeholder="Telefono 3">
+
+                </div>
+
+              </div>
+              <div class="col-md-4">
+
+                  <div class="input-group">
+
+                    <label class="sr-only" for="unidadMedida">Telefono 3</label>
+                    <div class="input-group-addon">Telefono 3</div>
+                    <input type="text"   class="form-control" name="Telefono3" id="precioB" placeholder="Telefono3">
+
+                  </div>
+
+                </div>
+            </div>
+
             <br/>
             <br/>
             <div class="text-center">
-              <button type="submit"  class="btn btn-primary">Agregar</button>
+              <button type="submit"  class="btn btn-info">Agregar</button>
               <button class="btn btn-warning" onclick="$('form').reset">Limpiar datos</button>
             </div>
           </form>
@@ -143,8 +169,8 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($clientes as $cliente)
                 <tr>
-                  @foreach ($clientes as $cliente)
                   <td>{{$cliente->id}}</td>
                   <td>{{$cliente->nombre}}</td>
                   <td>{{$cliente->razonSocial}}</td>
@@ -157,10 +183,12 @@
 
                   @if($cliente->activo==1)
                   <td>Activo</td>
+                  @else
+                  <td>Inactivo</td>
                   @endif
 
-                  @endforeach
                 </tr>
+                  @endforeach
               </tbody>
             </table>
           </div>
