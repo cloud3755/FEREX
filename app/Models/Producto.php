@@ -14,7 +14,7 @@ class Producto extends Model implements Inactivable
         $this->claveProdServ = $request->claveProdServ;
         $this->minimoAlarma = $request->minimoAlarma;
         $this->codigoBarras = $request->codigoBarras;
-        $this->precioA = $request->codigoBarras;
+        $this->precioA = $request->precioA;
         $this->precioB = $request->precioB;
         $this->precioC = $request->precioC;
 
