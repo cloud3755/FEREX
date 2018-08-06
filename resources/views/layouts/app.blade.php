@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/personalizado.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/MenuVertical.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -81,6 +82,60 @@
                 </div>
             </div>
         </nav>
+  @guest
+  @else
+  <div class="nav-side-menu">
+    <div class="brand">Ferex</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+                <li>
+                  <a href="#">
+                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                  </a>
+                </li>
+
+                <li  data-toggle="collapse" data-target="#products" class="collapsed active">
+                  <a href="#"><i class="fa fa-gift fa-lg"></i> Productos<span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="products">
+                    <li class="active"><a href="#">Alta de productos</a></li>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                  <a href="#"><i class="fa fa-globe fa-lg"></i> Altas <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="service">
+                  <li>Alta de clientes</li>
+                  <li>Alta de usuarios</li>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#new" class="collapsed">
+                  <a href="#"><i class="fa fa-car fa-lg"></i> Ventas <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="new">
+                  <li>Venta de productos</li>
+                </ul>
+
+                 <!-- <li>
+                  <a href="#">
+                  <i class="fa fa-user fa-lg"></i> Profile
+                  </a>
+                  </li>
+
+                 <li>
+                  <a href="#">
+                  <i class="fa fa-users fa-lg"></i> Users
+                  </a>
+                </li> -->
+            </ul>
+     </div>
+</div>
+@endguest
         @section('mensajesBackEnd')
             @if(Session::has('Guardado'))
                 <div class="alert alert-success"><span></span><em> {!! session('Guardado') !!}</em></div>
