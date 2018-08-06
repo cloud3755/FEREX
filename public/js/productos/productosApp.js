@@ -44,8 +44,11 @@ function showPanelAgregar(isCreate = true)
     $("#panelAgregar").show(500);
     if(isCreate)
     {
-        $('#form').reset();
+        $('#form').trigger("reset");
+        $('#setInventario').show();
         $('#form').attr("action", "/productos/nuevo");
+        $('#guardar').text("Guardar");
+
     }
 }
 
@@ -60,10 +63,12 @@ function editar(id)
     .done(function( data ) {
         for(var key in data)
         {
-            $('form').find('#'+key).val(data[key]);
+            $('#form').find('#'+key).val(data[key]);
         }
         showPanelAgregar(false);
         $('#idProducto').val(id);
+        $('#setInventario').hide();
+        $('#guardar').text("editar");
         $('#form').attr("action", "/productos/editar");
     });
 }

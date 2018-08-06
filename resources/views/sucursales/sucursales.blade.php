@@ -8,7 +8,7 @@
         <div class="col-md-12 col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                  <span>Nuevo producto</span>
+                  <span>Nueva Sucursal</span>
                   <button id="btnAgregar" class="btn btn-success">Agregar</button>
                   <button id="btnCerrar" class="btn btn-danger">Cerrar</button>
                 </div>
@@ -17,102 +17,23 @@
                     @section('mensajesBackEnd')
                       @parent
                     @endsection
-                    <form id="form" class="form" method="POST" action="/productos/nuevo">
+                    <form id="form" class="form" method="POST" action="/sucursales/nuevo">
                      {{ csrf_field() }}
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
 
                           <div class="input-group">
-                            <label class="sr-only" for="nombre">Producto</label>
-                            <div class="input-group-addon">Producto</div>
+                            <label class="sr-only" for="nombre">Sucursal</label>
+                            <div class="input-group-addon">Sucursal</div>
                             <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre" required>
                           </div>
 
                         </div>
-                        <div class="col-md-6">
-
-                          <div class="input-group">
-                            <label class="sr-only" for="descripcion">Descripción</label>
-                            <div class="input-group-addon">Descripción</div>
-                            <textarea rows="1" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion"></textarea>
-                          </div>
-
-                        </div>
                       </div>
+
+                      @include("partials.direcciones")
                       <br/>
-                      <div class="row">
-                        <div class="col-md-4">
-
-                          <div class="input-group">
-
-                            <label class="sr-only" for="claveProdServ">Clave SAT</label>
-                            <div class="input-group-addon">Clave SAT</div>
-                            <input type="text" class="form-control" name="claveProdServ" id="claveProdServ" placeholder="clave SAT">
-
-                          </div>
-
-                        </div>
-                        <div class="col-md-4">
-
-                          <div class="input-group">
-                            <label class="sr-only" for="minimoAlarma">Alarma <br/> de inventario</label>
-                            <div class="input-group-addon">Alarma <br/> de inventario</div>
-                            <input type="number" min = "1" class="form-control" name="minimoAlarma" id="minimoAlarma" placeholder="Alarma">
-                          </div>
-
-                        </div>
-                        <div class="col-md-4">
-
-                            <div class="input-group">
-  
-                              <label class="sr-only" for="codigoBarras">C&oacute;digo de barras</label>
-                              <div class="input-group-addon">C&oacute;digo de barras</div>
-                              <input type="text"  class="form-control" name="codigoBarras" id="codigoBarras" placeholder="Code">
-  
-                            </div>
-  
-                          </div>
-                      </div>
-                      <br/>
-                      <div class="row">
-                        <div class="col-md-4">
-
-                          <div class="input-group">
-
-                            <label class="sr-only" for="unidadMedida">Precio A</label>
-                            <div class="input-group-addon">Precio A</div>
-                            <input type="number" min="0.01"  class="form-control" name="precioA" id="precioA" placeholder="precio">
-
-                          </div>
-  
-                        </div>
-                        <div class="col-md-4">
-
-                            <div class="input-group">
-  
-                              <label class="sr-only" for="unidadMedida">Precio B</label>
-                              <div class="input-group-addon">Precio B</div>
-                              <input type="number" min="0.01"  class="form-control" name="precioB" id="precioB" placeholder="precio">
-  
-                            </div>
-    
-                          </div>
-                          <div class="col-md-4">
-
-                              <div class="input-group">
-    
-                                <label class="sr-only" for="unidadMedida">Precio C</label>
-                                <div class="input-group-addon">Precio C</div>
-                                <input type="number" min="0.01"  class="form-control" name="precioC" id="precioC" placeholder="precio">
-    
-                              </div>
-      
-                          </div>
-                      </div>
-                      <br/>
-                      <div class="row text-center">
-                        <button type="button" class="btn btn-default" id="setInventario" data-toggle="modal" data-target="#modalExistencia">Inventario inicial</button>
-                      </div>
+                      
                       <br/>
                       <div class="text-center">
                         <button type="submit" id="guardar"  class="btn btn-primary">Agregar</button>

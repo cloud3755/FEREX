@@ -37,8 +37,9 @@ class productosController extends Controller
             function($productos) 
             {
                 // return "HOLA";
-                return '<a data-id="'.$productos->id.'" href="#" class="Editar btn  btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a>
-                 <a data-id="'.$productos->id.'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Desactivar</a>';
+                return '<a data-id="'.$productos->id.'" href="#" class="Editar btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                 <a data-id="'.$productos->id.'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                 <a data-id="'.$productos->id.'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-barcode"></i></a>';
             })
         ->rawColumns(['Acciones'])
         ->make(true);

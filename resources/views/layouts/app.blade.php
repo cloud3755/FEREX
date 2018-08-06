@@ -11,7 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!--<link href="{{ asset('css/bootstrap3.css') }}" rel="stylesheet">-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/personalizado.css') }}" rel="stylesheet">
     <link href="{{ asset('css/MenuVertical.css') }}" rel="stylesheet">
 </head>
@@ -152,7 +153,7 @@
     <script src="{{ asset('js/bootstrap/popper.js') }}"></script>
     <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
     <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
-
+    
     @show
 
     @section('scripts.DataTable')
