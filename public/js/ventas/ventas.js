@@ -1,4 +1,4 @@
-
+var totalFinal = 0;
 var arrayGins;
 var subTotalArr = new Array();
 var contador = 0;
@@ -46,12 +46,12 @@ function agregarRegistro()
     $('#tableEntrada tbody').append(
         '<tr class="trGin" id="'+gin+'">'+
 
-        '<td id="cliente">'+cliente+'</td>'+
-        '<td id="codigoBarras">'+codigoBarras+'</td>'+
-        '<td id="descripcion">'+descripcion+'</td>'+
-        '<td id="cantidad"><input class="Cantidad overCero" type="number" id="cantidad2" value="'+cantidad+'" /></td>'+
-        '<td id="precio">'+precio+'</td>'+
-        '<td id="subTotal">'+subTotal+'</td>'+
+        '<td id="cliente'+contador+'">'+cliente+'</td>'+
+        '<td id="codigoBarras'+contador+'">'+codigoBarras+'</td>'+
+        '<td id="descripcion'+contador+'">'+descripcion+'</td>'+
+        '<td id="cantidad'+contador+'"><input class="Cantidad overCero" type="number" id="cantidad2'+contador+'" value="'+cantidad+'" /></td>'+
+        '<td id="precio'+contador+'">'+precio+'</td>'+
+        '<td id="subTotal'+contador+'">'+subTotal+'</td>'+
         '<td>'+buttonDelete+'</td>'+
         '</tr">'
     );
@@ -59,14 +59,28 @@ function agregarRegistro()
 
     subTotalArr[contador] =  subTotal;
 
-    var total = subTotalArr[contador]+subTotalArr[contador-1];
-contador++;
+    if(contador==0){
+        var total = subTotalArr[contador];
+
+        $('#total label').append(
+            total
+        );
+
+        contador++;
+
+
+    }
+    else{
+        var total = subTotalArr[contador]+subTotalArr[contador-1];
+        $("#total label").text(total);
+        contador++;
+    }
 
 
 
-    $('#total label').append(
-        total
-    );
+
+
+
     $('.removegin').on('click', function(){quitarfila($(this));});
     $('.Cantidad').on('change',function(){cantidadChange($(this));});
 }
@@ -78,12 +92,31 @@ function cantidadChange(e)
     console.log(arrayGins);
 
 
-    var precio = parseInt($("#precio").text());
-    var cantidad = $("#cantidad2").val();
-    var subTotal =   precio * cantidad;
+   var tamañoCadena = e.attr("id").length;
 
-    $("#subTotal").val(subTotal);
-    $("#subTotal").text(subTotal);
+   var fila =  e.attr("id")[tamañoCadena-1];
+
+    console.log(fila);
+
+    var precio = parseInt($("#precio"+fila).text());
+    var cantidad = $("#cantidad2"+fila).val();
+    var subTotal =   precio * cantidad;
+    $("#subTotal"+fila).val(subTotal);
+    $("#subTotal"+fila).text(subTotal);
+
+
+
+    $("td[id^='subTotal']").each(function(){
+        totalFinal = totalFinal + eval($(this).text());
+        $("#total label").text(totalFinal);
+    });
+
+
+
+
+    totalFinal = 0;
+    e.off( event );
+
 }
 
 function quitarfila(e)
