@@ -49,6 +49,7 @@
                               <li><a href="/AltaClientes">Alta de clientes</a></li>
                             </ul>
                           </li>
+                            <li><a href="/venta">Venta</a></li>
                          @endguest
                     </ul>
 
@@ -149,8 +150,8 @@
     </div>
 
   @section('scripts.basic')
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap/popper.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
     <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
     

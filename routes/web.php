@@ -39,3 +39,8 @@ Route::post('/AltaCliente/nuevo', 'altaclientesController@nuevo');
 Route::get('/sucursales', 'sucursalesController@index')->name('Sucurslaes');
 Route::post('/AltaCliente/nuevo', 'altaclientesController@nuevo');
 //---------------------------------------------------MODULO DE SUCURSALES FIN---------------------------------------------------------------------------------------------------------------------
+
+
+//punto de venta
+
+Route::get('/venta', 'ventaController@index')->name('venta');
