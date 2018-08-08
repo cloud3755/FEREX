@@ -38,10 +38,16 @@ class productosController extends Controller
             {
                 // return "HOLA";
                 return '<a data-id="'.$productos->id.'" href="#" class="Editar btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                 <a data-id="'.$productos->id.'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                 <a data-id="'.$productos->id.'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-barcode"></i></a>';
+                 <a data-id="'.$productos->id.'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
             })
-        ->rawColumns(['Acciones'])
+            
+            ->addColumn('codigoBarras', 
+            function($productos) 
+            {
+                // return "HOLA";
+                return '<a data-code="'.$productos->codigoBarras.'" href="#" data-toggle="modal" data-target="#modalBarras" class="codigoBarras btn btn-default"><i class="glyphicon glyphicon-barcode"></i></a> '.$productos->codigoBarras;
+            })
+        ->rawColumns(['Acciones', 'codigoBarras'])
         ->make(true);
     }
 

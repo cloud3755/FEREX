@@ -165,8 +165,8 @@
             <!-- aqui va la informacion que se va a cargar a la tabla de entradas -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                  Productos
-                   <a title="Carga masiva" class="btn btn-success"><i class="glyphicon glyphicon-cloud-upload"></i></a>
+                  Productos 
+                   <a title="Carga masiva" data-toggle="modal" data-target="#modalCargaMasiva" class="btn btn-success"><i class="glyphicon glyphicon-cloud-upload"></i> Carga masiva</a>
                 </div>
                
 
@@ -198,10 +198,82 @@
 </div>
 
 
-  
+<div class="modal fade" id="modalCargaMasiva" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalExistenciaLabel">Carga masiva</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Instrucciones:
+      <ol>
+        <li>Descargar el layout <button class="btn btn-primary">Aqui</button></li>
+        <li>Llnenar las columnas correspondientes</li>
+        <li>Las ultimas columnas pertenecen al inventario por sucursal, dependiendo del id
+          de la sucursal, introduzca la cantidad de inventario inicial
+        </li>
+        <li>De click en subir layout</li>
+        <li>Se llenara la tabla de abajo, verifique los datos</li>
+        <li>De click en cargar</li>
+      </ol>
+      <span class="text-danger">No utilice el mismo layout para cargas posteriores, descargue uno nuevo en este apartado</span>
+      <table class="table">
+        <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Descripci&oacute;n</th>
+              <th>Clave producto servicio</th>
+              <th>Precio A</th>
+              <th>Precio B</th>
+              <th>Precio C</th>
+              <th>Codigo de barras</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+      
+      </div>
+      <div class="modal-footer">
+        <input hidden type="text" name="dataInventarioInicial" id="dataInventarioInicial">
+        <input hidden type="text" name="idProducto" id="idProducto">
+        <button type="button" id="guardarInventario" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalBarras" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <div id="barcodeDiv">
+        <svg id="barcode"></svg>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <input hidden type="text" name="dataInventarioInicial" id="dataInventarioInicial">
+        <input hidden type="text" name="idProducto" id="idProducto">
+        <button type="button" id="imprimirCodigo" class="btn btn-primary" data-dismiss="modal">Imprimir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 @endsection
   @section('scripts.personalizados')
   @parent
     <script src="{{ asset('js/productos/productosApp.js') }}"></script>
+    <script src="{{ asset('js/utils/JsBarcode.all.min.js') }}"></script>
   @endsection

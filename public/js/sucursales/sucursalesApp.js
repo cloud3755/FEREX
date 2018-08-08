@@ -1,22 +1,16 @@
 
 $(function(){
-thedataTables("dataTable", '/productos/get',
+thedataTables("dataTable", '/sucursales/get',
 [
     {data: 'Acciones', name: 'Acciones', orderable: false, searchable: false},
-    {data: 'nombre', name: 'nombre'},
-    {data: 'descripcion', name: 'descripcion'},
-    {data: 'claveProdServ', name: 'claveProdServ'},
-    {data: 'precioA', name: 'precioA'},
-    {data: 'precioB', name: 'precioB'},
-    {data: 'precioC', name: 'precioC'},
-    {data: 'codigoBarras', name: 'codigoBarras'}
+    {data: 'id', name: 'id'},
+    {data: 'nombre', name: 'nombre'}
 
 ]
 );
 
 $("#btnAgregar").on('click', showPanelAgregar);
 $("#btnCerrar").on('click', hidePanelAgregar);
-$("#imprimirCodigo").on('click', PrintBarCode);
 
 $('#form').submit(
     function(event)
@@ -39,15 +33,6 @@ $(document).on('click',  ".Desactivar",
         desactivar($(this).data('id'));
     }
 );
-
-$(document).on('click',  ".codigoBarras",
-    function()
-    {
-        JsBarcode("#barcode", $(this).data('code'));
-    }
-);
-
-
 
 function showPanelAgregar(isCreate = true)
 {
@@ -104,35 +89,5 @@ function  setInventarioInicial()
         inventarioInicial[idSucursal] = $(this).val();
     });
     $("#dataInventarioInicial").val(JSON.stringify(inventarioInicial));
-}
-
-function PrintBarCode()
-{
-    var css = "@media print {size: 15cm 15cm;}";
-   
-
-    var mywindow = window.open('', 'PrintMap', 'height=100,width=300');
-
-    mywindow.document.write('<html>');
-    mywindow.document.write('<head>');
-    mywindow.document.write("<style>");
-    mywindow.document.write("@page {size: 25cm 35.7cm;   margin: 5mm 5mm 5mm 5mm;}");
-    mywindow.document.write("</style>");
-    mywindow.document.write('</head>');
-    mywindow.document.write('<body>');
-    mywindow.document.write('<div style="height:400px;border:1px solid blue;">');
-   
-    mywindow.document.write($("#barcodeDiv").html());
-
-    mywindow.document.write('</div>');
-    mywindow.document.write('</body></html>');
-
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-//mywindow.open();
-    mywindow.print();
-    mywindow.close();
-
-    return true;
 }
 });

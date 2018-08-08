@@ -86,7 +86,7 @@
             <!-- aqui va la informacion que se va a cargar a la tabla de entradas -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                  Productos
+                  sucursales
                    <a title="Carga masiva" class="btn btn-success"><i class="glyphicon glyphicon-cloud-upload"></i></a>
                 </div>
                
@@ -97,13 +97,9 @@
                         <thead>
                           <tr>
                             <th>Acciones</th>
-                            <th>Nombre</th>
-                            <th>Descripci&oacute;n</th>
-                            <th>Clave producto servicio</th>
-                            <th>Precio A</th>
-                            <th>Precio B</th>
-                            <th>Precio C</th>
-                            <th>Codigo de barras</th>
+                            <th>id</th>
+                            <th>nombre</th>
+                           
                             
                           </tr>
                         </thead>
@@ -124,5 +120,5 @@
 @endsection
   @section('scripts.personalizados')
   @parent
-    <script src="{{ asset('js/productos/productosApp.js') }}"></script>
+    <script src="{{ asset('js/sucursales/SucursalesApp.js') }}"></script>
   @endsection
