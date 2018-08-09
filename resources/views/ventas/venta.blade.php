@@ -29,7 +29,7 @@
                                     <div class="input-group">
                                         <label class="sr-only" for="Clientes">Cliente</label>
                                         <div class="input-group-addon">Cliente</div>
-                                        <select class="form-control selectpicker" multiple  id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
+                                            <select class="form-control selectpicker cliente"   id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
                                             @foreach($clientes as $cliente)
                                                 <option data-descripcion="{{$cliente->rfc}}" value="{{$cliente->rfc}}">{{$cliente->email}} - {{$cliente->rfc}}</option>
                                             @endforeach
@@ -42,9 +42,9 @@
                                     <div class="input-group">
                                         <label class="sr-only" for="Productos">Productos</label>
                                         <div class="input-group-addon">Productos</div>
-                                        <select class="form-control selectpicker" multiple  id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
+                                        <select class="form-control selectpicker producto"   id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
                                             @foreach($productos as $producto)
-                                                <option data-descripcion="{{$producto->descripcion}}" value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
+                                                <option data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -55,7 +55,7 @@
                                         <div class="input-group">
                                             <label class="sr-only" for="cantidad">Cantidad</label>
                                             <div class="input-group-addon">Cantidad</div>
-                                            <input type="number" min="0" class="form-control overCero" id="cantidad" placeholder="Cantidad">
+                                            <input type="number" min="1"  class="form-control overCero" id="cantidad" placeholder="Cantidad">
                                         </div>
                                     </div>
 
@@ -108,10 +108,15 @@
                                Total
                                 <label></label>
                             </div>
-                            <form hidden  id="form" method="POST" action="/entradas" }}>
+                            <form hidden  id="form" method="POST" action="/venta" }}>
                                 {{ csrf_field() }}
-                                <input type="text" id="datosEntrada" name="datosEntrada" />
-                                <input type="number" id="id_sucursal" name="id_sucursal" />
+                                <input type="text" id="vendedor" name="vendedor" value="0" />
+                                <input type="text" id="cliente" name="cliente[]"  />
+                                <input type="text" id="producto" name="producto[]"  />
+                                <input type="text" id="cantidad" name="cantidad[]"  />
+                                <input type="text" id="precioProducto" name="precioProducto[]"  />
+                                <input type="text" id="subTotal" name="subTotal[]"  />
+                                <input type="text" id="total" name="total[]"  />
                             </form>
                         </div>
                     </div>

@@ -45,3 +45,4 @@ Route::post('/AltaCliente/nuevo', 'altaclientesController@nuevo');
 //punto de venta
 
 Route::get('/venta', 'ventaController@index')->name('venta');
+Route::post('/venta', 'ventaController@realizarVenta');
