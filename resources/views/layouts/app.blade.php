@@ -15,6 +15,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/personalizado.css') }}" rel="stylesheet">
     <link href="{{ asset('css/MenuVertical.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
 </head>
 <body>
     <div id="app">
@@ -155,7 +156,7 @@
     <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
     <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
-    
+
     @show
 
     @section('scripts.DataTable')
