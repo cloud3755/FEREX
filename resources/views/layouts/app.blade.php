@@ -15,6 +15,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/personalizado.css') }}" rel="stylesheet">
     <link href="{{ asset('css/MenuVertical.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
 </head>
 <body>
@@ -95,12 +96,12 @@
 
             <ul id="menu-content" class="menu-content collapse out">
                 <li>
-                  <a href="#">
+                  <a href="/Dashboard">
                   <i class="fa fa-dashboard fa-lg"></i> Dashboard
                   </a>
                 </li>
 
-                <li  data-toggle="collapse" data-target="#products" class="collapsed active">
+                <li  data-toggle="collapse" data-target="#products" >
                   <a href="#"><i class="fa fa-gift fa-lg"></i> Productos<span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="products">

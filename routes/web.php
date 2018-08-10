@@ -40,7 +40,9 @@ Route::get('/sucursales', 'sucursalesController@index')->name('Sucurslaes');
 Route::get('/sucursales/get', 'sucursalesController@getSucursales');
 Route::post('/AltaCliente/nuevo', 'altaclientesController@nuevo');
 //---------------------------------------------------MODULO DE SUCURSALES FIN---------------------------------------------------------------------------------------------------------------------
-
+//---------------------------------------------------MODULO DE DASHBOARD---------------------------------------------------------------------------------------------------------------------
+Route::get('/Dashboard', 'DashboardController@index')->name('Dashboard');
+//---------------------------------------------------MODULO DE DASHBOARD FIN---------------------------------------------------------------------------------------------------------------------
 
 //punto de venta
 
