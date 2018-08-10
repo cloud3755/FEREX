@@ -188,8 +188,8 @@ function agregarRegistro()
 
 function cantidadChange(e)
 {
-    var gin = e.parent().parent().attr('id');
-    arrayGins[gin]['cantidad'] = e.val();
+
+
     var cantidad = e.val();
 
     var exitenciaPorFila = e.data("existencia");
