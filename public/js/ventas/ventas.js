@@ -33,6 +33,14 @@ function agregarRegistro()
         return false;
     }
 
+    if (cantidad >0){
+    }
+
+    else {
+        alert("No puede ir esa cantidad")
+        return false;
+    }
+
     var buttonDelete = '<button data-gin='+gin+' class="removegin">x</button>';
     arrayGin['cliente'] = cliente;
     arrayGin['codigoBarras'] = codigoBarras;
@@ -103,6 +111,16 @@ function cantidadChange(e)
     var cantidad = e.val();
 
     var exitenciaPorFila = e.data("existencia");
+
+    if(cantidad > 0){
+
+    }
+
+    else {
+        alert("No puede ir esa cantidad");
+        e.val(1);
+        e.off( event );
+    }
 
     if(exitenciaPorFila < cantidad){
         alert("sobre pasa tu inventario");
