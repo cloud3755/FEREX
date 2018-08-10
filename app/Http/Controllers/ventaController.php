@@ -36,6 +36,7 @@ class ventaController extends Controller
         $precioProducto = $request->input('precioProducto');
         $subTotal = $request->input('subTotal');
         $total = $request->input('total');
+        $folio = $request->input('folio');
 
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",", $producto[0]);
@@ -43,20 +44,22 @@ class ventaController extends Controller
         $precios = explode(",", $precioProducto[0]);
         $subTotales = explode(",", $subTotal[0]);
 
-        $ventas = new Ventas();
+
 
             $i = count($productos);
 
 
             for ($a=0; $a<$i; $a++ ){
 
-
+                $ventas = new Ventas();
                 $clienteAdd = $clientes[$a];
                 $productoAdd = $productos[$a];
                 $cantidadAdd = $cantidades[$a];
                 $precioAdd = $precios[$a];
                 $subTotaleAdd = $subTotales[$a];
                 $totalAdd = $total[0];
+                $folioAdd = $folio[0];
+                $ventas -> folio = $folioAdd;
                 $ventas -> vendedor = $request->input('vendedor');
                 $ventas -> cliente= $clienteAdd;
                 $ventas -> producto= $productoAdd;
@@ -66,7 +69,8 @@ class ventaController extends Controller
                 $ventas -> total =  $totalAdd;
                 $ventas->save();
             }
-
+        \Session::flash('Guardado','Se guardo correctamente la venta');
+        return redirect()->route("venta");
 
     }
 

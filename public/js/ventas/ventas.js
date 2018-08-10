@@ -3,6 +3,20 @@ var arrayGins;
 var subTotalArr = new Array();
 var contador = 0;
 arrayGins = {};
+
+var d = new Date();
+var month = d.getMonth()+1;
+var day = d.getDate();
+var output = d.getFullYear() + '/' +
+    (month<10 ? '0' : '') + month + '/' +
+    (day<10 ? '0' : '') + day;
+var nuevaCadena = output.replace("/", "");
+var nuevaCadena2 = nuevaCadena.replace("/", "");
+
+var folio =nuevaCadena2+ Math.floor(Math.random() * 100000);
+
+
+
 $(function(){
 
     $('#agregarEntrada').on('click', agregarRegistro);
@@ -34,6 +48,51 @@ function agregarRegistro()
     }
 
     if (cantidad >0){
+        var productoSelecionado = $(".producto :selected").data("codigo");
+        var cantidadSelecionada= $("#cantidad").val();
+        $("td[id^='codigoBarras']").each(function($key){
+
+            var productoAgregado = $(this).text();
+
+
+            if(productoSelecionado == productoAgregado){
+                var cantidadAgregada = $("#cantidad2"+$key).val();
+                cantidadSelecionada =  parseInt(cantidadSelecionada);
+                cantidadAgregada =   parseInt(cantidadAgregada);
+                var sumarCantidad = cantidadSelecionada +  cantidadAgregada;
+
+
+                $("#cantidad2"+$key).val(sumarCantidad);
+
+
+                var tamañoCadena =  $(this).attr("id").length;
+
+                var fila =  $(this).attr("id")[tamañoCadena-1];
+
+
+
+                var precio = parseInt($("#precio"+fila).text());
+                var cantidad = $("#cantidad2"+fila).val();
+                var subTotal =   precio * cantidad;
+                $("#subTotal"+fila).val(subTotal);
+                $("#subTotal"+fila).text(subTotal);
+
+
+                $("td[id^='subTotal']").each(function(){
+                    totalFinal = totalFinal + eval($(this).text());
+                    $("#total label").text(totalFinal);
+                });
+
+
+
+
+                totalFinal = 0;
+
+               agregarRegistro.off( event );
+            }
+
+
+        });
     }
 
     else {
@@ -41,7 +100,7 @@ function agregarRegistro()
         return false;
     }
 
-    var buttonDelete = '<button data-gin='+gin+' class="removegin">x</button>';
+    var buttonDelete = '<button data-gin='+codigoBarras+' class="removegin">x</button>';
     arrayGin['cliente'] = cliente;
     arrayGin['codigoBarras'] = codigoBarras;
     arrayGin['descripcion'] = descripcion;
@@ -49,11 +108,15 @@ function agregarRegistro()
     arrayGin['precio'] = precio;
     arrayGin['subTotal'] = subTotal;
 
-    console.log(arrayGin);
+
     arrayGins[cliente] = arrayGin;
-    console.log(arrayGins);
+
+
+
+
+
     $('#tableEntrada tbody').append(
-        '<tr class="trGin" id="'+gin+'">'+
+        '<tr class="trCliente" id="'+codigoBarras+'">'+
 
         '<td id="cliente'+contador+'">'+cliente+'</td>'+
         '<td id="codigoBarras'+contador+'">'+codigoBarras+'</td>'+
@@ -79,16 +142,35 @@ function agregarRegistro()
         );
 
         contador++;
-        $('.producto option:selected').remove();
-        $('.producto').selectpicker('refresh');
+
 
     }
     else{
-        var total = subTotalArr[contador]+subTotalArr[contador-1];
-        $("#total label").text(total);
+
+
+        var tamañoCadena =  $(".Cantidad").attr("id").length;
+
+        var fila =  $(".Cantidad").attr("id")[tamañoCadena-1];
+
+
+
+        var precio = parseInt($("#precio"+fila).text());
+        var cantidad = $("#cantidad2"+fila).val();
+        var subTotal =   precio * cantidad;
+        $("#subTotal"+fila).val(subTotal);
+        $("#subTotal"+fila).text(subTotal);
+
+
+        $("td[id^='subTotal']").each(function(){
+            totalFinal = totalFinal + eval($(this).text());
+            $("#total label").text(totalFinal);
+        });
+
+
+
+
+        totalFinal = 0;
         contador++;
-        $('.producto option:selected').remove();
-        $('.producto').selectpicker('refresh');
     }
 
 
@@ -156,11 +238,11 @@ function cantidadChange(e)
 
 function quitarfila(e)
 {
-    gin = e.data('gin');
 
-    $('#'+gin).remove();
-    delete arrayGins[gin];
 
+   var idFila = e.data("gin");
+
+    $('#'+idFila).remove();
 }
 
 function submitForm()
@@ -220,6 +302,7 @@ var total  = $("#total label").text() ;
     $("#form input#precioProducto").val(precioProducto);
     $("#form input#subTotal").val(subTotal);
     $("#form input#total").val(total);
-
+    $("#form input#folio").val(folio);
+    folio
     $('#form').submit();
 }

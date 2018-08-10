@@ -53,9 +53,8 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="input-group">
-                                            <label class="sr-only" for="cantidad">Cantidad</label>
-                                            <div class="input-group-addon">Cantidad</div>
-                                            <input type="number" min="1"  class="form-control overCero" id="cantidad" placeholder="Cantidad">
+
+                                            <input  type="hidden" value="1"  class="form-control overCero" id="cantidad" placeholder="Cantidad">
                                         </div>
                                     </div>
 
@@ -117,6 +116,7 @@
                                 <input type="text" id="precioProducto" name="precioProducto[]"  />
                                 <input type="text" id="subTotal" name="subTotal[]"  />
                                 <input type="text" id="total" name="total[]"  />
+                                <input type="text" id="folio" name="folio[]"  />
                             </form>
                         </div>
                     </div>
