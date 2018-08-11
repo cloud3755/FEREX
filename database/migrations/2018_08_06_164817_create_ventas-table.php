@@ -19,7 +19,7 @@ class CreateVentasTable extends Migration
         $table->string('vendedor');
         $table->string('cliente');
         $table->string('producto');
-        $table->string('cantidad');
+        $table->decimal('cantidad', 7 , 3 );
         $table->string('precioProducto');
         $table->string('subTotal');
         $table->string('total');

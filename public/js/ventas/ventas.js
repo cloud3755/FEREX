@@ -191,7 +191,7 @@ function cantidadChange(e)
 
 
     var cantidad = e.val();
-
+cantidad = parseInt(cantidad);
     var exitenciaPorFila = e.data("existencia");
 
     if(cantidad > 0){
