@@ -18,6 +18,12 @@ var folio =nuevaCadena2+ Math.floor(Math.random() * 100000);
 
 
 $(function(){
+    $('body').keyup(function(e) {
+        if(e.which == 13){
+            agregarRegistro();
+            $(".producto > button").click();
+        }
+    });
 
     $('#agregarEntrada').on('click', agregarRegistro);
     $('#Procesar').on('click', submitForm);
@@ -26,6 +32,9 @@ $(function(){
     });
 
 });
+
+
+
 
 
 function agregarRegistro()
