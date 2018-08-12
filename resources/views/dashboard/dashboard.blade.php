@@ -119,6 +119,54 @@
     </div>
 </div>
 
+<?php
+  $graficaTotalVentas=json_encode($ventasMes);
+
+ ?>
+
+ <script type="text/javascript">
+
+ function drawChart() {
+
+   var ventasMes = eval(<?php echo $graficaTotalVentas ?>);
+   var mes = 'Sin mes';
+
+   var datosMes = new Array();
+   datosMes[0] = ['Mes', 'Ventas'];
+
+   for (var i = 0; i < ventasMes.length; i++)
+    {
+
+      if (ventasMes[i].mes == 1) {mes = 'Enero';}
+      else if (ventasMes[i].mes == 2) {mes = 'Febrero';}
+      else if (ventasMes[i].mes == 3) {mes = 'Marzo';}
+      else if (ventasMes[i].mes == 4) {mes = 'Abril';}
+      else if (ventasMes[i].mes == 5) {mes = 'Mayo';}
+      else if (ventasMes[i].mes == 6) {mes = 'Junio';}
+      else if (ventasMes[i].mes == 7) {mes = 'Julio';}
+      else if (ventasMes[i].mes == 8) {mes = 'Agosto';}
+      else if (ventasMes[i].mes == 9) {mes = 'Septiembre';}
+      else if (ventasMes[i].mes == 10) {mes = 'Octubre';}
+      else if (ventasMes[i].mes == 11) {mes = 'Noviembre';}
+      else if (ventasMes[i].mes == 12) {mes = 'Diciembre';}
+
+      datosMes[i + 1] = [ mes, ventasMes[i].suma ];
+    }
+
+
+   var data = google.visualization.arrayToDataTable(datosMes,false);
+
+   var options = {
+     title: 'Ventas por mes',
+     hAxis: {title: 'Ventas',  titleTextStyle: {color: '#333'}},
+     vAxis: {minValue: 0}
+   };
+
+   var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+   chart.draw(data, options);
+ }
+
+ </script>
 
 @endsection
   @section('scripts.personalizados')
