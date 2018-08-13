@@ -20,8 +20,9 @@ var folio =nuevaCadena2+ Math.floor(Math.random() * 100000);
 $(function(){
     $('body').keyup(function(e) {
         if(e.which == 13){
-            agregarRegistro();
+
             $(".producto > button").click();
+            agregarRegistro();
         }
     });
 
@@ -43,6 +44,7 @@ function agregarRegistro()
     var cliente = $('#Cliente :selected').data('descripcion');
     var cantidad = $('#cantidad').val();
     var arrayGin = {};
+    var idProducto = $('#Productos :selected').data('id');
     var descripcion = $('#Productos :selected').data('descripcion');
     var codigoBarras = $('#Productos :selected').data('codigo');
     var precio = $('#Productos :selected').val();
@@ -128,8 +130,8 @@ function agregarRegistro()
         '<tr class="trCliente" id="'+codigoBarras+'">'+
 
         '<td id="cliente'+contador+'">'+cliente+'</td>'+
-        '<td id="codigoBarras'+contador+'">'+codigoBarras+'</td>'+
-        '<td id="descripcion'+contador+'">'+descripcion+'</td>'+
+        '<td   id="codigoBarras'+contador+'">'+codigoBarras+'</td>'+
+        '<td  data-existencia = '+existencia+'  data-id = '+ idProducto + '  id="descripcion'+contador+'">'+descripcion+'</td>'+
         '<td id="cantidad'+contador+'"><input class="Cantidad overCero" data-existencia='+existencia+' type="number" id="cantidad2'+contador+'" value="'+cantidad+'" /></td>'+
         '<td id="precio'+contador+'">'+precio+'</td>'+
         '<td id="subTotal'+contador+'">'+subTotal+'</td>'+
@@ -262,11 +264,14 @@ function submitForm()
     //alert($('#sucursal').val());return;
 
 var cliente = [];
+var idProducto = [];
+var existencia = [];
 var producto = [];
 var cantidad = [];
 var precioProducto = [];
 var subTotal = [];
 var total  = $("#total label").text() ;
+
     $("td[id^='cliente']").each(function(){
         var clientes = $(this).text();
 
@@ -277,6 +282,12 @@ var total  = $("#total label").text() ;
 
         var productos = $(this).text();
         producto.push(productos);
+        var ids = $(this).data("id");
+        idProducto.push(ids);
+        var existencias = $(this).data("existencia");
+        existencia.push(existencias);
+
+
 
     });
     $('.Cantidad').each(function(key,value){
@@ -306,12 +317,13 @@ var total  = $("#total label").text() ;
     //subTotal
     //total
     $("#form input#cliente").val(cliente);
+    $("#form input#idProdcuto").val(idProducto);
+    $("#form input#existencias").val(existencia);
     $("#form input#producto").val(producto);
     $("#form input#cantidad").val(cantidad);
     $("#form input#precioProducto").val(precioProducto);
     $("#form input#subTotal").val(subTotal);
     $("#form input#total").val(total);
     $("#form input#folio").val(folio);
-    folio
     $('#form').submit();
 }

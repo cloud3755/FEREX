@@ -44,7 +44,7 @@
                                         <div class="input-group-addon">Productos</div>
                                         <select class="form-control selectpicker producto"   id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
                                             @foreach($productos as $producto)
-                                                <option data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
+                                                <option   data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -111,6 +111,8 @@
                                 {{ csrf_field() }}
                                 <input type="text" id="vendedor" name="vendedor" value="0" />
                                 <input type="text" id="cliente" name="cliente[]"  />
+                                <input type="text" id="idProdcuto" name="idProdcuto[]"  />
+                                <input type="text" id="existencias" name="existencias[]"  />
                                 <input type="text" id="producto" name="producto[]"  />
                                 <input type="text" id="cantidad" name="cantidad[]"  />
                                 <input type="text" id="precioProducto" name="precioProducto[]"  />

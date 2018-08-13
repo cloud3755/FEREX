@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Producto;
 use App\Models\Inventario;
+use function PhpParser\filesInDir;
 use Yajra\Datatables\Datatables;//Prueba dataTables Ajax
 
 class ventaController extends Controller
@@ -33,16 +34,20 @@ class ventaController extends Controller
         $cliente = $request->input('cliente');
         $producto = $request->input('producto');
         $cantidad = $request->input('cantidad');
+        $existencia = $request->input('existencias');
         $precioProducto = $request->input('precioProducto');
         $subTotal = $request->input('subTotal');
         $total = $request->input('total');
         $folio = $request->input('folio');
+        $idProducto = $request->input('idProdcuto');
 
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",", $producto[0]);
         $cantidades = explode(",", $cantidad[0]);
         $precios = explode(",", $precioProducto[0]);
         $subTotales = explode(",", $subTotal[0]);
+        $idProductos = explode(",", $idProducto[0]);
+        $existencias = explode(",", $existencia[0]);
 
 
 
@@ -57,6 +62,8 @@ class ventaController extends Controller
                 $cantidadAdd = $cantidades[$a];
                 $precioAdd = $precios[$a];
                 $subTotaleAdd = $subTotales[$a];
+                $idProductoAdd = $idProductos[$a];
+                $existenciaAdd = $existencias[$a];
                 $totalAdd = $total[0];
                 $folioAdd = $folio[0];
                 $ventas -> folio = $folioAdd;
@@ -68,7 +75,20 @@ class ventaController extends Controller
                 $ventas -> subTotal = $subTotaleAdd;
                 $ventas -> total =  $totalAdd;
                 $ventas->save();
+                $inventario = new Inventario();
+
+
+                $existenciaActual = intval($existenciaAdd);
+                $cantidadRestar =  intval($cantidadAdd);
+
+                $existenciaAdd = $existenciaActual -  $cantidadRestar;
+
+                $inventario::where ("idProducto",$idProductoAdd)->update(["cantidad"=>$existenciaAdd]);
             }
+
+
+
+
         \Session::flash('Guardado','Se guardo correctamente la venta');
         return redirect()->route("venta");
 
