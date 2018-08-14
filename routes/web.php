@@ -27,6 +27,9 @@ Route::get('/productos/get/{id}', 'productosController@get');
 Route::post('/productos/nuevo', 'productosController@nuevo');
 Route::post('/productos/editar', 'productosController@editar');
 Route::post('/productos/cambioEstatus', 'productosController@cambioEstatus');
+Route::get('/productos/layout', 'productosController@crearDescargarLayoutExcelCargaMasiva');
+
+
 
 //productos*******************************************
 

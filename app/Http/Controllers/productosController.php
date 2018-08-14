@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use App\Models\Inventario;
 use App\Models\Sucursal;
-use Yajra\Datatables\Datatables;//Prueba dataTables Ajax
+use Datatables;//Prueba dataTables Ajax
+use Excel;
 
 class productosController extends Controller 
 {
@@ -107,5 +108,11 @@ class productosController extends Controller
         $producto->save();
         \Session::flash('Guardado','Se desactivo el producto correctamente');
         return redirect()->route("productos"); 
+    }
+
+    public function crearDescargarLayoutExcelCargaMasiva()
+    {
+        Excel::download(array("hello", "world"), "layout.xls");
+
     }
 }

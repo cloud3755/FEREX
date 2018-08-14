@@ -210,7 +210,7 @@
       <div class="modal-body">
       Instrucciones:
       <ol>
-        <li>Descargar el layout <button class="btn btn-primary">Aqui</button></li>
+        <li>Descargar el layout <a href="/productos/layout"  class="btn btn-primary">Aqui</a></li>
         <li>Llnenar las columnas correspondientes</li>
         <li>Las ultimas columnas pertenecen al inventario por sucursal, dependiendo del id
           de la sucursal, introduzca la cantidad de inventario inicial
