@@ -40,6 +40,7 @@ class ventaController extends Controller
         $total = $request->input('total');
         $folio = $request->input('folio');
         $idProducto = $request->input('idProdcuto');
+        $credito = $request->input('credito');
 
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",", $producto[0]);
@@ -66,6 +67,7 @@ class ventaController extends Controller
                 $existenciaAdd = $existencias[$a];
                 $totalAdd = $total[0];
                 $folioAdd = $folio[0];
+                $creditoAdd = $credito[0];
                 $ventas -> folio = $folioAdd;
                 $ventas -> vendedor = $request->input('vendedor');
                 $ventas -> cliente= $clienteAdd;
@@ -84,6 +86,10 @@ class ventaController extends Controller
                 $existenciaAdd = $existenciaActual -  $cantidadRestar;
 
                 $inventario::where ("idProducto",$idProductoAdd)->update(["cantidad"=>$existenciaAdd]);
+
+
+                $credito = new clientes();
+                $credito::where ("rfc",$clienteAdd)->update(["credito"=>$creditoAdd]);
             }
 
 

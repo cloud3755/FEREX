@@ -17,6 +17,18 @@ var folio =nuevaCadena2+ Math.floor(Math.random() * 100000);
 
 
 
+$( "#credito" ).change(function() {
+    var limiteCredito = $('#Cliente :selected').data('limitecredito');
+    var creditoActual = $('#Cliente :selected').data('creditoactual');
+
+    limiteCredito = limiteCredito - creditoActual;
+    if($( "#credito" ).val() >limiteCredito){
+        alert("Tu limite de credito es"+ limiteCredito);
+        $( "#credito" ).val(limiteCredito);
+    }
+
+});
+
 $(function(){
     $('body').keyup(function(e) {
         if(e.which == 13){
@@ -263,6 +275,8 @@ function submitForm()
     //$('#id_sucursal').val($('#sucursal').val());
     //alert($('#sucursal').val());return;
 
+
+
 var cliente = [];
 var idProducto = [];
 var existencia = [];
@@ -271,6 +285,13 @@ var cantidad = [];
 var precioProducto = [];
 var subTotal = [];
 var total  = $("#total label").text() ;
+
+
+var creditoActual = $('#Cliente :selected').data('creditoactual');
+var creditoUsado = $('#credito').val();
+
+
+    creditoActual = parseInt(creditoActual) +parseInt(creditoUsado) ;
 
     $("td[id^='cliente']").each(function(){
         var clientes = $(this).text();
@@ -324,6 +345,8 @@ var total  = $("#total label").text() ;
     $("#form input#precioProducto").val(precioProducto);
     $("#form input#subTotal").val(subTotal);
     $("#form input#total").val(total);
+    $("#form input#credito").val(creditoActual);
     $("#form input#folio").val(folio);
+
     $('#form').submit();
 }

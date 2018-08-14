@@ -31,7 +31,7 @@
                                         <div class="input-group-addon">Cliente</div>
                                             <select class="form-control selectpicker cliente"   id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
                                             @foreach($clientes as $cliente)
-                                                <option data-descripcion="{{$cliente->rfc}}" value="{{$cliente->rfc}}">{{$cliente->email}} - {{$cliente->rfc}}</option>
+                                                <option  data-limiteCredito="{{$cliente->limiteCredito}}"  data-creditoActual="{{$cliente->credito}}" data-descripcion="{{$cliente->rfc}}" value="{{$cliente->rfc}}">{{$cliente->email}} - {{$cliente->rfc}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -53,7 +53,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="input-group">
-
+                                            <input type="number" min="0.01"  class="form-control" name="credito" id="credito" placeholder="Vender a credito">
                                             <input  type="hidden" value="1"  class="form-control overCero" id="cantidad" placeholder="Cantidad">
                                         </div>
                                     </div>
@@ -85,6 +85,7 @@
 @endif -->
                         <div class="table-responsive">
                             <button id="Procesar" type="button">Vender</button>
+
                             <table class="table" id="tableEntrada">
                                 <thead>
                                 <tr>
@@ -111,6 +112,7 @@
                                 {{ csrf_field() }}
                                 <input type="text" id="vendedor" name="vendedor" value="0" />
                                 <input type="text" id="cliente" name="cliente[]"  />
+                                <input type="text" id="credito" name="credito[]"  />
                                 <input type="text" id="idProdcuto" name="idProdcuto[]"  />
                                 <input type="text" id="existencias" name="existencias[]"  />
                                 <input type="text" id="producto" name="producto[]"  />
