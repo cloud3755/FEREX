@@ -7,15 +7,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use App\Models\Inventario;
 use App\Models\Sucursal;
-use Datatables;//Prueba dataTables Ajax
+use Yajra\Datatables\Datatables;//Prueba dataTables Ajax 
 use Excel;
+
+ 
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
 
 class productosController extends Controller 
 {
     public function index()
     {
         $sucursales  =  Sucursal::where('activo', true)->get();
-        
         return view('productos.productos', compact('sucursales'));
 
     }
@@ -112,7 +117,39 @@ class productosController extends Controller
 
     public function crearDescargarLayoutExcelCargaMasiva()
     {
+        return Excel::download(new ProductoExports(), 'export.xlsx');
         Excel::download(array("hello", "world"), "layout.xls");
 
     }
+}
+
+
+class ProductoExports implements FromCollection, WithHeadings
+{
+    use Exportable;
+ 
+    public function collection()
+    {
+        return collect();
+    }
+ 
+    public function headings(): array
+    {
+        $sucursales  =  Sucursal::where('activo', true)->get();
+        $sucursalesArray = [];
+        foreach($sucursales as $sucursal)
+        {
+            array_push( $sucursalesArray, $sucursal->id." : ".$sucursal->nombre);
+        }
+        return array_merge( [
+            'Producto',
+            'Descripcion',
+            'Clave SAT',
+            'Precio A',
+            'Precio B',
+            'Precio C',
+            'Codigo Barras',
+        ], $sucursalesArray);
+    }
+ 
 }
