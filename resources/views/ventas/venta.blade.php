@@ -53,7 +53,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="input-group">
-                                            <input type="number" min="0.01"  class="form-control" name="credito" id="credito" placeholder="Vender a credito">
+                                            <input type="number" min="0.01"  value="0" class="form-control" name="credito" id="credito" placeholder="Vender a credito">
                                             <input  type="hidden" value="1"  class="form-control overCero" id="cantidad" placeholder="Cantidad">
                                         </div>
                                     </div>

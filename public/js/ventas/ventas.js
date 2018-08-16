@@ -80,8 +80,8 @@ function agregarRegistro()
 
             if(productoSelecionado == productoAgregado){
                 var cantidadAgregada = $("#cantidad2"+$key).val();
-                cantidadSelecionada =  parseInt(cantidadSelecionada);
-                cantidadAgregada =   parseInt(cantidadAgregada);
+                cantidadSelecionada =  parseFloat(cantidadSelecionada);
+                cantidadAgregada =   parseFloat(cantidadAgregada);
                 var sumarCantidad = cantidadSelecionada +  cantidadAgregada;
 
 
@@ -94,7 +94,7 @@ function agregarRegistro()
 
 
 
-                var precio = parseInt($("#precio"+fila).text());
+                var precio = parseFloat($("#precio"+fila).text());
                 var cantidad = $("#cantidad2"+fila).val();
                 var subTotal =   precio * cantidad;
                 $("#subTotal"+fila).val(subTotal);
@@ -177,7 +177,7 @@ function agregarRegistro()
 
 
 
-        var precio = parseInt($("#precio"+fila).text());
+        var precio = parseFloat($("#precio"+fila).text());
         var cantidad = $("#cantidad2"+fila).val();
         var subTotal =   precio * cantidad;
         $("#subTotal"+fila).val(subTotal);
@@ -214,7 +214,7 @@ function cantidadChange(e)
 
 
     var cantidad = e.val();
-cantidad = parseInt(cantidad);
+cantidad = parseFloat(cantidad);
     var exitenciaPorFila = e.data("existencia");
 
     if(cantidad > 0){
@@ -238,7 +238,7 @@ cantidad = parseInt(cantidad);
 
 
 
-    var precio = parseInt($("#precio"+fila).text());
+    var precio = parseFloat($("#precio"+fila).text());
     var cantidad = $("#cantidad2"+fila).val();
     var subTotal =   precio * cantidad;
     $("#subTotal"+fila).val(subTotal);
@@ -291,7 +291,7 @@ var creditoActual = $('#Cliente :selected').data('creditoactual');
 var creditoUsado = $('#credito').val();
 
 
-    creditoActual = parseInt(creditoActual) +parseInt(creditoUsado) ;
+    creditoActual = parseFloat(creditoActual) +parseFloat(creditoUsado) ;
 
     $("td[id^='cliente']").each(function(){
         var clientes = $(this).text();
