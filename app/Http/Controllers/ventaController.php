@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\clientes;
-use App\Ventas;
+use App\Models\Ventas;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
