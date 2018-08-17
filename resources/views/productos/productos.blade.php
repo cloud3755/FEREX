@@ -209,18 +209,23 @@
       </div>
       <div class="modal-body">
       Instrucciones:
+      <form id="form" class="form" method="POST" action="/productos/cargaMasiva" enctype="multipart/form-data">
+      {{ csrf_field() }}
       <ol>
         <li>Descargar el layout <a href="/productos/layout"  class="btn btn-primary">Aqui</a></li>
         <li>Llnenar las columnas correspondientes</li>
         <li>Las ultimas columnas pertenecen al inventario por sucursal, dependiendo del id
           de la sucursal, introduzca la cantidad de inventario inicial
         </li>
-        <li>De click en subir layout</li>
-        <li>Se llenara la tabla de abajo, verifique los datos</li>
+        <li>Suba el layout <input type="file" name="layout" id="layout" accept="xls">  </li>
+        
         <li>De click en cargar</li>
+        <li>Se cargaran los datos</li>
       </ol>
+      <input type="submit" value="cargar">
+      </form>
       <span class="text-danger">No utilice el mismo layout para cargas posteriores, descargue uno nuevo en este apartado</span>
-      <table class="table">
+     <!-- <table class="table">
         <thead>
           <tr>
               <th>Nombre</th>
@@ -236,7 +241,7 @@
 
         </tbody>
       </table>
-      
+      -->
       </div>
       <div class="modal-footer">
         <input hidden type="text" name="dataInventarioInicial" id="dataInventarioInicial">

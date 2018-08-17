@@ -9,11 +9,9 @@ use App\Models\Inventario;
 use App\Models\Sucursal;
 use Yajra\Datatables\Datatables;//Prueba dataTables Ajax 
 use Excel;
-
- 
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use App\Jobs\ProcesCargaProductos;
+use File;
+use Illuminate\Support\Facades\Input;
 
 
 class productosController extends Controller 
@@ -117,29 +115,23 @@ class productosController extends Controller
 
     public function crearDescargarLayoutExcelCargaMasiva()
     {
-        return Excel::download(new ProductoExports(), 'export.xlsx');
-        Excel::download(array("hello", "world"), "layout.xls");
-
-    }
-}
-
-
-class ProductoExports implements FromCollection, WithHeadings
-{
-    use Exportable;
+        return Excel::create('Layout Carga masiva', function($excel) {
  
-    public function collection()
-    {
-        return collect();
-    }
+            $excel->sheet('Productos', function($sheet) {
+
+                $sheet->fromArray($this->headings());
  
-    public function headings(): array
+            });
+        })->export('xls');
+    }
+
+    private function headings(): array
     {
         $sucursales  =  Sucursal::where('activo', true)->get();
         $sucursalesArray = [];
         foreach($sucursales as $sucursal)
         {
-            array_push( $sucursalesArray, $sucursal->id." : ".$sucursal->nombre);
+            array_push( $sucursalesArray, "sucursal"." ". $sucursal->id." ".$sucursal->nombre);
         }
         return array_merge( [
             'Producto',
@@ -151,5 +143,17 @@ class ProductoExports implements FromCollection, WithHeadings
             'Codigo Barras',
         ], $sucursalesArray);
     }
- 
+
+    public function masiveUpload(Request $request)
+    {
+
+        $path = Input::file('layout')->getRealPath();
+    //    $data = Excel::load($path, function($reader) {})->get();
+    //        dd($data);return;
+        ProcesCargaProductos::dispatch($path);
+        \Session::flash('Guardado','Se estan cargando sus productos');
+        return redirect()->route("productos"); 
+        
+        
+    }
 }
