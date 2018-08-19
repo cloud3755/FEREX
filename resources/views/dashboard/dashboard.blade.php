@@ -61,14 +61,14 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">124</div>
-                            <div>Top de cliente</div>
+                            <div>Historial de clientes</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="#" data-toggle="modal" data-target="#exampleModal" >
                     <div class="panel-footer">
-                        <span class="pull-left">Ver detalle</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <span class="pull-left" >  Ver detalle</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right" ></i></span>
                         <div class="clearfix"></div>
                     </div>
                 </a>
@@ -119,6 +119,45 @@
     </div>
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hstorial de clientes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Nombre cliente</th>
+                <th>Numero de Compras</th>
+                <th>Ttotal de compras</th>
+                <th>Limite de credito</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($detalleCliente as $clientes)
+              <tr>
+                <td>{{$clientes->nombre}}</td>
+                <td>{{$clientes->total_compras}}</td>
+                <td>{{$clientes->Compra}}</td>
+                <td>{{$clientes->limite}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SE PASA EL ARREGLO GLOBAL A LOS ARREGLOS -->
 <?php
   $graficaTotalVentas=json_encode($ventasMes);
 

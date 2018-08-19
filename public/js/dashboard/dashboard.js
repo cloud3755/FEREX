@@ -116,7 +116,7 @@ function drawChart1() {
   ]);
 
   var options = {
-    title: 'My Daily Activities',
+    title: 'Productos mas vendidos',
     is3D: true,
   };
 
