@@ -15,11 +15,15 @@
     @section('styles')
 
  <!--   <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
- <!--   <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />-->    
+ <!--   <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />-->   
+
+
     <link href="{{ asset('bootstrap3/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('AwesomeFonts/css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/personalizado.css') }}" rel="stylesheet">
     <link href="{{ asset('css/MenuVertical.css') }}" rel="stylesheet">
+
+
     @show
 </head>
 <body>
@@ -38,7 +42,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'FEREX') }}
                     </a>
                 </div>
 
@@ -101,34 +105,34 @@
             <ul id="menu-content" class="menu-content collapse out">
                 <li>
                   <a href="/Dashboard">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
-                <!--  <i class="glyphicon glyphicon-dashboard"></i> Dashboard-->
-                 
+                <i class="fas fa-tachometer-alt"></i> Dashboard       
                   </a>
                 </li>
 
-                <li  data-toggle="collapse" data-target="#products" >
-                  <a href="#"><i class="glyphicon glyphicon-gift"></i> Productos<span class="arrow"></span></a>
+                <li  data-toggle="collapse" data-target="#productsCollapse" >
+                  <a href="#"><i class="glyphicon glyphicon-gift"></i> Productos<i class="fas fa-chevron-down"></i></a>
                 </li>
-                <ul class="sub-menu collapse" id="products">
-                    <li class="active"><a href="#">Alta de productos</a></li>
+                <ul class="sub-menu collapse" id="productsCollapse">
+                    <li class="active"><a href="/productos"><i class="fa fa-plus"></i>Alta de productos</a></li>
                 </ul>
 
 
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class="glyphicon glyphicon-globe"></i> Altas <span class="arrow"></span></a>
+                <li data-toggle="collapse" data-target="#serviceCollapse" class="collapsed">
+                  <a href="#"><i class="glyphicon glyphicon-globe"></i> Altas <i class="fas fa-chevron-down"></i></a>
                 </li>
-                <ul class="sub-menu collapse" id="service">
-                  <li>Alta de clientes</li>
-                  <li>Alta de usuarios</li>
+                <ul class="sub-menu collapse" id="serviceCollapse">
+                  <li><a href="/AltaClientes"> <i class="fas fa-plus"></i>Alta de clientes</a></li>
+                  <li><a href="/sucursales"> <i class="fas fa-plus"></i>Alta de sucursales</a></li>
+                  
+                  <li><i class="fas fa-plus"></i>Alta de usuarios</li>
                 </ul>
 
 
                 <li data-toggle="collapse" data-target="#new" class="collapsed">
-                  <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="arrow"></span></a>
+                  <a href="#">Ventas <i class="fas fa-chevron-down"></i></a>
                 </li>
                 <ul class="sub-menu collapse" id="new">
-                  <li>Venta de productos</li>
+                    <li><a href="/venta"> <i class="fas fa-plus"></i>Venta</a></li>
                 </ul>
 
                  <!-- <li>
@@ -162,6 +166,7 @@
     <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
     <script src="{{ asset('bootstrap3/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <!--  <script src="{{ asset('js/app.js') }}"></script>-->
     <!--  <script src="{{ asset('bootstrap3/js/bootstrap.js') }}"></script>-->
     
