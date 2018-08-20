@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('scripts.basic')
+@section('styles')
     @parent
-    <link href="{{ asset('css/bootstrap/bootstrap-select.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap/bootstrap-select.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap/bootstrap-select.css.map') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.css.map') }}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="container">

@@ -8,15 +8,19 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Ferex') }}</title>
 
     <!-- Styles -->
-    <!--<link href="{{ asset('css/bootstrap3.css') }}" rel="stylesheet">-->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    @section('styles')
+
+ <!--   <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+ <!--   <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />-->    
+    <link href="{{ asset('bootstrap3/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('AwesomeFonts/css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/personalizado.css') }}" rel="stylesheet">
     <link href="{{ asset('css/MenuVertical.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
+    @show
 </head>
 <body>
     <div id="app">
@@ -97,12 +101,14 @@
             <ul id="menu-content" class="menu-content collapse out">
                 <li>
                   <a href="/Dashboard">
-                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+                <!--  <i class="glyphicon glyphicon-dashboard"></i> Dashboard-->
+                 
                   </a>
                 </li>
 
                 <li  data-toggle="collapse" data-target="#products" >
-                  <a href="#"><i class="fa fa-gift fa-lg"></i> Productos<span class="arrow"></span></a>
+                  <a href="#"><i class="glyphicon glyphicon-gift"></i> Productos<span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="products">
                     <li class="active"><a href="#">Alta de productos</a></li>
@@ -110,7 +116,7 @@
 
 
                 <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class="fa fa-globe fa-lg"></i> Altas <span class="arrow"></span></a>
+                  <a href="#"><i class="glyphicon glyphicon-globe"></i> Altas <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="service">
                   <li>Alta de clientes</li>
@@ -119,7 +125,7 @@
 
 
                 <li data-toggle="collapse" data-target="#new" class="collapsed">
-                  <a href="#"><i class="fa fa-car fa-lg"></i> Ventas <span class="arrow"></span></a>
+                  <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="new">
                   <li>Venta de productos</li>
@@ -152,24 +158,26 @@
     </div>
 
   @section('scripts.basic')
-    <script src="{{ asset('js/bootstrap/popper.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('bootstrapUtils/js/popper.js') }}"></script>
     <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
-    <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
-
+    <script src="{{ asset('bootstrap3/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--  <script src="{{ asset('js/app.js') }}"></script>-->
+    <!--  <script src="{{ asset('bootstrap3/js/bootstrap.js') }}"></script>-->
+    
     @show
 
     @section('scripts.DataTable')
-        <script src="{{ asset('js//bootstrap/datatables.js') }}"></script>
+    
+        <script src="{{ asset('bootstrapUtils/js/datatables.js') }}"></script>
         <script src="{{ asset('js/utils/datatable.js') }}"></script>
     @show
 
     @section('scripts.Select')
     <!--Script select 2 -->
-        <script src="{{ asset('js//bootstrap/bootstrap-select.min.js') }}"></script>
-        <script src="{{ asset('js//bootstrap/bootstrap-select.js') }}"></script>
-    <!--  -->
+        <script src="{{ asset('bootstrapUtils/js/bootstrap-select.min.js') }}"></script>
+        <script src="{{ asset('bootstrapUtils/js/bootstrap-select.js') }}"></script>
+    
     @show
 
     @section('scripts.personalizados')

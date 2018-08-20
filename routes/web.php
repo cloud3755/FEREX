@@ -34,6 +34,14 @@ Route::post('/productos/cargaMasiva', 'productosController@masiveUpload');
 
 //productos*******************************************
 
+//---------------------------------------------------MODULO DE Inventario INICIO---------------------------------------------------------------------------------------------------------------------
+
+
+Route::get('/inventario/manual', 'inventarioController@manual');
+//---------------------------------------------------MODULO DE Inventario INICIO---------------------------------------------------------------------------------------------------------------------
+
+
+
 //---------------------------------------------------MODULO DE CLIENTES INICIO---------------------------------------------------------------------------------------------------------------------
 Route::get('/AltaClientes', 'altaclientesController@index')->name('AltaClientes');
 Route::post('/AltaCliente/nuevo', 'altaclientesController@nuevo');

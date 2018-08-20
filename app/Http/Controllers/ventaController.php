@@ -19,7 +19,7 @@ class ventaController extends Controller
     public function index()
     {
         $productos =    DB::table('productos')
-            ->join("inventarios", "inventarios.id", "=", "productos.id" )
+            ->join("inventarios", "inventarios.idProducto", "=", "productos.id" )
             ->select("productos.*", "inventarios.cantidad")
             ->get();
 
