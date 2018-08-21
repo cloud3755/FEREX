@@ -33,6 +33,7 @@ $("#fijarCliente").click(function (e) {
     $("#agregarEntrada").attr('disabled',false);
     $("#Procesar").attr('disabled',false);
     $("#productosDiv").show();
+    //s
 
 });
 $( "#credito" ).change(function() {
