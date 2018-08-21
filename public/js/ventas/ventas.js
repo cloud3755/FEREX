@@ -73,27 +73,23 @@ function agregarRegistro()
     if (cantidad >0){
         var productoSelecionado = $(".producto :selected").data("codigo");
         var cantidadSelecionada= $("#cantidad").val();
-        $("td[id^='codigoBarras']").each(function($key){
+        $("td[id^='codigoBarras']").each(function(){
 
             var productoAgregado = $(this).text();
 
 
             if(productoSelecionado == productoAgregado){
-                var cantidadAgregada = $("#cantidad2"+$key).val();
+
+                var tamañoCadena =  $(this).attr("id").length;
+
+                var fila =  $(this).attr("id")[tamañoCadena-1];
+                var cantidadAgregada = $("#cantidad2"+fila).val();
                 cantidadSelecionada =  parseFloat(cantidadSelecionada);
                 cantidadAgregada =   parseFloat(cantidadAgregada);
                 var sumarCantidad = cantidadSelecionada +  cantidadAgregada;
 
 
-                $("#cantidad2"+$key).val(sumarCantidad);
-
-
-                var tamañoCadena =  $(this).attr("id").length;
-
-                var fila =  $(this).attr("id")[tamañoCadena-1];
-
-
-
+                $("#cantidad2"+fila).val(sumarCantidad);
                 var precio = parseFloat($("#precio"+fila).text());
                 var cantidad = $("#cantidad2"+fila).val();
                 var subTotal =   precio * cantidad;
@@ -263,9 +259,40 @@ function quitarfila(e)
 {
 
 
+
    var idFila = e.data("gin");
 
     $('#'+idFila).remove();
+
+
+    $("td[id^='codigoBarras']").each(function(){
+        var tamañoCadena =  $(this).attr("id").length;
+
+        var fila =  $(this).attr("id")[tamañoCadena-1];
+        var precio = parseFloat($("#precio"+fila).text());
+        var cantidad = $("#cantidad2"+fila).val();
+        var subTotal =   precio * cantidad;
+        $("#subTotal"+fila).val(subTotal);
+        $("#subTotal"+fila).text(subTotal);
+
+
+        $("td[id^='subTotal']").each(function(){
+            totalFinal = totalFinal + eval($(this).text());
+            $("#total label").text(totalFinal);
+        });
+
+
+
+
+        totalFinal = 0;
+
+    });
+
+
+
+
+
+
 }
 
 function submitForm()
