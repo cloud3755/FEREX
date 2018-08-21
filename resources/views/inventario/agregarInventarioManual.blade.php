@@ -23,11 +23,11 @@
 
                           <div class="input-group">
 
-                            <label class="sr-only" for="GIN">Producto</label>
+                            <label class="sr-only" for="Productos">Producto</label>
                             <div class="input-group-addon">Producto</div>
-                            <select class="form-control selectpicker producto"   id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
+                            <select class="form-control selectpicker producto"  id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
                                 @foreach($productos as $producto)
-                                    <option   data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
+                                    <option   data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->id}}"   data-codigo="{{$producto->codigoBarras}}">{{$producto->nombre}}</option>
                                 @endforeach
                             </select>
                           </div>
@@ -38,16 +38,16 @@
                           <div class="input-group">
                             <label class="sr-only" for="lote">Cantidad</label>
                             <div class="input-group-addon">Cantidad</div>
-                            <input type="text" class="form-control" id="lote" placeholder="Lote">
+                            <input type="number" class="form-control" id="Cantidad" placeholder="Cantidad">
                           </div>
 
                         </div>
 
                         <div class="col-xs-5">
                           <div class="input-group">
-                            <label class="sr-only" for="ubicacion">Sucursal</label>
+                            <label class="sr-only" for="Sucursal">Sucursal</label>
                             <div class="input-group-addon">Sucursal</div>
-                            <select class="form-control selectpicker" id="ubicacionsel" data-live-search="true" data-width="100%" name="ubicacion">
+                            <select class="form-control selectpicker" id="Sucursal" data-live-search="true" data-width="100%" name="Sucursal">
                               @foreach ($sucursales as $sucursal)
                               <option data-id="{{$sucursal->id}}" value="{{$sucursal->nombre}}">{{$sucursal->nombre}}</option>
                               @endforeach
@@ -121,10 +121,11 @@
 
 
 
+
+
 @endsection
-@section('scripts')
+@section('scripts.personalizados')
 @parent
-<script src="{{ asset('js/utils/date.js') }}"></script>
 <script src="{{ asset('js/utils/inputNumberUtil.js') }}"></script>
-<script src="{{ asset('js/entradas/appEntradas.js') }}"></script>
+<script src="{{ asset('js/inventario/inventarioApp.js') }}"></script>
 @endsection
