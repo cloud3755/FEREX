@@ -20,6 +20,7 @@ var folio =nuevaCadena2+ Math.floor(Math.random() * 100000);
 $("#productosDiv").hide();
 
 $("#agregarEntrada").attr('disabled',true);
+$("#Procesar").attr('disabled',true);
 
 $("#nuevoCliente").click(function (e) {
     e.preventDefault();
@@ -30,6 +31,7 @@ $("#fijarCliente").click(function (e) {
 
     $('#Cliente').attr('disabled',true);
     $("#agregarEntrada").attr('disabled',false);
+    $("#Procesar").attr('disabled',false);
     $("#productosDiv").show();
 
 });
