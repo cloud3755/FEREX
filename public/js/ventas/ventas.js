@@ -17,6 +17,22 @@ var folio =nuevaCadena2+ Math.floor(Math.random() * 100000);
 
 
 
+$("#productosDiv").hide();
+
+$("#agregarEntrada").attr('disabled',true);
+
+$("#nuevoCliente").click(function (e) {
+    e.preventDefault();
+
+});
+$("#fijarCliente").click(function (e) {
+    e.preventDefault();
+
+    $('#Cliente').attr('disabled',true);
+    $("#agregarEntrada").attr('disabled',false);
+    $("#productosDiv").show();
+
+});
 $( "#credito" ).change(function() {
     var limiteCredito = $('#Cliente :selected').data('limitecredito');
     var creditoActual = $('#Cliente :selected').data('creditoactual');
@@ -28,6 +44,8 @@ $( "#credito" ).change(function() {
     }
 
 });
+
+
 
 $(function(){
     $('body').keyup(function(e) {

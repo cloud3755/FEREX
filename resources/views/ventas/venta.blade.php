@@ -23,23 +23,30 @@
                         @endsection
                         <form class="form" >
                             <div class="row">
+                                <button  id="nuevoCliente" class="btn btn-secondary"> Nuevo cliente</button>
+                                <br>
+                                <br>
 
                                 <div class="col-xs-4">
 
                                     <div class="input-group">
+
                                         <label class="sr-only" for="Clientes">Cliente</label>
                                         <div class="input-group-addon">Cliente</div>
+
                                             <select class="form-control selectpicker cliente"   id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
+                                                <option value="0" selected>Cliente general</option>
                                             @foreach($clientes as $cliente)
                                                 <option  data-limiteCredito="{{$cliente->limiteCredito}}"  data-creditoActual="{{$cliente->credito}}" data-descripcion="{{$cliente->rfc}}" value="{{$cliente->rfc}}">{{$cliente->email}} - {{$cliente->rfc}}</option>
                                             @endforeach
-                                        </select>
+                                        </select> <button id="fijarCliente" class="btn btn-secondary">Fijar cliente</button>
                                     </div>
                                 </div>
-                                <br><br>
+
+                                <br><br><br><br><br>
                                 <div class="col-xs-4">
 
-                                    <div class="input-group">
+                                    <div id="productosDiv" class="input-group">
                                         <label class="sr-only" for="Productos">Productos</label>
                                         <div class="input-group-addon">Productos</div>
                                         <select class="form-control selectpicker producto"   id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
