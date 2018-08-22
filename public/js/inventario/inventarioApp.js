@@ -1,7 +1,7 @@
 $(function(){
 
     $('#agregarInventario').on('click', agregarRegistro);
-   
+    $('#procesarInventario').on('click', submitForm);
 });
 
 
@@ -23,14 +23,15 @@ function agregarRegistro()
     var producto = $('#Productos').text();
     cantidad = $('#Cantidad').val();
     var sucursal =  $('#Sucursal').text();
+    var idSucursal = $('#Sucursal :selected').data('id');
     var buttonDelete = '<button data-id='+idProducto+' class="removeProducto">x</button>';
 
     $('#tableEntrada tbody').append(
         '<tr class="trProducto" id="tr'+idProducto+'">'+
-            '<td>'+producto+'</td>'+
+            '<td class="idProducto" data-id="'+idProducto+'">'+producto+'</td>'+
             '<td>'+descripcion+'</td>'+
             '<td ><input class="Cantidad overCero" type="number" value="'+cantidad+'" /></td>'+
-            '<td>'+sucursal+'</td>'+
+            '<td class="idSucursal" data-id="'+idSucursal+'">'+sucursal+'</td>'+
             '<td>'+buttonDelete+'</td>'+
         '</tr">'
     );
@@ -45,5 +46,23 @@ function quitarfila(e)
 
 function submitForm()
 {
+    var arrayInventario = [];
+    $('.trProducto').each
+    (
+        function()
+        {
+            idSucursal = $(this).find('.idSucursal').data('id');
+            idProducto = $(this).find('.idProducto').data('id');
+            cantidad = $(this).find('.Cantidad').val();
+            arrayInventario.push({
+                idSucursal, 
+                idProducto, 
+                cantidad});
+        }
+    );
     
+    $('#datosInventario').val(JSON.stringify(arrayInventario));
+    //$('#id_sucursal').val($('#sucursal').val());
+    //alert($('#sucursal').val());return;
+    $('#form').submit();
 }

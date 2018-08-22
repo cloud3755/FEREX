@@ -27,7 +27,7 @@
                             <div class="input-group-addon">Producto</div>
                             <select class="form-control selectpicker producto"  id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
                                 @foreach($productos as $producto)
-                                    <option   data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->id}}"   data-codigo="{{$producto->codigoBarras}}">{{$producto->nombre}}</option>
+                                    <option   data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"    value="{{$producto->id}}">{{$producto->codigoBarras}} - {{$producto->nombre}}</option>
                                 @endforeach
                             </select>
                           </div>
@@ -77,6 +77,8 @@
                         </div>
                     @endif -->
                     <div class="table-responsive">
+                    <button type="button" id="procesarInventario" class="btn btn-success">Procesar</button>
+
                       <table class="table" id="tableEntrada">
                         <thead>
                           <tr>
@@ -91,9 +93,9 @@
 
                         </tbody>
                       </table>
-                    <form hidden  id="form" method="POST" action="/entradas" }}>
+                    <form hidden  id="form" method="POST" action="/inventario/manual" }}>
                        {{ csrf_field() }}
-                      <input type="text" id="datosEntrada" name="datosEntrada" />
+                      <input type="text" id="datosInventario" name="datosInventario" />
                     </form>
                     </div>
                 </div>

@@ -37,7 +37,8 @@ Route::post('/productos/cargaMasiva', 'productosController@masiveUpload');
 //---------------------------------------------------MODULO DE Inventario INICIO---------------------------------------------------------------------------------------------------------------------
 
 
-Route::get('/inventario/manual', 'inventarioController@manual');
+Route::get('/inventario/manual', 'inventarioController@indexManual');
+Route::post('/inventario/manual', 'inventarioController@manual');
 //---------------------------------------------------MODULO DE Inventario INICIO---------------------------------------------------------------------------------------------------------------------
 
 

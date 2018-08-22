@@ -9,11 +9,35 @@ use App\Models\Sucursal;
 
 class inventarioController extends Controller
 {
-    public function manual()
+    public function indexManual()
     {
         $sucursales  =  Sucursal::where('activo', true)->get();
         $productos = Producto::where('activo', true)->get();
         return view('inventario.agregarInventarioManual', compact('sucursales', 'productos'));
+    }
 
+    public function manual(Request $request)
+    {
+        $inventarios = json_decode($request->datosInventario);
+        foreach($inventarios as $inventarioObject)
+        {
+            $inventario = new Inventario();
+            if($inventario->existsBySucursal($inventarioObject->idProducto, $inventarioObject->idSucursal))
+            {
+                $inventario->updateAddStockBySucursalProducto($inventarioObject->idProducto, $inventarioObject->idSucursal, $inventarioObject->cantidad);
+            }
+            else
+            {
+                $inventario->idSucursal = $inventarioObject->idSucursal;
+                $inventario->idProducto = $inventarioObject->idProducto;
+                $inventario->cantidad = $inventarioObject->cantidad;
+                $inventario->save();
+                $inventario = null;
+            }
+            $inventario = null;
+        }
+        \Session::flash('Guardado','Se Guardo el inventario correctamente');
+        return redirect()->route("productos"); 
+        
     }
 }
