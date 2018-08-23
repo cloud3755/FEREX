@@ -33,7 +33,24 @@ $("#fijarCliente").click(function (e) {
     $("#agregarEntrada").attr('disabled',false);
     $("#Procesar").attr('disabled',false);
     $("#productosDiv").show();
-    //s
+
+
+});
+
+$("#precioB").click(function (e) {
+    e.preventDefault();
+    var precioB = $('#Productos :selected').data('preciob');
+
+$('#Productos :selected').val(precioB);
+
+
+});
+$("#precioC").click(function (e) {
+    e.preventDefault();
+    var precioC = $('#Productos :selected').data('precioc');
+
+    $('#Productos :selected').val(precioC);
+
 
 });
 $( "#credito" ).change(function() {

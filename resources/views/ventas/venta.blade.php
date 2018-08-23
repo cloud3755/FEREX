@@ -35,7 +35,7 @@
                                         <div class="input-group-addon">Cliente</div>
 
                                             <select class="form-control selectpicker cliente"   id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
-                                                <option value="0" selected>Cliente general</option>
+                                                <option value="0"     data-limiteCredito="0"  data-creditoActual="0" data-descripcion="Cliente general" selected>Cliente general</option>
                                             @foreach($clientes as $cliente)
                                                 <option  data-limiteCredito="{{$cliente->limiteCredito}}"  data-creditoActual="{{$cliente->credito}}" data-descripcion="{{$cliente->rfc}}" value="{{$cliente->rfc}}">{{$cliente->email}} - {{$cliente->rfc}}</option>
                                             @endforeach
@@ -51,16 +51,20 @@
                                         <div class="input-group-addon">Productos</div>
                                         <select class="form-control selectpicker producto"   id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
                                             @foreach($productos as $producto)
-                                                <option   data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
+                                                <option    data-preciob="{{$producto->precioB}}"   data-precioc="{{$producto->precioC}}"  data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
                                             @endforeach
                                         </select>
+                                        <button id="precioB" class="btn btn-secondary">Precio B</button>
+                                        <button id="precioC" class="btn btn-secondary">Precio C</button>
+
                                     </div>
                                 </div>
-                                <br><br>
+
+
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="input-group">
-                                            <input type="number" min="0.01"  value="0" class="form-control" name="credito" id="credito" placeholder="Vender a credito">
+                                            <input type="number" min="0.01"  value="0" class="form-control" name="credito" id="credito" placeholder="Vender a credito">Vender a credito
                                             <input  type="hidden" value="1"  class="form-control overCero" id="cantidad" placeholder="Cantidad">
                                         </div>
                                     </div>
