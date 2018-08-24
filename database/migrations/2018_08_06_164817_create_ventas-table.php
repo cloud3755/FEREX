@@ -15,14 +15,12 @@ class CreateVentasTable extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('folio');
-        $table->string('vendedor');
-        $table->string('cliente');
-        $table->string('producto');
-        $table->decimal('cantidad', 7 , 3 );
-        $table->string('precioProducto');
-        $table->string('subTotal');
-        $table->string('total');
+
+        $table->string('folio');//Checar si es necesario, si no se puede manejar el id
+
+        $table->string('idVendedor');
+        $table->string('idCliente');
+        
         $table->timestamps();
 
         });

@@ -34,13 +34,30 @@ class UsersTableSeeder extends Seeder {
                    'nombre' => "Matriz",
                    'direccion'     => 'Mariano Otero SN',
             ));
+            
             db::table('productos')->insert(array(
                    'nombre' => "Producto dummie",
                    'descripcion'     => 'Producto dummie',
                    'claveProdServ'     => '0101010101',
                    'codigoBarras'     => '000000',
                    'precioA'     => 99.99,
-            ));        
+            ));     
+            for($i=0 ; $i< 10000; $i++)
+            {
+            db::table('productos')->insert(array(
+                   'nombre' => $i,
+                   'descripcion'     => '12',
+                   'claveProdServ'     => '0101010101',
+                   'codigoBarras'     => $i,
+                   'precioA'     => 99.99,
+            ));     
+            }
+            db::table('cajas')->insert(array(
+                'nombre' => "Principal",
+                'saldo'     => 0,
+                'estado'     => 'NI',
+                'idSucursal'     => 1,
+            ));      
 
         }
 }
