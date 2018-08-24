@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('styles')
     @parent
-    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.css.map') }}" rel="stylesheet">
 @endsection
 @section('content')
 <div class="container">
@@ -30,15 +27,26 @@
                             <th>Estado</th>
                             <th>Saldo</th>
                             <th>Sucursal</th>
+                            <th>Operacion</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($cajas as $caja)
                                 <td>$caja->id</td>
                                 <td>$caja->nombre</td>
-                                <td>$caja->saldo</td>
-                                <td>$caja->estado</td>
+                                
+                                <td><input type="number" value="$caja->saldo" ></td>
+                                
+                                <td>$caja->estadoNombre</td>
                                 <td>$caja->sucursal</td>
+                                @switch($caja->estado)
+                                    @case("NI")
+                                        <td><button type="button" id-operacion="Iniciar" class="btn btn-success" value"Iniciar"></button></td>
+                                    @break
+                                    @case("AB")
+                                        <td><button type="button" id-operacion="Reiniciar" class="btn btn-success" value"Reiniciar"></button></td>
+                                    @break
+                                @endswitch
                             @endforeach
                         </tbody>
                       </table>
