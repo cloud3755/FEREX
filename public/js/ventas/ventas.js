@@ -92,6 +92,7 @@ function agregarRegistro()
 {
     var gin = $('#Cliente').val();
     var cliente = $('#Cliente :selected').data('descripcion');
+    var clienteId = $('#Cliente :selected').data('id');
     var cantidad = $('#cantidad').val();
     var arrayGin = {};
     var idProducto = $('#Productos :selected').data('id');
@@ -175,8 +176,8 @@ function agregarRegistro()
     $('#tableEntrada tbody').append(
         '<tr class="trCliente" id="'+codigoBarras+'">'+
 
-        '<td id="cliente'+contador+'">'+cliente+'</td>'+
-        '<td   id="codigoBarras'+contador+'">'+codigoBarras+'</td>'+
+        '<td data-id="'+clienteId+'" id="cliente'+contador+'">'+cliente+'</td>'+
+        '<td  id="codigoBarras'+contador+'">'+codigoBarras+'</td>'+
         '<td  data-existencia = '+existencia+'  data-id = '+ idProducto + '  id="descripcion'+contador+'">'+descripcion+'</td>'+
         '<td id="cantidad'+contador+'"><input class="Cantidad overCero" data-existencia='+existencia+' type="number" id="cantidad2'+contador+'" value="'+cantidad+'" /></td>'+
         '<td id="precio'+contador+'">'+precio+'</td>'+
@@ -359,14 +360,14 @@ var creditoUsado = $('#credito').val();
     creditoActual = parseFloat(creditoActual) +parseFloat(creditoUsado) ;
 
     $("td[id^='cliente']").each(function(){
-        var clientes = $(this).text();
+        var clientes = $(this).data("id");
 
         cliente.push(clientes);
     });
 
     $("td[id^='descripcion']").each(function(key,value){
 
-        var productos = $(this).text();
+        var productos = $(this).data("id");
         producto.push(productos);
         var ids = $(this).data("id");
         idProducto.push(ids);
