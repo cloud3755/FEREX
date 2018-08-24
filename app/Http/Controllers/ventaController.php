@@ -89,7 +89,7 @@ class ventaController extends Controller
 
 
                 $credito = new clientes();
-                $credito::where ("rfc",$clienteAdd)->update(["credito"=>$creditoAdd]);
+                $credito::where ("id",$clienteAdd)->update(["credito"=>$creditoAdd]);
             }
 
 
