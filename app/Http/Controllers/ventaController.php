@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\clientes;
 use App\Models\Ventas;
+use App\Models\ventasDetalle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -36,68 +37,55 @@ class ventaController extends Controller
         $cantidad = $request->input('cantidad');
         $existencia = $request->input('existencias');
         $precioProducto = $request->input('precioProducto');
-        $subTotal = $request->input('subTotal');
-        $total = $request->input('total');
         $folio = $request->input('folio');
         $idProducto = $request->input('idProdcuto');
         $credito = $request->input('credito');
-
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",", $producto[0]);
         $cantidades = explode(",", $cantidad[0]);
         $precios = explode(",", $precioProducto[0]);
-        $subTotales = explode(",", $subTotal[0]);
         $idProductos = explode(",", $idProducto[0]);
         $existencias = explode(",", $existencia[0]);
 
-
-
+        $folioAdd = $folio[0];
+        $clienteAdd = $clientes[0];
             $i = count($productos);
 
+        $ventas = new Ventas();
+        $ventas -> folio = $folioAdd;
+        $ventas -> idVendedor = $request->input('vendedor');
+        $ventas -> idCliente= $clienteAdd;
+        $ventas->save();
 
+        $ventaId= $ventas->id;
             for ($a=0; $a<$i; $a++ ){
 
-                $ventas = new Ventas();
-                $clienteAdd = $clientes[$a];
                 $productoAdd = $productos[$a];
                 $cantidadAdd = $cantidades[$a];
                 $precioAdd = $precios[$a];
-                $subTotaleAdd = $subTotales[$a];
                 $idProductoAdd = $idProductos[$a];
                 $existenciaAdd = $existencias[$a];
-                $totalAdd = $total[0];
-                $folioAdd = $folio[0];
+
                 $creditoAdd = $credito[0];
-                $ventas -> folio = $folioAdd;
-                $ventas -> vendedor = $request->input('vendedor');
-                $ventas -> cliente= $clienteAdd;
-                $ventas -> producto= $productoAdd;
-                $ventas ->  cantidad= $cantidadAdd;
-                $ventas -> precioProducto = $precioAdd;
-                $ventas -> subTotal = $subTotaleAdd;
-                $ventas -> total =  $totalAdd;
-                $ventas->save();
+                $ventasDetalle = new ventasDetalle();
+                $ventasDetalle -> Producto= $productoAdd;
+                $ventasDetalle -> cantidad= $cantidadAdd;
+                $ventasDetalle -> precio = $precioAdd;
+                 $ventasDetalle->idVenta= $ventaId;
+                $ventasDetalle -> idProducto = $idProductoAdd;
+                $ventasDetalle ->save();
                 $inventario = new Inventario();
-
-
                 $existenciaActual = intval($existenciaAdd);
                 $cantidadRestar =  intval($cantidadAdd);
-
                 $existenciaAdd = $existenciaActual -  $cantidadRestar;
-
                 $inventario::where ("idProducto",$idProductoAdd)->update(["cantidad"=>$existenciaAdd]);
-
-
-                $credito = new clientes();
-                $credito::where ("id",$clienteAdd)->update(["credito"=>$creditoAdd]);
             }
 
 
-
-
+        $credito = new clientes();
+        $credito::where ("id",$clienteAdd)->update(["credito"=>$creditoAdd]);
         \Session::flash('Guardado','Se guardo correctamente la venta');
         return redirect()->route("venta");
-
     }
 
 

@@ -368,7 +368,7 @@ var creditoUsado = $('#credito').val();
 
     $("td[id^='descripcion']").each(function(key,value){
 
-        var productos = $(this).data("id");
+        var productos = $(this).text();
         producto.push(productos);
         var ids = $(this).data("id");
         idProducto.push(ids);
