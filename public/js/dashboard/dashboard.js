@@ -89,7 +89,7 @@ function drawAxisTickColors() {
          else if (ventasMes[i].mes == 11) {mes = 'Noviembre';}
          else if (ventasMes[i].mes == 12) {mes = 'Diciembre';}
 
-         datosMes[i + 1] = [ mes, ventasMes[i].suma ];
+         datosMes[i+1] = [ mes, parseFloat(ventasMes[i].suma) ];
        }
 
 

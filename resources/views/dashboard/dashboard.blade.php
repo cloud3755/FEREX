@@ -139,14 +139,9 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($detalleCliente as $clientes)
               <tr>
-                <td>{{$clientes->nombre}}</td>
-                <td>{{$clientes->total_compras}}</td>
-                <td>{{$clientes->Compra}}</td>
-                <td>{{$clientes->limite}}</td>
+                <!-- aqui va los clientes -->
               </tr>
-              @endforeach
             </tbody>
         </table>
       </div>
