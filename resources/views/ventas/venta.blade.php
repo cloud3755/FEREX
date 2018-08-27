@@ -64,7 +64,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="input-group">
-                                            <input type="number" min="0.01"  value="0" class="form-control" name="credito" id="credito" placeholder="Vender a credito">Vender a credito
+
                                             <input  type="hidden" value="1"  class="form-control overCero" id="cantidad" placeholder="Cantidad">
                                         </div>
                                     </div>
@@ -96,6 +96,7 @@
 @endif -->
                         <div class="table-responsive">
                             <button id="Procesar" type="button">Vender</button>
+                            <button id="venderCredito" type="button">Vender a credito</button>
 
                             <table class="table" id="tableEntrada">
                                 <thead>

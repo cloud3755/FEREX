@@ -2,6 +2,7 @@ var totalFinal = 0;
 var arrayGins;
 var subTotalArr = new Array();
 var contador = 0;
+var creditoUsado = 0;
 arrayGins = {};
 
 var d = new Date();
@@ -22,6 +23,7 @@ $("#productosDiv").hide();
 
 $("#agregarEntrada").attr('disabled',true);
 $("#Procesar").attr('disabled',true);
+$("#venderCredito").attr('disabled',true);
 
 $("#nuevoCliente").click(function (e) {
     e.preventDefault();
@@ -33,6 +35,7 @@ $("#fijarCliente").click(function (e) {
     $('#Cliente').attr('disabled',true);
     $("#agregarEntrada").attr('disabled',false);
     $("#Procesar").attr('disabled',false);
+    $("#venderCredito").attr('disabled',false);
     $("#productosDiv").show();
 
 
@@ -54,16 +57,22 @@ $("#precioC").click(function (e) {
 
 
 });
-$( "#credito" ).change(function() {
+$( "#venderCredito" ).click(function(e) {
+    e.preventDefault();
+
+
     var limiteCredito = $('#Cliente :selected').data('limitecredito');
     var creditoActual = $('#Cliente :selected').data('creditoactual');
 
     limiteCredito = limiteCredito - creditoActual;
-    if($( "#credito" ).val() >limiteCredito){
+    if($("#total label").text()  > limiteCredito){
         alert("Tu limite de credito es"+ limiteCredito);
-        $( "#credito" ).val(limiteCredito);
+        return false;
     }
-
+    else {
+        creditoUsado = parseFloat($("#total label").text());
+        submitForm();
+    }
 });
 
 
@@ -355,10 +364,10 @@ var total  = $("#total label").text() ;
 
 
 var creditoActual = $('#Cliente :selected').data('creditoactual');
-var creditoUsado = $('#credito').val();
 
 
-    creditoActual = parseFloat(creditoActual) +parseFloat(creditoUsado) ;
+
+    creditoActual = parseFloat(creditoActual) + parseFloat(creditoUsado);
 
     $("td[id^='cliente']").each(function(){
         var clientes = $(this).data("id");
