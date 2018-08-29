@@ -15,12 +15,12 @@ class CreateVentasDetallesTable extends Migration
     {
         Schema::create('ventas_detalles', function (Blueprint $table) {
             $table->increments('id');
-
+           
             $table->string('Producto');
             $table->decimal('cantidad',8,2);
             $table->decimal('precio',8,2);
 
-            $table->integer('idVenta');//id que apunta a ventas
+            $table->increments('idVenta');//id que apunta a ventas
             $table->integer('idProducto');
 
             $table->timestamps();
