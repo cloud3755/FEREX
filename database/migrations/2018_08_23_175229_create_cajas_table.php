@@ -17,7 +17,7 @@ class CreateCajasTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->decimal('saldo',8,2);
-            $table->string('estado');//A arqueo, AB abierta, //NI no iniciada
+            $table->string('estado');//I, //NI no iniciada
             $table->integer('idSucursal');
             $table->timestamps();
         });

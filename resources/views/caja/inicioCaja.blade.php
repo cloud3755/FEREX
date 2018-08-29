@@ -32,27 +32,26 @@
                         </thead>
                         <tbody>
                             @foreach($cajas as $caja)
-                                <td>$caja->id</td>
-                                <td>$caja->nombre</td>
-                                
-                                <td><input type="number" value="$caja->saldo" ></td>
-                                
-                                <td>$caja->estadoNombre</td>
-                                <td>$caja->sucursal</td>
+                                <td>{{$caja->id}}</td>
+                                <td>{{$caja->nombre}}</td>
+                                <td>{{$caja->estadoNombre}}</td>
+                                <td><input id="saldo" type="number" value="$caja->saldo" ></td>
+                                <td>{{$caja->sucursal}}</td>
                                 @switch($caja->estado)
                                     @case("NI")
-                                        <td><button type="button" id-operacion="Iniciar" class="btn btn-success" value"Iniciar"></button></td>
+                                        <td><button type="button" data-id-caja="{{$caja->id}}" id="Iniciar" data-id-operacion="I" class="btn btn-success  cambioStatus" >Iniciar</button></td>
                                     @break
-                                    @case("AB")
-                                        <td><button type="button" id-operacion="Reiniciar" class="btn btn-success" value"Reiniciar"></button></td>
+                                    @case("I")
+                                        <td><button type="button" data-id-caja="{{$caja->id}}" id="Corte" id-operacion="Reiniciar" class="btn btn-danger  cambioStatus">Corte</button></td>
+                                        <td><button type="button" data-id-caja="{{$caja->id}}" id="Arqueo" id-operacion="Reiniciar" class="btn btn-warning  cambioStatus">Arqueo</button></td>
                                     @break
                                 @endswitch
                             @endforeach
                         </tbody>
                       </table>
-                    <form hidden  id="form" method="POST" action="/inventario/manual" }}>
+                    <form hidden  id="form" method="POST" action="/cajas/cambioStatus" }}>
                        {{ csrf_field() }}
-                      <input type="text" id="datosInventario" name="datosInventario" />
+                      <input type="text" id="datosCaja" name="datosCaja" />
                     </form>
                     </div>
                 </div>
@@ -61,30 +60,31 @@
     </div>
 </div>
 
-<!-- <form class="" action="/subirarchivo" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-  <input type="hidden" name="_token" value="{{ csrf_token() }}">
-  <div class="form-group form-group-lg">
-  <h2><label for="Usuario" class="control-label col-md-12">(*) Archivo:</label></h2>
-  <div class="col-md-6 col-sm-9">
-    <input class="form-control input-lg" id="archivo" type="file" placeholder="Elige el archivo" name="archivo" required>
+<div class="modal fade" id="modalCambioCaja" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalExistenciaLabel">Caja</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBodyCambioCaja">
+
+      </div>
+      <div class="modal-footer">
+        <input hidden type="text" name="dataInventarioInicial" id="dataInventarioInicial">
+        <input hidden type="text" name="idProducto" id="idProducto">
+        <button type="button" id="guardarInventario" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="modal-footer">
-<button type="submit" class="btnobjetivo" id="btnobjetivo" style="font-family: Arial;">Subir Documento</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseUpload">Cerrar</button>
-</div>
-
-</form> -->
-
-
-
 
 
 
 @endsection
 @section('scripts.personalizados')
 @parent
-<script src="{{ asset('js/utils/inputNumberUtil.js') }}"></script>
-<script src="{{ asset('js/inventario/inventarioApp.js') }}"></script>
+<script src="{{ asset('js/cajas/cajasApp.js') }}"></script>
 @endsection

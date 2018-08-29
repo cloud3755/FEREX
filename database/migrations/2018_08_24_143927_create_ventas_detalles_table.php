@@ -20,7 +20,7 @@ class CreateVentasDetallesTable extends Migration
             $table->decimal('cantidad',8,2);
             $table->decimal('precio',8,2);
 
-            $table->increments('idVenta');//id que apunta a ventas
+            $table->integer('idVenta');//id que apunta a ventas
             $table->integer('idProducto');
 
             $table->timestamps();
