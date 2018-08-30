@@ -6,11 +6,17 @@
     <link href="{{ asset('bootstrapUtils/css/bootstrap-select.css.map') }}" rel="stylesheet">
 @endsection
 @section('content')
+
+@include("partials.clientesAlta")
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Capturar Venta</div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <button  id="nuevoCliente" class="btn btn-info" data-toggle="modal" data-target="#altaCliente">  Nuevo cliente</button>
+                      Capturar Venta
+                    </div>
 
                     <div class="panel-body">
                     <!-- @if (session('status'))
@@ -23,9 +29,6 @@
                         @endsection
                         <form class="form" >
                             <div class="row">
-                                <button  id="nuevoCliente" class="btn btn-secondary"> Nuevo cliente</button>
-                                <br>
-                                <br>
 
                                 <div class="col-xs-4">
 
@@ -85,7 +88,7 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">Ventas Registradas</div>
 
                     <div class="panel-body">
@@ -95,8 +98,8 @@
                                 </div>
 @endif -->
                         <div class="table-responsive">
-                            <button id="Procesar" type="button">Vender</button>
-                            <button id="venderCredito" type="button">Vender a credito</button>
+                            <button id="Procesar" type="button" class="btn btn-success">Vender</button>
+                            <button id="venderCredito" type="button" class="btn btn-primary">Vender a credito</button>
 
                             <table class="table" id="tableEntrada">
                                 <thead>
