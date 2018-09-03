@@ -135,12 +135,17 @@
                 <th>Nombre cliente</th>
                 <th>Numero de Compras</th>
                 <th>Ttotal de compras</th>
-                <th>Limite de credito</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <!-- aqui va los clientes -->
+                @foreach ($detalleCliente as $cliente)
+                <tr>
+                  <td>{{$cliente->nombre}}</td>
+                  <td>{{$cliente->total_compras}}</td>
+                  <td>{{$cliente->Compra}}</td>
+                </tr>
+                @endforeach
               </tr>
             </tbody>
         </table>

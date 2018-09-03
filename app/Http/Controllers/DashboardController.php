@@ -23,6 +23,13 @@ class DashboardController extends Controller
       //                ->groupBy('idCliente','nombre')
       //                ->get();
 
+      $detalleCliente =DB::table('ventas')
+                     ->join('ventas_detalles','ventas_detalles.idVenta','=','ventas.id')
+                     ->join('clientes', 'clientes.id', '=', 'ventas.idCliente')
+                     ->select(DB::raw('nombre,count(*) as total_compras,sum(precio) as Compra'))
+                     ->groupBy('idCliente','nombre')
+                     ->get();               
+
       return view('dashboard.dashboard',compact('ventasMes','detalleCliente'));
     }
 }
