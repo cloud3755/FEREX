@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Producto;
+use Auth;
 use App\Models\Inventario;
 use function PhpParser\filesInDir;
 use Yajra\Datatables\Datatables;//Prueba dataTables Ajax
@@ -53,7 +54,7 @@ class ventaController extends Controller
 
         $ventas = new Ventas();
         $ventas -> folio = $folioAdd;
-        $ventas -> idVendedor = $request->input('vendedor');
+        $ventas -> idVendedor = Auth::user()->id;
         $ventas -> idCliente= $clienteAdd;
         $ventas->save();
 

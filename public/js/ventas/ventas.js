@@ -41,7 +41,7 @@ $("#fijarCliente").click(function (e) {
 
 });
 
-$("#precioB").click(function (e) {
+$("#precioB.btn").click(function (e) {
     e.preventDefault();
     var precioB = $('#Productos :selected').data('preciob');
 
@@ -49,7 +49,7 @@ $('#Productos :selected').val(precioB);
 
 
 });
-$("#precioC").click(function (e) {
+$("#precioC.btn").click(function (e) {
     e.preventDefault();
     var precioC = $('#Productos :selected').data('precioc');
 
