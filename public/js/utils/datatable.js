@@ -10,7 +10,7 @@ function thedataTables($id = "dataTable" ,  ajaxRoute = "", columns="")
     dtObject = 
     {
     processing: false,
-    serverSide: true,
+    
     searching: true,
     pageLength: 5,
     paging: true,
@@ -25,9 +25,11 @@ function thedataTables($id = "dataTable" ,  ajaxRoute = "", columns="")
             sNext:"Siguiente",
             sPrevious:"Anterior" 
         }
-    }
+    };
     if(ajaxRoute)
     {
+        dtObject["serverSide"] = true;
+       
         dtObject["ajax"] = ajaxRoute;
         dtObject["columns"] = columns;
     }
