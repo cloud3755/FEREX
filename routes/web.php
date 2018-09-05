@@ -37,6 +37,7 @@ Route::post('/productos/cargaMasiva', 'productosController@masiveUpload');
 //---------------------------------------------------MODULO DE Cajas INICIO---------------------------------------------------------------------------------------------------------------------
 
 Route::get('/cajas', 'cajaController@index')->name('cajas');
+Route::get('/cajas/historial', 'cajaController@historial');
 Route::post('/cajas/cambioStatus', 'cajaController@cambioEstadoCaja');
 
 //---------------------------------------------------MODULO DE Cajas FIN---------------------------------------------------------------------------------------------------------------------

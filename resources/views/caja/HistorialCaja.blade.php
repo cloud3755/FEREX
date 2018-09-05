@@ -8,7 +8,7 @@
         <div class="col-md-12">
 
             <div class="panel panel-default">
-                <div class="panel-heading">Cajas</div>
+                <div class="panel-heading">Cajas Historial</div>
 
                 <div class="panel-body">
                     <!-- @if (session('status'))
@@ -22,12 +22,12 @@
                       <table class="table" id="tableEntrada">
                         <thead>
                           <tr>
-                            <th>Id</th>
-                            <th>Caja</th>
-                            <th>Estado</th>
-                            <th>Saldo</th>
                             <th>Sucursal</th>
-                            <th>Operacion</th>
+                            <th>Caja</th>
+                            <th>Tipo</th>
+                            <th>Diferencia</th>
+                            <th>Fecha</th>
+                            
                           </tr>
                         </thead>
                         <tbody>

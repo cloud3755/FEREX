@@ -23,7 +23,7 @@ class cajaController extends Controller
         $cajas  =  
         DB::table('cajas')
         ->join('sucursales', 'sucursales.id', '=', 'cajas.idSucursal')
-        ->select("cajas.id", "cajas.nombre", 'estado', 'sucursales.nombre as sucursal', 
+        ->select("cajas.id", "cajas.saldo", "cajas.nombre", 'estado', 'sucursales.nombre as sucursal', 
         DB::raw("case when estado = 'A' THEN 'ARQUEO' 
         WHEN estado = 'AB' THEN 'abierta' 
         WHEN estado = 'NI' THEN 'No iniciada' END as estadoNombre ")
@@ -34,22 +34,47 @@ class cajaController extends Controller
         return view('caja.inicioCaja', compact('cajas'));
     }
 
+    function historial()
+    {
+
+    }
     function cambioEstadoCaja(Request $request)
     {
         $datosCaja = json_decode($request->datosCaja);
         //dd($datosCaja);
+        switch($datosCaja->operacion)
+        {
+            case "I":
+                $caja = caja::find($datosCaja->idCaja);
+                $caja->saldo = $datosCaja->saldo;
+                $caja->estado = $datosCaja->operacion;
+                $caja->save();
+                $corte = new corteCaja();
+                $corte->setByRequest($datosCaja);
+               
+                $corte->save();
+            break;
 
-        $caja = caja::find($datosCaja->idCaja);
+            case "A":
+                $corte = new corteCaja();
+                $corte->setByRequest($datosCaja);
+                
+                $corte->save();
+            break;
 
-        $caja->saldo = $datosCaja->saldo;
-        $caja->estado = $datosCaja->operacion;
-$caja->save();
-        $corte = new corteCaja();
-
-        $corte->idCaja = $caja->id;
-        $corte->tipo = $caja->estado;
-        $corte->saldo = $caja->saldo;
-        $corte->diferencia = 0;
-        $corte->save();
+            case "C" : 
+                $caja = caja::find($datosCaja->idCaja);
+                $caja->saldo = 0;
+                $caja->estado = "NI";
+                $caja->save();
+                $corte = new corteCaja();
+                $corte->setByRequest($datosCaja);
+                
+                $corte->save();
+            break;
+            \Session::flash('Guardado','Se hizo la operacion correctamente');
+            return redirect()->route("cajas"); 
+        }
+        
     }
 }
