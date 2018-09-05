@@ -36,7 +36,7 @@ class cajaController extends Controller
 
     function historial()
     {
-
+        $historialCaja = DB::table("corte_cajas");
     }
     function cambioEstadoCaja(Request $request)
     {
@@ -72,9 +72,9 @@ class cajaController extends Controller
                 
                 $corte->save();
             break;
-            \Session::flash('Guardado','Se hizo la operacion correctamente');
-            return redirect()->route("cajas"); 
+            
         }
-        
+        \Session::flash('Guardado','Se hizo la operacion correctamente');
+            return redirect()->route("cajas"); 
     }
 }

@@ -15,11 +15,14 @@ class CreateCorteCajasTable extends Migration
     {
         Schema::create('corte_cajas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idCaja');
+            
             $table->string('tipo');//A arqueo, C corte, I inicio
-            $table->decimal('saldo',8,2);
-            $table->decimal('diferencia',8,2);
+            $table->decimal('saldoSistema',8,2);
+            $table->decimal('saldoCapturado',8,2);
             $table->dateTime('fechaHora')->default(date("Y-m-d H:i:s"));
+            
+            $table->integer('idUsuario');
+            $table->integer('idCaja');
             $table->timestamps();
         });
     }

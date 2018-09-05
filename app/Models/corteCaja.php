@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class corteCaja extends Model
 {
@@ -10,7 +11,8 @@ class corteCaja extends Model
     {
         $this->idCaja = $obj->idCaja;
         $this->tipo = $obj->operacion;
-        $this->saldo = $obj->saldo;
-        $this->diferencia = $obj->saldo - $obj->saldoCapturado;
+        $this->saldoSistema = $obj->saldo;
+        $this->saldoCapturado =  $obj->saldoCapturado;
+        $this->idUsuario = Auth::user()->id;
     }
 }
