@@ -15,7 +15,7 @@
     @section('styles')
 
  <!--   <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
- <!--   <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />-->   
+ <!--   <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />-->
 
 
     <link href="{{ asset('bootstrap3/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -57,9 +57,15 @@
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                               <li><a href="/AltaClientes">Alta de clientes</a></li>
+                              <li><a href="/sucursales"> </i>Alta de sucursales</a></li>
                             </ul>
                           </li>
                             <li><a href="/venta">Venta</a></li>
+                            <li>
+                              <a href="/Dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                              </a>
+                            </li>
                          @endguest
                     </ul>
 
@@ -96,7 +102,7 @@
         </nav>
   @guest
   @else
-  <div class="nav-side-menu">
+  <!-- <div class="nav-side-menu">
     <div class="brand">Ferex</div>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
@@ -105,7 +111,7 @@
             <ul id="menu-content" class="menu-content collapse out">
                 <li>
                   <a href="/Dashboard">
-                <i class="fas fa-tachometer-alt"></i> Dashboard       
+                <i class="fas fa-tachometer-alt"></i> Dashboard
                   </a>
                 </li>
 
@@ -123,7 +129,7 @@
                 <ul class="sub-menu collapse" id="serviceCollapse">
                   <li><a href="/AltaClientes"> <i class="fas fa-plus"></i>Alta de clientes</a></li>
                   <li><a href="/sucursales"> <i class="fas fa-plus"></i>Alta de sucursales</a></li>
-                  
+
                   <li><i class="fas fa-plus"></i>Alta de usuarios</li>
                 </ul>
 
@@ -135,7 +141,7 @@
                     <li><a href="/venta"> <i class="fas fa-plus"></i>Venta</a></li>
                 </ul>
 
-                 <!-- <li>
+                  <li>
                   <a href="#">
                   <i class="fa fa-user fa-lg"></i> Profile
                   </a>
@@ -145,10 +151,10 @@
                   <a href="#">
                   <i class="fa fa-users fa-lg"></i> Users
                   </a>
-                </li> -->
+                </li>
             </ul>
      </div>
-</div>
+</div> -->
 @endguest
         @section('mensajesBackEnd')
             @if(Session::has('Guardado'))
@@ -169,11 +175,11 @@
 
     <!--  <script src="{{ asset('js/app.js') }}"></script>-->
     <!--  <script src="{{ asset('bootstrap3/js/bootstrap.js') }}"></script>-->
-    
+
     @show
 
     @section('scripts.DataTable')
-    
+
         <script src="{{ asset('bootstrapUtils/js/datatables.js') }}"></script>
         <script src="{{ asset('js/utils/datatable.js') }}"></script>
     @show
@@ -182,7 +188,7 @@
     <!--Script select 2 -->
         <script src="{{ asset('bootstrapUtils/js/bootstrap-select.min.js') }}"></script>
         <script src="{{ asset('bootstrapUtils/js/bootstrap-select.js') }}"></script>
-    
+
     @show
 
     @section('scripts.personalizados')
