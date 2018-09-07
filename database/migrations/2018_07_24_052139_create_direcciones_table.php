@@ -25,7 +25,7 @@ class CreateDireccionesTable extends Migration
             $table->string('CP');
             $table->string('ciudad');
             $table->string('estado');
-            $table->string('pais');
+            $table->string('pais')->default("México");
             $table->timestamps();
         });
     }

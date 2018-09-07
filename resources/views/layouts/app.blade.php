@@ -58,6 +58,7 @@
                             <ul class="dropdown-menu">
                               <li><a href="/AltaClientes">Alta de clientes</a></li>
                               <li><a href="/sucursales"> </i>Alta de sucursales</a></li>
+                              <li><a href="/inventario/manual"> </i>Alta de inventario</a></li>
                             </ul>
                           </li>
                             <li><a href="/venta">Venta</a></li>

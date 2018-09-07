@@ -1,3 +1,4 @@
+<br>
 <div class="row">
   <div class="col-md-4">
 
@@ -58,7 +59,7 @@
 
   </div>
 </div>
-
+<br><br>
 <div class="row">
   <div class="col-md-4">
 
@@ -78,12 +79,36 @@
     </div>
 
   </div>
+
+</div>
+<br><br>
+<div class="row">
+  
+
+  <div class="col-md-4">
+
+    <div class="input-group">
+      <label class="sr-only" for="estado">Estado</label>
+      <div class="input-group-addon">Estado</div>
+      <select class="form-control selectpicker"   id="estado" name="estado" data-live-search="true" data-width="100%" required>
+        @foreach($estados as $estado)
+            <option data-id="{{$estado->idEstado}}" value="{{$estado->estado}}"  >{{$estado->estado}}</option>
+        @endforeach
+      </select>
+    </div>
+
+
+  </div>
+
+
   <div class="col-md-4">
 
     <div class="input-group">
       <label class="sr-only" for="entre2">ciudad</label>
       <div class="input-group-addon">ciudad</div>
-      <input type="text" class="form-control" name="ciudad" id="ciudad" placeholder="ciudad">
+      <select class="form-control selectpicker"   id="ciudad" name="ciudad" data-live-search="true" data-width="100%" required>
+        
+      </select>
     </div>
 
   </div>

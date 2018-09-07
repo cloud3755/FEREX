@@ -32,8 +32,10 @@ class UsersTableSeeder extends Seeder {
             );
             db::table('sucursales')->insert(array(
                    'nombre' => "Matriz",
-                   'direccion'     => 'Mariano Otero SN',
+                   'idDireccion'     => 0,
             ));
+            
+           
             
             db::table('productos')->insert(array(
                    'nombre' => "Producto dummie",
@@ -42,7 +44,7 @@ class UsersTableSeeder extends Seeder {
                    'codigoBarras'     => '000000',
                    'precioA'     => 99.99,
             ));     
-            for($i=0 ; $i< 10000; $i++)
+            /*for($i=0 ; $i< 10000; $i++)
             {
             db::table('productos')->insert(array(
                    'nombre' => $i,
@@ -51,7 +53,7 @@ class UsersTableSeeder extends Seeder {
                    'codigoBarras'     => $i,
                    'precioA'     => 99.99,
             ));     
-            }
+            }*/
             db::table('cajas')->insert(array(
                 'nombre' => "Principal",
                 'saldo'     => 0,

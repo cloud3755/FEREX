@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Sucursal;
+
+use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;//Prueba dataTables Ajax
 
 class sucursalesController extends Controller
@@ -12,8 +14,12 @@ class sucursalesController extends Controller
     public function index()
     {
         $sucursales  =  Sucursal::where('activo', true)->get();
+        $estados = DB::connection("ciudades")
+        ->table("estados")
+        ->select("estados.*")
+        ->get();
         
-        return view('sucursales.sucursales', compact('sucursales'));
+        return view('sucursales.sucursales', compact('sucursales', 'estados'));
 
     }
 
@@ -36,5 +42,10 @@ class sucursalesController extends Controller
             })
         ->rawColumns(['Acciones'])
         ->make(true);
+    }
+
+    public function nueva(Request $request)
+    {
+        
     }
 }

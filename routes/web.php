@@ -74,5 +74,12 @@ function()
         Route::get('/venta', 'ventaController@index')->name('venta');
         Route::post('/venta', 'ventaController@realizarVenta');
 
+        //punto de venta
+
+        //ciudades
+        Route::get('/estados', 'ciudadesController@estados');
+        Route::get('/municipios/{idEstado}', 'ciudadesController@municipiosEstado');
+        //ciudades
+
     }
 );
