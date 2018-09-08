@@ -68,11 +68,11 @@ class ProcesCargaProductos implements ShouldQueue
                         $inventario = new Inventario();
                         $inventario->idSucursal = $value;
                         $inventario->idProducto = $Producto->id;
-                        $inventario->cantidad = $row["sucursal_".$value."_".$key];
+                        $inventario->cantidad = $row["sucursal_".$value."_".$key]==null ? 0 :  $row["sucursal_".$value."_".$key];
                         $inventario->save();
                         $inventario = null;
                     }
-                    
+
                     $Producto = null;
                 };
             });
