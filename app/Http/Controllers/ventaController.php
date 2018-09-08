@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\clientes;
 use App\Models\Ventas;
+use App\Models\caja;
 use App\Models\ventasDetalle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,9 @@ class ventaController extends Controller
 
         $clientes = new clientes();
         $clientes = $clientes->all();
-        return view('ventas.venta', compact('productos'),compact("clientes"));
+        $status = new caja();
+        $status = $status->all();
+        return view('ventas.venta', compact('productos'),compact("clientes","status"));
 
     }
 

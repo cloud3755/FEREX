@@ -17,6 +17,10 @@ var nuevaCadena2 = nuevaCadena.replace("/", "");
 var folio =nuevaCadena2+ Math.floor(Math.random() * 100000);
 var folio =nuevaCadena2+ Math.floor(Math.random() * 100000);
 
+if ($("#statusCaja").val() == "NI"){
+    alert("No Puedes vender sin iniciar la caja");
+    $("#fijarCliente").attr('disabled',true);
+}
 
 
 $("#productosDiv").hide();
