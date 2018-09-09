@@ -81,5 +81,9 @@ function()
         Route::get('/municipios/{idEstado}', 'ciudadesController@municipiosEstado');
         //ciudades
 
+        //----------------------------------------------------alta de vendedores ------------------------------------------------------------------------------------------------------------------------
+        Route::get('register', 'vendedoresController@showRegistrationForm')->name('register');
+        Route::post('register', 'vendedoresController@register1');
+
     }
 );

@@ -51,17 +51,20 @@
                     <ul class="nav navbar-nav">
                         @guest
                         @else
-                         <li><a href="/productos">Productos</a></li>
+                         <li><a href="/productos"> <i class="fas fa-store-alt"></i> Productos</a></li>
                          <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Altas
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                              <i class="fas fa-user-alt"></i> Altas
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                               <li><a href="/AltaClientes">Alta de clientes</a></li>
                               <li><a href="/sucursales"> </i>Alta de sucursales</a></li>
                               <li><a href="/inventario/manual"> </i>Alta de inventario</a></li>
+                              <li><a href="{{ route('register') }}"> </i>Alta de Vendedores</a></li>
                             </ul>
                           </li>
-                            <li><a href="/venta">Venta</a></li>
+                            <li><a href="/venta">
+                              <i class="fas fa-money-check-alt"></i> Venta</a></li>
                             <li>
                               <a href="/Dashboard">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard

@@ -6,9 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
-  protected $dateFormat = 'M j Y h:i:s';
+  protected $dateFormat = 'Y-m-d h:i:s';
     use Notifiable;
 
     /**
@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','sucursal','permisos'
+        'name', 'email', 'password','idSucursal','permisos'
     ];
 
     /**
