@@ -89,37 +89,40 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Usuarios</div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Usuarios</div>
-
-    <div class="panel-body">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Numero de usuario</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Sucursal</th>
-                <th>permiso</th>
-                <th>Activo</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($usuario as $usuarios)
-              <tr>
-                <td>{{$usuarios->id}}</td>
-                <td>{{$usuarios->name}}</td>
-                <td>{{$usuarios->email}}</td>
-                <td>{{$usuarios->idSucursal}}</td>
-                <td>{{$usuarios->permisos}}</td>
-                <td>{{$usuarios->activo}}</td>
-              </tr>
-                @endforeach
-            </tbody>
-          </table>
+        <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Numero de usuario</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Sucursal</th>
+                    <th>permiso</th>
+                    <th>Activo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($usuario as $usuarios)
+                  <tr>
+                    <td>{{$usuarios->id}}</td>
+                    <td>{{$usuarios->name}}</td>
+                    <td>{{$usuarios->email}}</td>
+                    <td>{{$usuarios->idSucursal}}</td>
+                    <td>{{$usuarios->permisos}}</td>
+                    @if($usuarios->activo==1)
+                      <td>Activo</td>
+                      @else
+                      <td>Inactivo</td>
+                    @endif
+                  </tr>
+                    @endforeach
+                </tbody>
+              </table>
+            </div>
         </div>
     </div>
 </div>
