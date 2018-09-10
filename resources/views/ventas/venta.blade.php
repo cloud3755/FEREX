@@ -63,6 +63,13 @@
                                         <button id="precioC" class="btn btn-secondary">Precio C</button>
 
                                     </div>
+                                    <select class="form-control selectpicker formaPago"   id="formaPago" name="formaPago" data-live-search="true" data-width="100%" required>
+                                        <option     value="0"  >Selecione la forma de pago</option>
+                                        <option    value="efectivo"  >Efectivo</option>
+                                        <option    value="tarjetaCredito"  >Tarjeta de Credito</option>
+                                        <option    value="tarjetaDebito"  >Tarjeta de Debito</option>
+                                        <option    value="Transeferencia"  >Transeferencia</option>
+                                    </select>
                                 </div>
 
 
@@ -138,6 +145,7 @@
                                 <input type="text" id="subTotal" name="subTotal[]"  />
                                 <input type="text" id="total" name="total[]"  />
                                 <input type="text" id="folio" name="folio[]"  />
+                                <input type="text" id="formaPago" name="formaPago[]"  />
                             </form>
                         </div>
                     </div>

@@ -44,6 +44,7 @@ class ventaController extends Controller
         $folio = $request->input('folio');
         $idProducto = $request->input('idProdcuto');
         $credito = $request->input('credito');
+        $formaPago = $request->input('formaPago');
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",", $producto[0]);
         $cantidades = explode(",", $cantidad[0]);
@@ -52,11 +53,13 @@ class ventaController extends Controller
         $existencias = explode(",", $existencia[0]);
 
         $folioAdd = $folio[0];
+        $formaPagoAdd = $formaPago[0];
         $clienteAdd = $clientes[0];
             $i = count($productos);
 
         $ventas = new Ventas();
         $ventas -> folio = $folioAdd;
+        $ventas -> formaDePago = $formaPagoAdd;
         $ventas -> idVendedor = Auth::user()->id;
         $ventas -> idCliente= $clienteAdd;
         $ventas->save();

@@ -117,11 +117,14 @@ function agregarRegistro()
     var subTotal = cantidad *  precio;
 
 
+
     if (existencia < cantidad ){
 
         alert("Solo quedan "+existencia+" "+ descripcion);
         return false;
     }
+
+
 
     if (cantidad >0){
         var productoSelecionado = $(".producto :selected").data("codigo");
@@ -355,7 +358,13 @@ function submitForm()
     //$('#id_sucursal').val($('#sucursal').val());
     //alert($('#sucursal').val());return;
 
+    var formaPago = $('#formaPago :selected').val();
 
+    if (formaPago == 0){
+
+        alert("Elija una forma de pago valida");
+        return false;
+    }
 
 var cliente = [];
 var idProducto = [];
@@ -364,14 +373,22 @@ var producto = [];
 var cantidad = [];
 var precioProducto = [];
 var subTotal = [];
+var formaPago = [];
 var total  = $("#total label").text() ;
 
 
 var creditoActual = $('#Cliente :selected').data('creditoactual');
 
-
-
     creditoActual = parseFloat(creditoActual) + parseFloat(creditoUsado);
+
+    if (creditoUsado == 0){
+        formaPago.push($('#formaPago :selected').val());
+    }
+    else {
+        formaPago.push("Venta a credito");
+    }
+
+
 
     $("td[id^='cliente']").each(function(){
         var clientes = $(this).data("id");
@@ -427,6 +444,7 @@ var creditoActual = $('#Cliente :selected').data('creditoactual');
     $("#form input#total").val(total);
     $("#form input#credito").val(creditoActual);
     $("#form input#folio").val(folio);
+    $("#form input#formaPago").val(formaPago);
 
     $('#form').submit();
 }
