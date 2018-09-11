@@ -32,12 +32,12 @@
 
                                 <div class="col-xs-4">
                                     @foreach($status as $statu)
-<input   name="statusCaja" id="statusCaja" type="hidden" value="{{$statu->estado}}">
+<input   name="statusCaja" id="statusCaja" type="hidden"  data-saldo="{{$statu->saldo}}" value="{{$statu->estado}}">
                                     @endforeach
                                     <div class="input-group">
 
                                         <label class="sr-only" for="Clientes">Cliente</label>
-                                        <div class="input-group-addon">Cliente</div>
+
 
                                             <select class="form-control selectpicker cliente"   id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
                                                 <option    value="0"     data-limiteCredito="0"  data-creditoActual="0" data-descripcion="Cliente general" selected>Cliente general</option>
@@ -53,7 +53,7 @@
 
                                     <div id="productosDiv" class="input-group">
                                         <label class="sr-only" for="Productos">Productos</label>
-                                        <div class="input-group-addon">Productos</div>
+
                                         <select class="form-control selectpicker producto"   id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
                                             @foreach($productos as $producto)
                                                 <option    data-preciob="{{$producto->precioB}}"   data-precioc="{{$producto->precioC}}"  data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
@@ -109,6 +109,7 @@
                         <div class="table-responsive">
                             <button id="Procesar" type="button" class="btn btn-success">Vender</button>
                             <button id="venderCredito" type="button" class="btn btn-primary">Vender a credito</button>
+                            <button id="IVA" type="button" class="btn btn-primary">Aplicar IVA</button>
 
                             <table class="table" id="tableEntrada">
                                 <thead>
@@ -144,6 +145,7 @@
                                 <input type="text" id="precioProducto" name="precioProducto[]"  />
                                 <input type="text" id="subTotal" name="subTotal[]"  />
                                 <input type="text" id="total" name="total[]"  />
+                                <input type="text" id="saldo" name="saldo[]"  />
                                 <input type="text" id="folio" name="folio[]"  />
                                 <input type="text" id="formaPago" name="formaPago[]"  />
                             </form>

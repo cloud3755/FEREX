@@ -3,6 +3,7 @@ var arrayGins;
 var subTotalArr = new Array();
 var contador = 0;
 var creditoUsado = 0;
+
 arrayGins = {};
 
 var d = new Date();
@@ -31,6 +32,36 @@ $("#venderCredito").attr('disabled',true);
 
 $("#nuevoCliente").click(function (e) {
     e.preventDefault();
+
+});
+
+$("#IVA").click(function (e) {
+    e.preventDefault();
+
+
+
+    $("td[id^='codigoBarras']").each(function(){
+        var tamañoCadena =  $(this).attr("id").length;
+
+        var fila =  $(this).attr("id")[tamañoCadena-1];
+        var precio = parseFloat($("#precio"+fila).text());
+        var cantidad = $("#cantidad2"+fila).val();
+        var subTotal =   precio * cantidad;
+        $("#subTotal"+fila).val(subTotal);
+        $("#subTotal"+fila).text(subTotal);
+
+
+        $("td[id^='subTotal']").each(function(){
+            totalFinal = totalFinal + eval($(this).text());
+            $("#total label").text(parseInt(totalFinal + (totalFinal*.16)));
+        });
+
+
+
+
+        totalFinal = 0;
+
+    });
 
 });
 $("#fijarCliente").click(function (e) {
@@ -360,11 +391,9 @@ function submitForm()
 
     var formaPago = $('#formaPago :selected').val();
 
-    if (formaPago == 0){
+    var saldoActual = $('#statusCaja').data('saldo');
 
-        alert("Elija una forma de pago valida");
-        return false;
-    }
+
 
 var cliente = [];
 var idProducto = [];
@@ -373,19 +402,31 @@ var producto = [];
 var cantidad = [];
 var precioProducto = [];
 var subTotal = [];
-var formaPago = [];
 var total  = $("#total label").text() ;
-
 
 var creditoActual = $('#Cliente :selected').data('creditoactual');
 
     creditoActual = parseFloat(creditoActual) + parseFloat(creditoUsado);
 
     if (creditoUsado == 0){
-        formaPago.push($('#formaPago :selected').val());
+
     }
     else {
-        formaPago.push("Venta a credito");
+        formaPago = "Venta a credito";
+    }
+
+    if (formaPago == 0 && formaPago !="Venta a credito" ){
+
+        alert("Elija una forma de pago valida");
+        return false;
+    }
+     if (formaPago == "efectivo"){
+
+
+        saldoActual = parseFloat(saldoActual) + parseFloat(total);
+    }
+    else {
+        saldoActual = parseFloat(saldoActual);
     }
 
 
@@ -442,6 +483,7 @@ var creditoActual = $('#Cliente :selected').data('creditoactual');
     $("#form input#precioProducto").val(precioProducto);
     $("#form input#subTotal").val(subTotal);
     $("#form input#total").val(total);
+    $("#form input#saldo").val(saldoActual);
     $("#form input#credito").val(creditoActual);
     $("#form input#folio").val(folio);
     $("#form input#formaPago").val(formaPago);

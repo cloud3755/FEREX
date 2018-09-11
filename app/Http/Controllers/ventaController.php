@@ -44,6 +44,7 @@ class ventaController extends Controller
         $folio = $request->input('folio');
         $idProducto = $request->input('idProdcuto');
         $credito = $request->input('credito');
+        $saldo = $request->input('saldo');
         $formaPago = $request->input('formaPago');
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",", $producto[0]);
@@ -74,6 +75,7 @@ class ventaController extends Controller
                 $existenciaAdd = $existencias[$a];
 
                 $creditoAdd = $credito[0];
+                $saldoAdd = $saldo[0];
                 $ventasDetalle = new ventasDetalle();
                 $ventasDetalle -> Producto= $productoAdd;
                 $ventasDetalle -> cantidad= $cantidadAdd;
@@ -91,6 +93,9 @@ class ventaController extends Controller
 
         $credito = new clientes();
         $credito::where ("id",$clienteAdd)->update(["credito"=>$creditoAdd]);
+        $saldo = new caja();
+        $saldo::where("id",1)->update(["saldo"=>$saldoAdd]);
+
         \Session::flash('Guardado','Se guardo correctamente la venta');
         return redirect()->route("venta");
     }
