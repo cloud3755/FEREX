@@ -4,6 +4,7 @@ var subTotalArr = new Array();
 var contador = 0;
 var creditoUsado = 0;
 
+
 arrayGins = {};
 
 var d = new Date();
@@ -35,12 +36,20 @@ $("#nuevoCliente").click(function (e) {
 
 });
 
-$("#IVA").click(function (e) {
+$("#IVA").one("click", function (e) {
     e.preventDefault();
+
+    $("td[id^='precio']").each(function(){
+
+        $(this).text(parseInt($(this).text())  + parseInt(($(this).text()*.16)));
+    });
 
 
 
     $("td[id^='codigoBarras']").each(function(){
+
+
+
         var tamañoCadena =  $(this).attr("id").length;
 
         var fila =  $(this).attr("id")[tamañoCadena-1];
@@ -53,13 +62,14 @@ $("#IVA").click(function (e) {
 
         $("td[id^='subTotal']").each(function(){
             totalFinal = totalFinal + eval($(this).text());
-            $("#total label").text(parseInt(totalFinal + (totalFinal*.16)));
+            $("#total label").text(totalFinal);
         });
 
 
 
 
         totalFinal = 0;
+
 
     });
 
