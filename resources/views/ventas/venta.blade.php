@@ -110,6 +110,7 @@
                             <button id="Procesar" type="button" class="btn btn-success">Vender</button>
                             <button id="venderCredito" type="button" class="btn btn-primary">Vender a credito</button>
                             <button id="IVA" type="button" class="btn btn-primary">Aplicar IVA</button>
+                            <button id="reset" type="button" class="btn btn-danger">Cancelar venta</button>
 
                             <table class="table" id="tableEntrada">
                                 <thead>

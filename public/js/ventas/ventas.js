@@ -5,6 +5,13 @@ var contador = 0;
 var creditoUsado = 0;
 
 
+
+$("#precioB.btn").append("  "+$('#Productos :selected').data('preciob'));
+
+
+$("#precioC.btn").append("  "+$('#Productos :selected').data('precioc'));
+
+
 arrayGins = {};
 
 var d = new Date();
@@ -31,8 +38,38 @@ $("#agregarEntrada").attr('disabled',true);
 $("#Procesar").attr('disabled',true);
 $("#venderCredito").attr('disabled',true);
 
+
+
 $("#nuevoCliente").click(function (e) {
     e.preventDefault();
+
+});
+$("#reset").click(function (e) {
+    e.preventDefault();
+
+    if(confirm('¿Estas seguro que deceas cancelar esta venta?')){
+        location.reload();
+    }
+
+else
+    {
+        return false;
+    }
+
+
+});
+
+
+$("#Productos").change(function (e) {
+    $("#precioB.btn").text("Precio B");
+    $("#precioC.btn").text("Precio C");
+
+    $("#precioB.btn").append("  "+$('#Productos :selected').data('preciob'));
+
+
+    $("#precioC.btn").append("  "+$('#Productos :selected').data('precioc'));
+
+
 
 });
 
@@ -298,6 +335,8 @@ function agregarRegistro()
 
     $('.Cantidad').on('change',function(){cantidadChange($(this));});
 }
+
+
 
 
 
