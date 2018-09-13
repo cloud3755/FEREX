@@ -64,6 +64,10 @@ function()
         Route::get('/sucursales', 'sucursalesController@index')->name('Sucurslaes');
         Route::get('/sucursales/get', 'sucursalesController@getSucursales');
 
+        Route::post('/sucursales/nuevo', 'sucursalesController@nueva');
+
+        
+
         //---------------------------------------------------MODULO DE SUCURSALES FIN---------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------MODULO DE DASHBOARD---------------------------------------------------------------------------------------------------------------------
         Route::get('/Dashboard', 'DashboardController@index')->name('Dashboard');

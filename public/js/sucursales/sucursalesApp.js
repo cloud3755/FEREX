@@ -12,14 +12,7 @@ thedataTables("dataTable", '/sucursales/get',
 $("#btnAgregar").on('click', showPanelAgregar);
 $("#btnCerrar").on('click', hidePanelAgregar);
 
-$('#form').submit(
-    function(event)
-    {
-        setInventarioInicial();
-        return true;
-    }
 
-);
 
 $(document).on('click', '.Editar', 
     function()
@@ -41,7 +34,7 @@ function showPanelAgregar(isCreate = true)
     {
         $('#form').trigger("reset");
         $('#setInventario').show();
-        $('#form').attr("action", "/productos/nuevo");
+        $('#form').attr("action", "/sucursales/nuevo");
         $('#guardar').text("Guardar");
 
     }
@@ -51,7 +44,7 @@ function hidePanelAgregar()
 {
     $("#panelAgregar").hide(500);
 }
-
+/*
 function editar(id)
 {
     $.get( "/productos/get/"+ id)
@@ -89,5 +82,5 @@ function  setInventarioInicial()
         inventarioInicial[idSucursal] = $(this).val();
     });
     $("#dataInventarioInicial").val(JSON.stringify(inventarioInicial));
-}
+}*/
 });

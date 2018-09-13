@@ -17,6 +17,7 @@ class direcciones extends Model
         $this->colonia = $request->colonia;
         $this->CP = $request->CP;
         $this->ciudad = $request->ciudad;
+        $this->estado = $request->estado;
         $this->numInterior = $request->numInterior;
 
 

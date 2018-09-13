@@ -42,44 +42,7 @@
                       <div class="text-center">
                         <button type="submit" id="guardar"  class="btn btn-primary">Agregar</button>
                         <button class="btn btn-warning" onclick="$('#form').trigger('reset');">Limpiar datos</button>
-                      </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="modalExistencia" tabindex="-1" role="dialog" aria-labelledby="modalExistenciaLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="modalExistenciaLabel">Modal title</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                            @foreach($sucursales as $sucursal)
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <th>Id </th>
-                                  <th>Sucursal</th>
-                                  <th>Inventario inicial</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              <td>{{$sucursal->id}}</td>
-                              <td>{{$sucursal->nombre}}</td>
-                              <td><input class="inventarioSucursal" value="0" min="0" data-idSucursal="{{$sucursal->id}}" type="number"></td>
-                              </tbody>
-                            </table>
-                            @endforeach
-                            </div>
-                            <div class="modal-footer">
-                              <input hidden type="text" name="dataInventarioInicial" id="dataInventarioInicial">
-                              <input hidden type="text" name="idProducto" id="idProducto">
-                              <button type="button" id="guardarInventario" class="btn btn-primary" data-dismiss="modal">Guardar cambios</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Modal -->
+                      </div>                  
                     </form>
                     <form hidden id="formDesactivar" class="form" method="POST" action="/productos/cambioEstatus" >
                       <input hidden type="text" name="idProducto" id="idProductoCambioStatus">
@@ -91,7 +54,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                   sucursales
-                   <a title="Carga masiva" class="btn btn-success"><i class="glyphicon glyphicon-cloud-upload"></i></a>
                 </div>
                
 

@@ -32,9 +32,29 @@ class UsersTableSeeder extends Seeder {
             );
             db::table('sucursales')->insert(array(
                    'nombre' => "Matriz",
-                   'idDireccion'     => 0,
+                   
             ));
-            
+            db::table('direcciones')->insert(array(
+              
+                'numInterior' => '',
+                'numExterior'=> "5099",
+                'calle'=> "Av Mariano Otero",
+                'entre1'=> "",
+                'entre2'=> "",
+                'referencia'=> "",
+                'colonia'=> "La Calma",
+                'CP'=> "45070",
+                'ciudad'=> "Zapopan",
+                'estado'=> "Jalisco",
+                'pais'=>"México"
+                
+             ));
+             db::table('sucursales_direcciones')->insert(array(
+                'idSucursal' => 1,
+                'idDireccion' => 1,
+                'tipo'=> "principal"
+             ));
+          
            
             
             db::table('productos')->insert(array(
