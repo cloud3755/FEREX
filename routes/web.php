@@ -77,6 +77,7 @@ function()
         //punto de venta
 
         Route::get('/venta', 'ventaController@index')->name('venta');
+    Route::get('/venta/historial', 'ventaController@historial')->name('ventaHistorial');
         Route::post('/venta', 'ventaController@realizarVenta');
 
         //punto de venta

@@ -34,6 +34,28 @@ class ventaController extends Controller
 
     }
 
+    public function historial(){
+
+$historial = DB::table("ventas")
+    ->join("ventas_detalles", "ventas_detalles.idVenta", "=", "ventas.id")
+    ->join("clientes", "clientes.id","=", "ventas.idCliente")
+    ->join("users", "users.id","=","ventas.idVendedor")
+    ->select("ventas.id","users.name","clientes.nombre","ventas_detalles.Producto","ventas_detalles.cantidad","ventas_detalles.precio","ventas.formaDePago","ventas_detalles.created_at")->get();
+
+
+
+
+
+
+
+//SELECT ventas.id,users.name,clientes.nombre,ventas_detalles.Producto,ventas_detalles.cantidad,ventas_detalles.precio,ventas.formaDePago, ventas_detalles.created_at FROM `ventas`
+// INNER JOIN ventas_detalles ON ventas.id = ventas_detalles.idVenta
+ //       INNER JOIN clientes ON ventas.idCliente = clientes.id
+//INNER JOIN users ON ventas.idVendedor = users.id
+
+return view("ventas.ventaHistorial",compact("historial"));
+    }
+
     public function realizarVenta(Request $request){
 
         $cliente = $request->input('cliente');

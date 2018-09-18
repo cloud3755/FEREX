@@ -63,8 +63,19 @@
                               <li><a href="{{ route('register') }}"> </i>Alta de Vendedores</a></li>
                             </ul>
                           </li>
-                            <li><a href="/venta">
-                              <i class="fas fa-money-check-alt"></i> Venta</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                              <i class="fas fa-money-check-alt"></i> Venta <span class="caret"></span></a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="/venta">Realizar venta</a></li>
+                                    <li><a href="/venta/historial"> </i>Historial de ventas</a></li>
+
+                                </ul>
+                            </li>
+
+
+
                             <li>
                             <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
