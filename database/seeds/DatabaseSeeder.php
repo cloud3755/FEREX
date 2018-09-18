@@ -79,7 +79,25 @@ class UsersTableSeeder extends Seeder {
                 'saldo'     => 0,
                 'estado'     => 'NI',
                 'idSucursal'     => 1,
-            ));      
+            ));
 
+
+            db::table('clientes')->insert(array(
+                'id' => "0",
+                'nombre'     => "Cliente general",
+                'razonSocial'     => '0000',
+                'contacto'     => "00",
+                'rfc' => "0000",
+                'email'     => "000",
+                'limiteCredito'     => '0',
+                'credito'     => "0",
+                'telefono1' => "0",
+                'telefono2'     => 0,
+                'telefono3'     => '0',
+                'consumoTotal'     => 0,
+                'activo' => "1",
+                'idDireccion'     => 1,
+
+            ));
         }
 }
