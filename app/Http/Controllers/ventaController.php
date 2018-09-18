@@ -68,6 +68,7 @@ class ventaController extends Controller
         $ventas->save();
 
         $ventaId= $ventas->id;
+        echo $ventaId;
             for ($a=0; $a<$i; $a++ ){
 
                 $productoAdd = $productos[$a];
@@ -82,7 +83,7 @@ class ventaController extends Controller
                 $ventasDetalle -> Producto= $productoAdd;
                 $ventasDetalle -> cantidad= $cantidadAdd;
                 $ventasDetalle -> precio = $precioAdd;
-                 $ventasDetalle->idVenta= $ventaId;
+                $ventasDetalle->idVenta= $ventaId;
                 $ventasDetalle -> idProducto = $idProductoAdd;
                 $ventasDetalle ->save();
                 $inventario = new Inventario();
@@ -100,7 +101,8 @@ class ventaController extends Controller
 
         $datosVenta = DB::table('ventas')
         ->join("ventas_detalles", "ventas.id", "=", "ventas_detalles.idVenta")
-        ->join("clientes", "ventas.idCliente", "=", "clientes.id")
+        ->leftjoin("clientes", "ventas.idCliente", "=", "clientes.id")
+        ->whereRaw("ventas.id = ".$ventaId)
         ->select(
             "clientes.nombre as nombreCliente",
             "ventas.formaDePago as formaDePago",
@@ -110,11 +112,28 @@ class ventaController extends Controller
             "ventas_detalles.precio",
             DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
             )
-        ->where("ventas.id", "=", $ventaId)
+        
         ->get();
-
+        $sicual = DB::table('ventas')
+        ->join("ventas_detalles", "ventas.id", "=", "ventas_detalles.idVenta")
+        ->leftjoin("clientes", "ventas.idCliente", "=", "clientes.id")
+        ->whereRaw("ventas.id = ".$ventaId)
+        ->select(
+            "clientes.nombre as nombreCliente",
+            "ventas.formaDePago as formaDePago",
+            "ventas.folio",
+            "ventas_detalles.Producto as nombreProducto",
+            "ventas_detalles.cantidad",
+            "ventas_detalles.precio",
+            DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
+            )
+        ->toSql();
+        //echo $sicual;
+        //    dd($datosVenta);
         \Session::flash('Guardado','Se guardo correctamente la venta');
-        return redirect()->route("venta")->with("datosVenta", $datosVenta);
+        \Session::flash('datosVenta',$datosVenta);
+        \Session::flash('sicual',$sicual);
+        return redirect()->route("venta");
     }
 
 

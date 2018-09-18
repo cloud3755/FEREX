@@ -165,12 +165,16 @@
 
 @if(Session::has('datosVenta'))
 @php
+    
+    
     $venta = session('datosVenta');
     $folio = $venta->pluck('folio')->first();
     $nombreCliente = $venta->pluck('nombreCliente')->first();
     $total=0;
 @endphp
-    <div id="Venta">
+
+
+    <div id="Venta" hidden>
         <H3>FEREX</H3>
     <p>Dirección: Av Mariano Otero 5099, La Calma, 45070 Zapopan, Jal.</p>
     <p>Teléfono: 01 33 3070 1462</p> 
@@ -209,8 +213,22 @@
 @if(Session::has('datosVenta'))
 <script>
     var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-    var datos = $("#Venta").html();
-    mywindow.document.write('<html><head><title>CheckList</title></head>');
+    var datos = document.getElementById("Venta").innerHTML
+   
+    mywindow.document.write('<html><head><title>CheckList</title>'+
+    '<style type="text/css" media="print">'+
+    '@page '+ 
+    '{'+
+    '    size:  58mm;   /* auto is the initial value */'+
+    '    margin: 1mm;  /* this affects the margin in the printer settings */'+
+    '}'+
+    'html'+
+    '{'+
+    '    background-color: #FFFFFF; '+
+    '    margin: 0px;  /* this affects the margin on the html before sending to printer */'+
+    '}'+
+    '</style>'+
+    '</head>');
     mywindow.document.write(datos);
     mywindow.document.write('</body></html>');
 
