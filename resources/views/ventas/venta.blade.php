@@ -40,7 +40,7 @@
 
 
                                             <select class="form-control selectpicker cliente"   id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
-                                                <option    value="0"     data-limiteCredito="0"  data-creditoActual="0" data-descripcion="Cliente general" selected>Cliente general</option>
+                                                <option    value="0"    data-id="0"  data-limiteCredito="0"  data-creditoActual="0" data-descripcion="Cliente general" selected>Cliente general</option>
                                             @foreach($clientes as $cliente)
                                                 <option   data-limiteCredito="{{$cliente->limiteCredito}}"  data-creditoActual="{{$cliente->credito}}" data-id="{{$cliente->id}}" data-descripcion="{{$cliente->rfc}}" value="{{$cliente->rfc}}">{{$cliente->nombre}} - {{$cliente->rfc}}</option>
                                             @endforeach
