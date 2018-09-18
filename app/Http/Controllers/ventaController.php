@@ -53,6 +53,8 @@ class ventaController extends Controller
         $idProductos = explode(",", $idProducto[0]);
         $existencias = explode(",", $existencia[0]);
 
+       
+
         $folioAdd = $folio[0];
         $formaPagoAdd = $formaPago[0];
         $clienteAdd = $clientes[0];
@@ -96,8 +98,23 @@ class ventaController extends Controller
         $saldo = new caja();
         $saldo::where("id",1)->update(["saldo"=>$saldoAdd]);
 
+        $datosVenta = DB::table('ventas')
+        ->join("ventas_detalles", "ventas.id", "=", "ventas_detalles.idVenta")
+        ->join("clientes", "ventas.idCliente", "=", "clientes.id")
+        ->select(
+            "clientes.nombre as nombreCliente",
+            "ventas.formaDePago as formaDePago",
+            "ventas.folio",
+            "ventas_detalles.Producto as nombreProducto",
+            "ventas_detalles.cantidad",
+            "ventas_detalles.precio",
+            DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
+            )
+        ->where("ventas.id", "=", $ventaId)
+        ->get();
+
         \Session::flash('Guardado','Se guardo correctamente la venta');
-        return redirect()->route("venta");
+        return redirect()->route("venta")->with("datosVenta", $datosVenta);
     }
 
 

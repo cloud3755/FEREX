@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group( ['middleware' => ['auth']],
 function()
 {
+        Route::get('/impresionprueba', 'productosController@prueba');
         //productos*******************************************
 
         Route::get('/productos', 'productosController@index')->name('productos');

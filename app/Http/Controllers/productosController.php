@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Input;
 
 class productosController extends Controller 
 {
+
+    public function prueba()
+    {
+        return view("prueba");
+    }
     public function index()
     {
         $sucursales  =  Sucursal::where('activo', true)->get();
