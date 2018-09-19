@@ -14,7 +14,7 @@
 
 <script>
 
-            function PrintDiv3() {
+    function PrintDiv3() {
     var contents = document.getElementById("print").innerHTML;
     var frame1 = document.createElement('iframe');
     frame1.name = "frame1";

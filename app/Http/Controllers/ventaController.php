@@ -56,7 +56,8 @@ $historial = DB::table("ventas")
 return view("ventas.ventaHistorial",compact("historial"));
     }
 
-    public function realizarVenta(Request $request){
+    public function realizarVenta(Request $request)
+    {
 
         $cliente = $request->input('cliente');
         $producto = $request->input('producto');
@@ -121,43 +122,29 @@ return view("ventas.ventaHistorial",compact("historial"));
         $saldo = new caja();
         $saldo::where("id",1)->update(["saldo"=>$saldoAdd]);
 
-        $datosVenta = DB::table('ventas')
-        ->join("ventas_detalles", "ventas.id", "=", "ventas_detalles.idVenta")
-        ->leftjoin("clientes", "ventas.idCliente", "=", "clientes.id")
-        ->whereRaw("ventas.id = ".$ventaId)
-        ->select(
-            "clientes.nombre as nombreCliente",
-            "ventas.formaDePago as formaDePago",
-            "ventas.folio",
-            "ventas_detalles.Producto as nombreProducto",
-            "ventas_detalles.cantidad",
-            "ventas_detalles.precio",
-            DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
-            )
-        
-        ->get();
-        $sicual = DB::table('ventas')
-        ->join("ventas_detalles", "ventas.id", "=", "ventas_detalles.idVenta")
-        ->leftjoin("clientes", "ventas.idCliente", "=", "clientes.id")
-        ->whereRaw("ventas.id = ".$ventaId)
-        ->select(
-            "clientes.nombre as nombreCliente",
-            "ventas.formaDePago as formaDePago",
-            "ventas.folio",
-            "ventas_detalles.Producto as nombreProducto",
-            "ventas_detalles.cantidad",
-            "ventas_detalles.precio",
-            DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
-            )
-        ->toSql();
-        //echo $sicual;
-        //    dd($datosVenta);
+        $datosVenta = $this->returnDataVentaPrint($ventaId);
         \Session::flash('Guardado','Se guardo correctamente la venta');
         \Session::flash('datosVenta',$datosVenta);
-        \Session::flash('sicual',$sicual);
+       
         return redirect()->route("venta");
     }
 
-
+    public function returnDataVentaPrint($idVenta)
+    {
+        return DB::table('ventas')
+        ->join("ventas_detalles", "ventas.id", "=", "ventas_detalles.idVenta")
+        ->leftjoin("clientes", "ventas.idCliente", "=", "clientes.id")
+        ->whereRaw("ventas.id = ".$idVenta)
+        ->select(
+            "clientes.nombre as nombreCliente",
+            "ventas.formaDePago as formaDePago",
+            "ventas.folio",
+            "ventas_detalles.Producto as nombreProducto",
+            "ventas_detalles.cantidad",
+            "ventas_detalles.precio",
+            DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
+            )
+        ->get();
+    }
 
 }
