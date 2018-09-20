@@ -3,39 +3,54 @@
     $folio = $venta->pluck('folio')->first();
     $nombreCliente = $venta->pluck('nombreCliente')->first();
     $total=0;
+    function fillString($str,$maxLen, $padType)
+    {
+        return (strlen($str) < $maxLen) ? 
+            str_pad($str, $maxLen, "*",$padType) :
+            substr($str, 0, $maxLen);
+    }
 @endphp
 <div id="print">
-    <section class="sheet">
+    <section id="sheet">
         <div>********************************</div>
         <div>********************************</div>
-        <div>FEREX</div>
-        <div>PRODUCTO**PREC&iexcl;O**CANT*****TOTAL</div>
+        <div>{{fillString("FEREX", 32, STR_PAD_BOTH)}}</div>
+        <div>FOLIO:**{{fillString($folio, 24, STR_PAD_RIGHT)}}</div>
+        <div>Cliente:{{fillString($nombreCliente, 24, STR_PAD_RIGHT)}}</div>
+       
+        <div>PRODUCTO*****PRECIO**CANT****TOT</div>
         @foreach($venta as $datosVenta)
         <div>
-            {!!substr($datosVenta->nombreProducto, 0 , 10 )!!}
-            {!!substr($datosVenta->nombreProducto, 0 , 10 )!!}
-
+            {{fillString($datosVenta->nombreProducto, 12, STR_PAD_RIGHT)}}
+            {{fillString(intval($datosVenta->precio* 1e2) / 1e2, 7, STR_PAD_LEFT)}}
+            {{fillString(intval($datosVenta->cantidad* 1e2) / 1e2, 6, STR_PAD_LEFT)}}
+            {{fillString(intval($datosVenta->totalLinea * 1e2) / 1e2, 7, STR_PAD_LEFT)}}
+            @php $total+= $datosVenta->totalLinea @endphp
         </div>
-                <td></td>
-                <td>{{$datosVenta->cantidad}}</td>
-                <td>{{$datosVenta->precio}}</td>
-                <td>{{$datosVenta->totalLinea}}</td>
-            </tr>@php $total+= $datosVenta->totalLinea@endphp
         @endforeach
-        <div>********************************</div>
+        <div>{{fillString("TOTAL:*".intval($datosVenta->totalLinea * 1e2) / 1e2, 32,STR_PAD_LEFT)}}</div>
     </section>
 </div>
 
 
 <script>
-    var contents = document.getElementById("print").innerHTML;
-    var frame1 = document.createElement('iframe');
-    frame1.name = "frame1";
 
-    document.body.appendChild(frame1);
-    var frameDoc = frame1.contentWindow ? frame1.contentWindow : frame1.contentDocument.document ? frame1.contentDocument.document : frame1.contentDocument;
-    frameDoc.document.open();
-    frameDoc.document.write(
+$('#sheet')
+  .contents() // get all child nodes
+  .each(function() { // iterate over them
+   console.log($(this).text());
+    var  replace= $(this).text().replace(/\i/i, '¡');
+    console.log(replace);
+    replace = replace.replace(/\s/i, '*');
+    replace = replace.replace(/\./i, '⋅');
+    replace = replace.replace(/\./i, '⋅');
+    
+    $(this).text(replace); // update text content if it's text node
+  });
+//$("#print < div").text().replace(/\i/g, '&iexcl;');
+  var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+$data = $('#sheet').html();
+    mywindow.document.write(
     '    <html lang="en"> '+
     '    <head>'+
     '    <meta charset="utf-8">'+
@@ -58,14 +73,13 @@
     '    </style>'+
     '    </head>'+
     '    <body class="receipt">')
-frameDoc.document.write()
-frameDoc.document.write('</body></html>');
+    mywindow.document.write($data)
+    mywindow.document.write('</body></html>');
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+//mywindow.open();
+    mywindow.print();
+    mywindow.close();
 
-    frameDoc.document.close();
-    setTimeout(function () {
-        window.frames["frame1"].focus();
-        window.frames["frame1"].print();
-        document.body.removeChild(frame1);
-    }, 500);
 
-<script>
+</script>

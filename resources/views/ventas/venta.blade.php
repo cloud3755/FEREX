@@ -156,11 +156,13 @@
             </div>
         </div>
     </div>
+
 @endsection
 @section('scripts.personalizados')
     @parent
 
     <script src="{{ asset('js/ventas/ventas.js') }}"></script>
+    @includeWhen(Session::has('datosVenta'), 'partials.Print.VentaTicket', ['datosVenta' => session('datosVenta')])
+
 @endsection
 
-@includeWhen(Session::has('datosVenta'), 'partials.Print.VentaPDF', ['datosVenta' => session('datosVenta')])
