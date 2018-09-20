@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Producto;
-use Auth;
+use  Auth;
 use App\Models\Inventario;
 use function PhpParser\filesInDir;
 use Yajra\Datatables\Datatables;//Prueba dataTables Ajax
@@ -30,7 +30,7 @@ class ventaController extends Controller
         $clientes = $clientes->all();
         $status = new caja();
         $status = $status->all();
-        return view('ventas.venta', compact('productos'),compact("clientes","status"));
+        return view('ventas.venta', compact('productos'),compact("clientes","status","vendedor"));
 
     }
 
@@ -113,14 +113,14 @@ return view("ventas.ventaHistorial",compact("historial"));
                 $existenciaActual = intval($existenciaAdd);
                 $cantidadRestar =  intval($cantidadAdd);
                 $existenciaAdd = $existenciaActual -  $cantidadRestar;
-                $inventario::where ("idProducto",$idProductoAdd)->update(["cantidad"=>$existenciaAdd]);
+                $inventario::where("idProducto",$idProductoAdd)->where("idSucursal",Auth::user()->idSucursal)-> update(["cantidad"=>$existenciaAdd]);
             }
 
 
         $credito = new clientes();
         $credito::where ("id",$clienteAdd)->update(["credito"=>$creditoAdd]);
         $saldo = new caja();
-        $saldo::where("id",1)->update(["saldo"=>$saldoAdd]);
+        $saldo::where("id",Auth::user()->idSucursal)->update(["saldo"=>$saldoAdd]);
 
         $datosVenta = $this->returnDataVentaPrint($ventaId);
         \Session::flash('Guardado','Se guardo correctamente la venta');

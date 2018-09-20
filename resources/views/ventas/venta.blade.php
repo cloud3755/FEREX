@@ -34,6 +34,7 @@
                                     @foreach($status as $statu)
 <input   name="statusCaja" id="statusCaja" type="hidden"  data-saldo="{{$statu->saldo}}" value="{{$statu->estado}}">
                                     @endforeach
+
                                     <div class="input-group">
 
                                         <label class="sr-only" for="Clientes">Cliente</label>
