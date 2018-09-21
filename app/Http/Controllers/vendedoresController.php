@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 
 use App\User;
+use App\Models\Sucursal;
 
 class vendedoresController extends Controller
 {
@@ -36,9 +37,12 @@ class vendedoresController extends Controller
 
     public function showRegistrationForm()
     {
-        $usuarios = new User();
-        $usuario = $usuarios->all();
-        return view('auth.register',compact('usuario'));
+        $usuario = DB::table("users")
+        ->join("sucursales", "users.idSucursal", "=", "sucursales.id")
+        ->select("sucursales.nombre as nombreSucursal", DB::raw("CASE permisos WHEN 2 THEN 'Administrador' WHEN 3 THEN 'Vendedor' END as permisosNombre"), 'users.*')
+        ->get();
+        $sucursales  =  Sucursal::where('activo', true)->get();
+        return view('auth.register',compact('usuario', 'sucursales'));
     }
 
     protected function validator(array $data)

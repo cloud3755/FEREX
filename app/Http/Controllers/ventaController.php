@@ -133,6 +133,10 @@ return view("ventas.ventaHistorial",compact("historial"));
     {
         return DB::table('ventas')
         ->join("ventas_detalles", "ventas.id", "=", "ventas_detalles.idVenta")
+        ->join("users", "users.id", "=", "ventas.idVendedor")
+        ->join("sucursales", "sucursales.id", "=", "users.idSucursal")
+        ->join("sucursales_direcciones", "sucursales_direcciones.idSucursal", "=", "sucursales.id")
+        ->join("direcciones", "direcciones.id", "=", "sucursales_direcciones.idDireccion")
         ->leftjoin("clientes", "ventas.idCliente", "=", "clientes.id")
         ->whereRaw("ventas.id = ".$idVenta)
         ->select(
@@ -142,6 +146,13 @@ return view("ventas.ventaHistorial",compact("historial"));
             "ventas_detalles.Producto as nombreProducto",
             "ventas_detalles.cantidad",
             "ventas_detalles.precio",
+            "users.name as nombreVendedor",
+            "direcciones.numExterior",
+            "direcciones.calle",
+            "direcciones.colonia",
+            "direcciones.cp",
+            "direcciones.ciudad",
+            "direcciones.estado",
             DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
             )
         ->get();

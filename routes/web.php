@@ -18,11 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+ Route::get('/impresionprueba', 'productosController@prueba');
 Route::group( ['middleware' => ['auth']],
 function()
 {
-        Route::get('/impresionprueba', 'productosController@prueba');
+       
         //productos*******************************************
 
         Route::get('/productos', 'productosController@index')->name('productos');

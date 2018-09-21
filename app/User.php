@@ -8,6 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+    public function isAdmin()
+    {
+        return $this->id_rol == 1|| $this->id_rol == 2;
+    }
   protected $dateFormat = 'Y-m-d h:i:s';
     use Notifiable;
 

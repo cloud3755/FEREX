@@ -2,49 +2,70 @@
     $venta = $datosVenta;
     $folio = $venta->pluck('folio')->first();
     $nombreCliente = $venta->pluck('nombreCliente')->first();
+    $nombreVendedor = $venta->pluck('nombreVendedor')->first();
+    $numExterior = $venta->pluck('numExterior')->first();
+    $calle = $venta->pluck('calle')->first();
+    $colonia = $venta->pluck('colonia')->first();
+    $cp = $venta->pluck('cp')->first();
+    $ciudad = $venta->pluck('ciudad')->first();
+    $estado = $venta->pluck('estado')->first();
     $total=0;
     function fillString($str,$maxLen, $padType)
     {
         return (strlen($str) < $maxLen) ? 
-            str_pad($str, $maxLen, "*",$padType) :
+            str_pad($str, $maxLen, "_",$padType) :
             substr($str, 0, $maxLen);
     }
 @endphp
 <div id="print">
     <section id="sheet">
         <div>********************************</div>
-        <div>********************************</div>
         <div>{{fillString("FEREX", 32, STR_PAD_BOTH)}}</div>
-        <div>FOLIO:**{{fillString($folio, 24, STR_PAD_RIGHT)}}</div>
+        <div>{{fillString($calle, 32, STR_PAD_BOTH)}}</div>
+        <div>{{fillString($numExterior, 32, STR_PAD_BOTH)}}</div>
+        <div>{{fillString($colonia, 32, STR_PAD_BOTH)}}</div>
+        <div>{{fillString($cp, 32, STR_PAD_BOTH)}}</div>
+        <div>{{fillString($ciudad."*".$estado, 32, STR_PAD_BOTH)}}</div>
+        <div>FOLIO:{{fillString($folio, 26, STR_PAD_RIGHT)}}</div>
         <div>Cliente:{{fillString($nombreCliente, 24, STR_PAD_RIGHT)}}</div>
-       
-        <div>PRODUCTO*****PRECIO**CANT****TOT</div>
+        <div>Vendedor:{{fillString($nombreVendedor, 23, STR_PAD_RIGHT)}}</div>
+        <div>PRODUCTO_____PRECIO__CANT____TOT</div>
         @foreach($venta as $datosVenta)
-        <div>
-            {{fillString($datosVenta->nombreProducto, 12, STR_PAD_RIGHT)}}
-            {{fillString(intval($datosVenta->precio* 1e2) / 1e2, 7, STR_PAD_LEFT)}}
-            {{fillString(intval($datosVenta->cantidad* 1e2) / 1e2, 6, STR_PAD_LEFT)}}
-            {{fillString(intval($datosVenta->totalLinea * 1e2) / 1e2, 7, STR_PAD_LEFT)}}
+        <div>{{fillString(trim($datosVenta->nombreProducto), 12, STR_PAD_RIGHT)}}{{fillString(trim(intval($datosVenta->precio* 1e2) / 1e2), 7, STR_PAD_LEFT)}}{{fillString(trim(intval($datosVenta->cantidad* 1e2) / 1e2), 6, STR_PAD_LEFT)}}{{fillString(trim(intval($datosVenta->totalLinea * 1e2) / 1e2), 7, STR_PAD_LEFT)}}</div>
             @php $total+= $datosVenta->totalLinea @endphp
-        </div>
+        
         @endforeach
-        <div>{{fillString("TOTAL:*".intval($datosVenta->totalLinea * 1e2) / 1e2, 32,STR_PAD_LEFT)}}</div>
+        <div>{{fillString("TOTAL:*".intval($total * 1e2) / 1e2, 32,STR_PAD_LEFT)}}</div>
+        <div>********************************</div>
+        
     </section>
 </div>
 
 
 <script>
-
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+}
 $('#sheet')
   .contents() // get all child nodes
   .each(function() { // iterate over them
-   console.log($(this).text());
-    var  replace= $(this).text().replace(/\i/i, '¡');
+   
+    var  replace= $(this).text().replace(/\I/gi, '¡');
     console.log(replace);
-    replace = replace.replace(/\s/i, '*');
-    replace = replace.replace(/\./i, '⋅');
-    replace = replace.replace(/\./i, '⋅');
-    
+    replace = replace.replace(/\./gi, '⋅');
+    replace = replace.replace(/\./gi, '⋅');
+    replace = replace.replace(/\,/gi, '⋅');
+    replace = replace.replace(/\//gi, '>');
+    replace = replace.replace(/\\/gi, '>');
+    //replace = replace.replace(/\f/i, 'F');
+    replace = replace.split('f').join('F');
+    replace = replace.split('t').join('T');
+    replace = replace.replace(/\j/gi, 'J');
+    replace = replace.replace(/\l/gi, 'L');
+    //replace = replace.replace(/\t/gi, 'T');
+    replace = replace.replace(/\:/gi, '=');
+    replace = replace.split(' ').join('_');
+
     $(this).text(replace); // update text content if it's text node
   });
 //$("#print < div").text().replace(/\i/g, '&iexcl;');

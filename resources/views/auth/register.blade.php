@@ -41,9 +41,13 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Sucursal</label>
-
+                           
                             <div class="col-md-6">
-                                <input id="sucursal" type="text" class="form-control" name="sucursal" value="{{ old('sucursal') }}" required>
+                                <select class="form-control" id="sucursal" name="sucursal">
+                                 @foreach($sucursales as $sucursal)
+                                    <option value="{{$sucursal->id}}">{{$sucursal->nombre}}</option>
+                                 @endforeach
+                                 </select>
                             </div>
                         </div>
 
@@ -51,7 +55,10 @@
                             <label for="email" class="col-md-4 control-label">Permisos</label>
 
                             <div class="col-md-6">
-                                <input id="permisos" type="text" class="form-control" name="permisos" value="{{ old('permisos') }}" required>
+                                <select class="form-control" id="permisos" name="permisos">
+                                    <option value="2">Administrador</option>
+                                    <option value="3">Vendedor</option>
+                                 </select>
                             </div>
                         </div>
 
@@ -111,8 +118,8 @@
                     <td>{{$usuarios->id}}</td>
                     <td>{{$usuarios->name}}</td>
                     <td>{{$usuarios->email}}</td>
-                    <td>{{$usuarios->idSucursal}}</td>
-                    <td>{{$usuarios->permisos}}</td>
+                    <td>{{$usuarios->nombreSucursal}}</td>
+                    <td>{{$usuarios->permisosNombre}}</td>
                     @if($usuarios->activo==1)
                       <td>Activo</td>
                       @else

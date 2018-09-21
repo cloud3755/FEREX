@@ -8,12 +8,67 @@
     <div>FEREX</div>
     <span>Producto</span><span>Cantidad</span><span>precio</span>    
    </div>
-  <div><button onclick="PrintDiv3();">Imprimir</button></div>
+  <div><button onclick="print4();">Imprimir</button></div>
 </body>
 </html>
 
 <script>
+    function print4()
+    {
+          var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+    var string ="";
+    for(var i = 33; i<126; i++)
+        string +=String.fromCharCode(i);
+    replace = string;
+    var  replace= replace.replace(/\I/gi, '¡');
+    console.log(replace);
+    replace = replace.replace(/\./gi, '⋅');
+    replace = replace.replace(/\./gi, '⋅');
+    replace = replace.replace(/\,/gi, '⋅');
+    replace = replace.replace(/\//gi, '>');
+    replace = replace.replace(/\\/gi, '>');
+    //replace = replace.replace(/\f/i, 'F');
+    replace = replace.split('f').join('F');
+    replace = replace.replace(/\j/gi, 'J');
+    replace = replace.replace(/\l/gi, 'L');
+    replace = replace.replace(/\t/g, 'T');
+    replace = replace.replace(/\f/gi, '>');
+    
+    replace = replace.replace(/\:/gi, '=');
+    replace = replace.split(' ').join('*');
 
+    string = replace;
+    mywindow.document.write(
+    '    <html lang="en"> '+
+    '    <head>'+
+    '    <meta charset="utf-8">'+
+    '   <title>receipt</title>'+
+    '    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">'+
+    '    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">'+
+    '    <style>'+
+        '@page '+ 
+    '{'+
+    '    size:  80mm;   /* auto is the initial value */'+
+    '    margin: 0mm;  /* this affects the margin in the printer settings */'+
+    '}'+
+    'html'+
+    '{'+
+    '    background-color: #FFFFFF; '+
+    '    margin: 0px;  /* this affects the margin on the html before sending to printer */'+
+    '}'+
+    '        body.receipt .sheet { width: 100mm;  } /* sheet size */'+
+    '        @media print { body.receipt { width: 100mm } } /* fix for Chrome */'+
+    '    </style>'+
+    '    </head>'+
+    '    <body class="receipt">')
+    mywindow.document.write(string)
+    mywindow.document.write('</body></html>');
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+//mywindow.open();
+    mywindow.print();
+    mywindow.close();
+    }
     function PrintDiv3() {
     var contents = document.getElementById("print").innerHTML;
     var frame1 = document.createElement('iframe');
