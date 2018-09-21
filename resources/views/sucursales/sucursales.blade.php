@@ -41,11 +41,13 @@
                       <br/>
                       <div class="text-center">
                         <button type="submit" id="guardar"  class="btn btn-primary">Agregar</button>
+                        <input hidden type="text" name="idSucursal" id="idSucursal">
+                        <input hidden type="text" name="idDireccion" id="idDireccion">
                         <button class="btn btn-warning" onclick="$('#form').trigger('reset');">Limpiar datos</button>
                       </div>                  
                     </form>
                     <form hidden id="formDesactivar" class="form" method="POST" action="/productos/cambioEstatus" >
-                      <input hidden type="text" name="idProducto" id="idProductoCambioStatus">
+                      <input hidden type="text" name="idSucursal" id="idProductoCambioStatus">
                       {{ csrf_field() }}
                     </form>
                 </div>

@@ -26,6 +26,18 @@ class sucursalesController extends Controller
 
     }
 
+    public function get($id)
+    {
+    return json_encode(DB::table('sucursales')
+        ->join("sucursales_direcciones", "sucursales_direcciones.idSucursal", "=", "sucursales.id")
+        ->join("direcciones", "direcciones.id", "=", "sucursales_direcciones.idDireccion")
+        
+        ->whereRaw("sucursales.id = ".$id)
+        ->select(
+            "sucursales.id as idSucursal","sucursales.nombre as nombre", "direcciones.*","direcciones.id as idDireccion"
+            )
+        ->first());
+    } 
     public function getSucursales($activos = true)
     {
         $sucursales;
@@ -45,6 +57,33 @@ class sucursalesController extends Controller
         ->rawColumns(['Acciones'])
         ->make(true);
     }
+
+    public function editar(Request $request)
+    {
+        try
+        {
+        $idSucursal = $request->idSucursal;
+        $idDireccion = $request->idDireccion;
+        $Sucursal = Sucursal::find($idSucursal);
+        $Direccion = direcciones::find($idDireccion);
+
+        $Sucursal->nombre = $request->nombre;
+        $Sucursal->save();
+
+        $Direccion->setByRequest($request);
+        $Direccion->save();
+
+        
+        \Session::flash('Guardado','Se edito la sucursal correctamente');
+        return redirect()->route("Sucurslaes"); 
+        }
+        catch(Exception $e)
+        {
+            \Session::flash('Warning','Ocurrio un error en el servidor '. $e->getMessage());
+            return redirect()->route("Sucurslaes"); 
+        }
+    }
+
 
     public function nueva(Request $request)
     {

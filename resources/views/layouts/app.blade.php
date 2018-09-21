@@ -87,6 +87,7 @@
                            
                             </ul>
                           </li>
+                          <li>
                               <a href="/Dashboard">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                               </a>

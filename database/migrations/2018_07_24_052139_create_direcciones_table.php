@@ -16,15 +16,15 @@ class CreateDireccionesTable extends Migration
         Schema::create('direcciones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('numInterior')->nullable();
-            $table->string('numExterior');
-            $table->string('calle');
-            $table->string('entre1');
-            $table->string('entre2');
-            $table->string('referencia');
-            $table->string('colonia');
-            $table->string('CP');
-            $table->string('ciudad');
-            $table->string('estado');
+            $table->string('numExterior')->nullable();
+            $table->string('calle')->nullable();
+            $table->string('entre1')->nullable();
+            $table->string('entre2')->nullable();
+            $table->string('referencia')->nullable();
+            $table->string('colonia')->nullable();
+            $table->string('CP')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('estado')->nullable();
             $table->string('pais')->default("México");
             $table->timestamps();
         });

@@ -33,7 +33,6 @@ function showPanelAgregar(isCreate = true)
     if(isCreate)
     {
         $('#form').trigger("reset");
-        $('#setInventario').show();
         $('#form').attr("action", "/sucursales/nuevo");
         $('#guardar').text("Guardar");
 
@@ -44,26 +43,30 @@ function hidePanelAgregar()
 {
     $("#panelAgregar").hide(500);
 }
-/*
+
 function editar(id)
 {
-    $.get( "/productos/get/"+ id)
+    $.get( "/sucursales/get/"+ id)
     .done(function( data ) {
+        data = JSON.parse(data);console.log(data);
+        var idDireccion = data.idDireccion;
+        alert(idDireccion);
         for(var key in data)
         {
+            
             $('#form').find('#'+key).val(data[key]);
-        }
+        }alert(data);
         showPanelAgregar(false);
-        $('#idProducto').val(id);
-        $('#setInventario').hide();
+        $('#idSucursal').val(id);
+        $('#idDireccion').val(idDireccion);
         $('#guardar').text("editar");
-        $('#form').attr("action", "/productos/editar");
-    });
+        $('#form').attr("action", "/sucursales/editar");
+    }).fail(function(data){console.log(data)});
 }
 
 function desactivar(id)
 {
-    if(confirm("Seguro que desea desactivar este producto"))
+    if(confirm("Seguro que desea desactivar esta sucursal"))
     {
         $("#idProductoCambioStatus").val(id);
         $("#formDesactivar").submit();
@@ -72,15 +75,4 @@ function desactivar(id)
     
 }
 
-
-function  setInventarioInicial()
-{
-    var inventarioInicial = {};
-    $(".inventarioSucursal").each(function()
-    {
-        var idSucursal = $(this).data("idsucursal");
-        inventarioInicial[idSucursal] = $(this).val();
-    });
-    $("#dataInventarioInicial").val(JSON.stringify(inventarioInicial));
-}*/
 });

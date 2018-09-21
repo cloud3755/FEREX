@@ -64,8 +64,10 @@ function()
         //---------------------------------------------------MODULO DE SUCURSALES INICIO---------------------------------------------------------------------------------------------------------------------
         Route::get('/sucursales', 'sucursalesController@index')->name('Sucurslaes');
         Route::get('/sucursales/get', 'sucursalesController@getSucursales');
+        Route::get('/sucursales/get/{id}', 'sucursalesController@get');
 
         Route::post('/sucursales/nuevo', 'sucursalesController@nueva');
+        Route::post('/sucursales/editar', 'sucursalesController@editar');
 
         
 
