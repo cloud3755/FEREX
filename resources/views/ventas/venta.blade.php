@@ -43,7 +43,7 @@
                                             <select class="form-control selectpicker cliente"   id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
 
                                             @foreach($clientes as $cliente)
-                                                <option   data-limiteCredito="{{$cliente->limiteCredito}}"  data-creditoActual="{{$cliente->credito}}" data-id="{{$cliente->id}}" data-descripcion="{{$cliente->rfc}}" value="{{$cliente->rfc}}">{{$cliente->nombre}} - {{$cliente->rfc}}</option>
+                                                <option   data-limiteCredito="{{$cliente->limiteCredito}}"  data-creditoActual="{{$cliente->credito}}" data-id="{{$cliente->id}}" data-descripcion="{{$cliente->rfc}}" value="{{$cliente->id}}">{{$cliente->nombre}} - {{$cliente->rfc}}</option>
                                             @endforeach
                                         </select> <button id="fijarCliente" class="btn btn-secondary">Fijar cliente</button>
                                     </div>

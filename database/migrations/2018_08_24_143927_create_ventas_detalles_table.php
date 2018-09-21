@@ -17,8 +17,8 @@ class CreateVentasDetallesTable extends Migration
             $table->increments('id');
            
             $table->string('Producto');
-            $table->decimal('cantidad',8,2);
-            $table->decimal('precio',8,2);
+            $table->decimal('cantidad',10,2);
+            $table->decimal('precio',10,2);
 
             $table->integer('idVenta');//id que apunta a ventas
             $table->integer('idProducto');

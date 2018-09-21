@@ -480,11 +480,11 @@ var creditoActual = $('#Cliente :selected').data('creditoactual');
 
 
 
-    $("td[id^='cliente']").each(function(){
-        var clientes = $(this).data("id");
-
-        cliente.push(clientes);
-    });
+    //$("td[id^='cliente']").each(function(){
+    //    var clientes = $(this).data("id");
+    var idCliente = $("#Cliente :selected").val();
+        cliente.push(idCliente);
+    //});
 
     $("td[id^='descripcion']").each(function(key,value){
 

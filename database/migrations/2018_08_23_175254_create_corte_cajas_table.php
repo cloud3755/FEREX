@@ -17,8 +17,8 @@ class CreateCorteCajasTable extends Migration
             $table->increments('id');
             
             $table->string('tipo');//A arqueo, C corte, I inicio
-            $table->decimal('saldoSistema',8,2);
-            $table->decimal('saldoCapturado',8,2);
+            $table->decimal('saldoSistema',10,2);
+            $table->decimal('saldoCapturado',10,2);
             $table->dateTime('fechaHora')->default(date("Y-m-d H:i:s"));
             
             $table->integer('idUsuario');

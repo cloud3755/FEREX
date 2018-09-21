@@ -81,7 +81,7 @@
 
                             <label class="sr-only" for="unidadMedida">Precio A</label>
                             <div class="input-group-addon">Precio A</div>
-                            <input type="number" min="0.01"  class="form-control" name="precioA" id="precioA" placeholder="precio">
+                            <input type="number" min="0"  class="form-control" name="precioA" id="precioA" placeholder="precio">
 
                           </div>
   
@@ -92,7 +92,7 @@
   
                               <label class="sr-only" for="unidadMedida">Precio B</label>
                               <div class="input-group-addon">Precio B</div>
-                              <input type="number" min="0.01"  class="form-control" name="precioB" id="precioB" placeholder="precio">
+                              <input type="number" min="0"  class="form-control" name="precioB" id="precioB" placeholder="precio">
   
                             </div>
     
@@ -103,7 +103,7 @@
     
                                 <label class="sr-only" for="unidadMedida">Precio C</label>
                                 <div class="input-group-addon">Precio C</div>
-                                <input type="number" min="0.01"  class="form-control" name="precioC" id="precioC" placeholder="precio">
+                                <input type="number" min="0"  class="form-control" name="precioC" id="precioC" placeholder="precio">
     
                               </div>
       

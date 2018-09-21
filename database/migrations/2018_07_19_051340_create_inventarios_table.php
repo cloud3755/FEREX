@@ -17,7 +17,7 @@ class CreateInventariosTable extends Migration
             $table->increments('id');
             $table->integer('idSucursal');
             $table->integer('idProducto');
-            $table->decimal('cantidad', 7 , 3 );
+            $table->decimal('cantidad', 10 , 3 );
             $table->timestamps();
         });
     }

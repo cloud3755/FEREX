@@ -16,14 +16,14 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable()->default("");
             $table->string('claveProdServ')->nullable()->default("");
             $table->integer('minimoAlarma')->nullable();
             $table->string('codigoBarras')->unique()->nullable();
             $table->boolean('activo')->default(true);
-            $table->decimal('precioA',8,2)->default(0);
-            $table->decimal('precioB',8,2)->default(0);
-            $table->decimal('precioC',8,2)->default(0);
+            $table->decimal('precioA',10,2)->default(0);
+            $table->decimal('precioB',10,2)->default(0);
+            $table->decimal('precioC',10,2)->default(0);
             $table->timestamps();
         });
     }

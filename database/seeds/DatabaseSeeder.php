@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder {
                    'email'     => 'ferex@ferex.com',
                    'password'    =>  Hash::make('ferex@ferex.com'),
                    'idSucursal'      =>  1,
-                   'permisos'      =>  1,
+                   'permisos'      =>  2,
                  )
             );
             db::table('sucursales')->insert(array(
@@ -83,7 +83,7 @@ class UsersTableSeeder extends Seeder {
 
 
             db::table('clientes')->insert(array(
-                'id' => "0",
+                'id' => "1",
                 'nombre'     => "Cliente general",
                 'razonSocial'     => '0000',
                 'contacto'     => "00",
