@@ -57,7 +57,7 @@
 
                                         <select class="form-control selectpicker producto"   id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
                                             @foreach($productos as $producto)
-                                                <option    data-preciob="{{$producto->precioB}}"   data-precioc="{{$producto->precioC}}"  data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->descripcion}}</option>
+                                                <option    data-preciob="{{$producto->precioB}}"   data-precioc="{{$producto->precioC}}"  data-id="{{$producto->id}}"  data-descripcion="{{$producto->descripcion}}"  data-existencia="{{$producto->cantidad}}"  value="{{$producto->precioA}}"  data-codigo="{{$producto->codigoBarras}}">{{$producto->codigoBarras}} - {{$producto->nombre}}</option>
                                             @endforeach
                                         </select>
                                         <button id="precioB" class="btn btn-secondary">Precio B</button>
