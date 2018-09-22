@@ -70,6 +70,7 @@
                                         <option    value="tarjetaCredito"  >Tarjeta de Credito</option>
                                         <option    value="tarjetaDebito"  >Tarjeta de Debito</option>
                                         <option    value="Transeferencia"  >Transeferencia</option>
+                                        <option    value="cheque"  >Cheque</option>
                                     </select>
                                 </div>
 
@@ -166,4 +167,3 @@
     @includeWhen(Session::has('datosVenta'), 'partials.Print.VentaTicket', ['datosVenta' => session('datosVenta')])
 
 @endsection
-
