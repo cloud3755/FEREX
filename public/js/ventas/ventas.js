@@ -3,7 +3,7 @@ var arrayGins;
 var subTotalArr = new Array();
 var contador = 0;
 var creditoUsado = 0;
-
+var contadorParaIva = 0;
 
 
 $("#precioB.btn").append("  "+$('#Productos :selected').data('preciob'));
@@ -73,42 +73,76 @@ $("#Productos").change(function (e) {
 
 });
 
-$("#IVA").one("click", function (e) {
+$("#IVA").click (function (e) {
     e.preventDefault();
+    contadorParaIva ++;
 
-    $("td[id^='precio']").each(function(){
+    if (contadorParaIva %2 == 1) {
+        $("td[id^='precio']").each(function () {
 
-        $(this).text(parseInt($(this).text())  + parseInt(($(this).text()*.16)));
-    });
-
-
-
-    $("td[id^='codigoBarras']").each(function(){
-
-
-
-        var tamañoCadena =  $(this).attr("id").length;
-
-        var fila =  $(this).attr("id")[tamañoCadena-1];
-        var precio = parseFloat($("#precio"+fila).text());
-        var cantidad = $("#cantidad2"+fila).val();
-        var subTotal =   precio * cantidad;
-        $("#subTotal"+fila).val(subTotal);
-        $("#subTotal"+fila).text(subTotal);
-
-
-        $("td[id^='subTotal']").each(function(){
-            totalFinal = totalFinal + eval($(this).text());
-            $("#total label").text(totalFinal);
+            $(this).text(parseInt($(this).text()) + parseInt(($(this).text() * .16)));
         });
 
 
+        $("td[id^='codigoBarras']").each(function () {
 
 
-        totalFinal = 0;
+            var tamañoCadena = $(this).attr("id").length;
+
+            var fila = $(this).attr("id")[tamañoCadena - 1];
+            var precio = parseFloat($("#precio" + fila).text());
+            var cantidad = $("#cantidad2" + fila).val();
+            var subTotal = precio * cantidad;
+            $("#subTotal" + fila).val(subTotal);
+            $("#subTotal" + fila).text(subTotal);
 
 
-    });
+            $("td[id^='subTotal']").each(function () {
+                totalFinal = totalFinal + eval($(this).text());
+                $("#total label").text(totalFinal);
+            });
+
+
+            totalFinal = 0;
+            $("#IVA").text("Cancelar IVA");
+            $("#IVA").attr('class', 'btn btn-danger');
+
+        });
+    }
+    else{
+        $("td[id^='precio']").each(function () {
+
+            $(this).text(parseInt($(this).text()) - parseInt(($(this).text() * .16)));
+        });
+
+
+        $("td[id^='codigoBarras']").each(function () {
+
+
+            var tamañoCadena = $(this).attr("id").length;
+
+            var fila = $(this).attr("id")[tamañoCadena - 1];
+            var precio = parseFloat($("#precio" + fila).text());
+            var cantidad = $("#cantidad2" + fila).val();
+            var subTotal = precio * cantidad;
+            $("#subTotal" + fila).val(subTotal);
+            $("#subTotal" + fila).text(subTotal);
+
+
+            $("td[id^='subTotal']").each(function () {
+                totalFinal = totalFinal + eval($(this).text());
+                $("#total label").text(totalFinal);
+            });
+
+
+            totalFinal = 0;
+            $("#IVA").text("Aplicar IVA");
+            $("#IVA").attr('class', 'btn btn-primary');
+
+        });
+
+
+    }
 
 });
 $("#fijarCliente").click(function (e) {
