@@ -112,7 +112,7 @@ $("#IVA").click (function (e) {
     else{
         $("td[id^='precio']").each(function () {
 
-            $(this).text(parseInt($(this).text()) - parseInt(($(this).text() * .16)));
+            $(this).text($(this).data('precioiva'));
         });
 
 
@@ -309,7 +309,7 @@ function agregarRegistro()
         '<td  id="codigoBarras'+contador+'">'+codigoBarras+'</td>'+
         '<td  data-existencia = '+existencia+'  data-id = '+ idProducto + '  id="descripcion'+contador+'">'+descripcion+'</td>'+
         '<td id="cantidad'+contador+'"><input class="Cantidad overCero" data-existencia='+existencia+' type="number" id="cantidad2'+contador+'" value="'+cantidad+'" /></td>'+
-        '<td id="precio'+contador+'">'+precio+'</td>'+
+        '<td data-precioiva='+precio+' id="precio'+contador+'">'+precio+'</td>'+
         '<td id="subTotal'+contador+'">'+subTotal+'</td>'+
         '<td>'+buttonDelete+'</td>'+
         '</tr">'
