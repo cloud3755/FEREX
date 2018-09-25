@@ -97,18 +97,9 @@
                   </div>
 
                 </div>
-                <div class="col-md-4">
-
-                    <div class="input-group">
-
-                      <label class="sr-only" for="unidadMedida">Direccion</label>
-                      <div class="input-group-addon">Direccion</div>
-                      <input type="text"  class="form-control" name="precioC" id="precioC" placeholder="Direccion">
-
-                    </div>
-
-                </div>
+                
             </div>
+            @include("partials.direcciones")
             <br>
             <div class="row">
               <div class="col-md-4">
