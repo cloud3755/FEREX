@@ -21,7 +21,14 @@ class UsersTableSeeder extends Seeder {
 
         public function run()
         {
-           
+            db::table('users')->insert(array(
+                'name' => "super",
+                'email'     => 'super@super.com',
+                'password'    =>  Hash::make('super@super.com'),
+                'idSucursal'      =>  0,
+                'permisos'      =>  1,
+              )
+         );
           db::table('users')->insert(array(
                    'name' => "ferex",
                    'email'     => 'ferex@ferex.com',
@@ -35,7 +42,6 @@ class UsersTableSeeder extends Seeder {
                    
             ));
             db::table('direcciones')->insert(array(
-              
                 'numInterior' => '',
                 'numExterior'=> "5099",
                 'calle'=> "Av Mariano Otero",
@@ -95,9 +101,7 @@ class UsersTableSeeder extends Seeder {
                 'telefono2'     => 0,
                 'telefono3'     => '0',
                 'consumoTotal'     => 0,
-                'activo' => "1",
-                'idDireccion'     => 1,
-
+                'activo' => "1"
             ));
         }
 }
