@@ -24,6 +24,8 @@ class CreateProductosTable extends Migration
             $table->decimal('precioA',10,2)->default(0);
             $table->decimal('precioB',10,2)->default(0);
             $table->decimal('precioC',10,2)->default(0);
+            $table->decimal('Costo',10,2)->default(0);
+            $table->string('urlImagen',255)->default("");
             $table->timestamps();
         });
     }
