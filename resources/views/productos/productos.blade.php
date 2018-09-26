@@ -41,6 +41,27 @@
                       </div>
                       <br/>
                       <div class="row">
+                        <div class="col-md-8">
+
+                          <div class="input-group">
+                            <label class="sr-only" for="nombre">Url Imagen Producto</label>
+                            <div class="input-group-addon">Url Imagen Producto</div>
+                            <input type="text" class="form-control" name="urlImagen" id="urlImagen" placeholder="urlImagen">
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+                          <div id="imgProducto">
+                          <img src="" width="100" height="100">
+                          </div>
+                          
+
+                        </div>
+                        
+                      </div>
+                      <br/>
+                      <div class="row">
                         <div class="col-md-4">
 
                           <div class="input-group">
@@ -75,7 +96,18 @@
                       </div>
                       <br/>
                       <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+
+                          <div class="input-group">
+
+                            <label class="sr-only" for="unidadMedida">Costo</label>
+                            <div class="input-group-addon">Costo</div>
+                            <input type="number" min="0"  class="form-control" name="Costo" id="Costo" placeholder="Costo">
+
+                          </div>
+
+                        </div>
+                        <div class="col-md-3">
 
                           <div class="input-group">
 
@@ -86,7 +118,7 @@
                           </div>
   
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
 
                             <div class="input-group">
   
@@ -97,7 +129,7 @@
                             </div>
     
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
 
                               <div class="input-group">
     

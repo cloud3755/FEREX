@@ -106,6 +106,15 @@ function  setInventarioInicial()
     $("#dataInventarioInicial").val(JSON.stringify(inventarioInicial));
 }
 
+$("#urlImagen").bind("paste", function(e){
+    // access the clipboard using the api
+    $('#imgProducto').html("");
+    var pastedData = e.originalEvent.clipboardData.getData('text');
+    var img = $('<img />', {src : pastedData}).height(100).width(100);
+    img.appendTo('#imgProducto');
+   // alert(pastedData);
+} );
+
 function PrintBarCode()
 {
     var css = "@media print {size: 15cm 15cm;}";

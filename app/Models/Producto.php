@@ -17,6 +17,7 @@ class Producto extends Model implements Inactivable
         $this->precioA = $request->precioA;
         $this->precioB = $request->precioB;
         $this->precioC = $request->precioC;
-
+        $this->Costo = $request->Costo;
+        $this->urlImagen = $request->urlImagen;
     }
 }
