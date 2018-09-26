@@ -92,14 +92,12 @@ class UsersTableSeeder extends Seeder {
                 'id' => "1",
                 'nombre'     => "Cliente general",
                 'razonSocial'     => '0000',
-                'contacto'     => "00",
+              
                 'rfc' => "0000",
                 'email'     => "000",
                 'limiteCredito'     => '0',
                 'credito'     => "0",
                 'telefono1' => "0",
-                'telefono2'     => 0,
-                'telefono3'     => '0',
                 'consumoTotal'     => 0,
                 'activo' => "1"
             ));
