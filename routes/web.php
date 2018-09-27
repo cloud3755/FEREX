@@ -95,7 +95,7 @@ function()
         Route::post('register', 'vendedoresController@register1');
 
 
-        // prueba PDF
+
 
     }
 );
