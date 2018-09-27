@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Barryvdh\DomPDF\Facade as TOPDF;
 
 use App\Models\clientes;
 use App\Models\Ventas;
@@ -10,8 +11,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Producto;
-use  Auth;
+use App\Models\generar_pdf;
+use Auth;
 use App\Models\Inventario;
+
 use function PhpParser\filesInDir;
 use Yajra\Datatables\Datatables;//Prueba dataTables Ajax
 
@@ -21,6 +24,7 @@ class ventaController extends Controller
 
     public function index()
     {
+
         $productos =    DB::table('productos')
             ->join("inventarios", "inventarios.idProducto", "=", "productos.id" )
             ->select("productos.*", "inventarios.cantidad")
@@ -28,6 +32,7 @@ class ventaController extends Controller
 
         $clientes = new clientes();
         $clientes = $clientes->all();
+
         $status = new caja();
         $status = $status->all();
         return view('ventas.venta', compact('productos'),compact("clientes","status","vendedor"));
@@ -56,8 +61,91 @@ $historial = DB::table("ventas")
 return view("ventas.ventaHistorial",compact("historial"));
     }
 
+
+    public function generarCotizacion(Request $request){
+
+
+
+
+        $cliente = $request->input('cliente');
+        $producto = $request->input('producto');
+        $cantidad = $request->input('cantidad');
+        $precioProducto = $request->input('precioProducto');
+        $folio = $request->input('folio');
+        $idProducto = $request->input('idProdcuto');
+        $subTotal = $request->input('subTotal');
+        $total = $request->input('total');
+        $clientes = explode(",", $cliente[0]);
+        $productos = explode(",", $producto[0]);
+        $cantidades = explode(",", $cantidad[0]);
+        $precios = explode(",", $precioProducto[0]);
+        $idProductos = explode(",", $idProducto[0]);
+        $subTotal = explode(",", $subTotal[0]);
+        $total = explode(",", $total[0]);
+
+
+
+
+
+        $clienteAdd = $clientes[0];
+        $folioAdd = $folio[0];
+        $i = count($productos);
+
+
+
+
+        for ($a=0; $a<$i; $a++ ){
+            $productoAdd = $productos[$a];
+            $cantidadAdd = $cantidades[$a];
+            $precioAdd = $precios[$a];
+            $subTotalAdd = $subTotal[$a];
+            $totalAdd = $total[0];
+
+            $pdf = new generar_pdf();
+            $pdf -> folio = $folioAdd;
+            $pdf -> cliente= $clienteAdd;
+            $pdf -> descripcion= $productoAdd;
+            $pdf -> cantidad= $cantidadAdd;
+            $pdf -> precio = $precioAdd;
+            $pdf -> subTotal = $subTotalAdd;
+            $pdf -> total = $totalAdd;
+            $pdf -> precio = $precioAdd;
+
+
+            $pdf ->save();
+
+        }
+
+
+
+
+        $coti =    DB::table('generar_pdfs')
+            ->select("generar_pdfs.*")
+            ->where("folio",$folioAdd)
+            ->get();
+
+
+
+
+
+
+
+
+
+
+
+
+        $top = TOPDF::loadView('ventas.cotizacion', compact("coti"));
+
+        return $top->stream();
+
+
+    }
+
     public function realizarVenta(Request $request)
     {
+
+
 
         $cliente = $request->input('cliente');
         $producto = $request->input('producto');

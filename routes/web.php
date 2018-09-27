@@ -79,8 +79,9 @@ function()
         //punto de venta
 
         Route::get('/venta', 'ventaController@index')->name('venta');
-    Route::get('/venta/historial', 'ventaController@historial')->name('ventaHistorial');
+        Route::get('/venta/historial', 'ventaController@historial')->name('ventaHistorial');
         Route::post('/venta', 'ventaController@realizarVenta');
+        Route::post('/cotizacion', 'ventaController@generarCotizacion');
 
         //punto de venta
 
@@ -92,6 +93,9 @@ function()
         //----------------------------------------------------alta de vendedores ------------------------------------------------------------------------------------------------------------------------
         Route::get('register', 'vendedoresController@showRegistrationForm')->name('register');
         Route::post('register', 'vendedoresController@register1');
+
+
+        // prueba PDF
 
     }
 );

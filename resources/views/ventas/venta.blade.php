@@ -43,7 +43,7 @@
                                             <select class="form-control selectpicker cliente"   id="Cliente" name="Cliente" data-live-search="true" data-width="100%" required>
 
                                             @foreach($clientes as $cliente)
-                                                <option   data-limiteCredito="{{$cliente->limiteCredito}}"  data-creditoActual="{{$cliente->credito}}" data-id="{{$cliente->id}}" data-descripcion="{{$cliente->rfc}}" value="{{$cliente->id}}">{{$cliente->nombre}} - {{$cliente->rfc}}</option>
+                                                <option   data-nombre="{{$cliente->nombre}}" data-limiteCredito="{{$cliente->limiteCredito}}"  data-creditoActual="{{$cliente->credito}}" data-id="{{$cliente->id}}" data-descripcion="{{$cliente->rfc}}" value="{{$cliente->id}}">{{$cliente->nombre}} - {{$cliente->rfc}}</option>
                                             @endforeach
                                         </select> <button id="fijarCliente" class="btn btn-secondary">Fijar cliente</button>
                                     </div>
@@ -113,6 +113,7 @@
                             <button id="venderCredito" type="button" class="btn btn-primary">Vender a credito</button>
                             <button id="IVA" type="button" class="btn btn-primary">Aplicar IVA</button>
                             <button id="reset" type="button" class="btn btn-danger">Cancelar venta</button>
+                            <button id="pdf" type="button" class="btn btn-primary">Generar Cotizacion</button>
 
                             <table class="table" id="tableEntrada">
                                 <thead>
@@ -150,7 +151,28 @@
                                 <input type="text" id="total" name="total[]"  />
                                 <input type="text" id="saldo" name="saldo[]"  />
                                 <input type="text" id="folio" name="folio[]"  />
+
                                 <input type="text" id="formaPago" name="formaPago[]"  />
+                            </form>
+
+                            <form hidden  id="cotizacion" method="POST" action="/cotizacion" }}>
+                                {{ csrf_field() }}
+
+                                <input type="text" id="vendedor" name="vendedor" value="0" />
+                                <input type="text" id="cliente" name="cliente[]"  />
+                                <input type="text" id="credito" name="credito[]"  />
+                                <input type="text" id="idProdcuto" name="idProdcuto[]"  />
+                                <input type="text" id="existencias" name="existencias[]"  />
+                                <input type="text" id="producto" name="producto[]"  />
+                                <input type="text" id="cantidad" name="cantidad[]"  />
+                                <input type="text" id="precioProducto" name="precioProducto[]"  />
+                                <input type="text" id="subTotal" name="subTotal[]"  />
+                                <input type="text" id="total" name="total[]"  />
+                                <input type="text" id="saldo" name="saldo[]"  />
+                                <input type="text" id="folio" name="folio[]"  />
+
+                                <input type="text" id="formaPago" name="formaPago[]"  />
+
                             </form>
                         </div>
                     </div>

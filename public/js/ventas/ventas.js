@@ -40,6 +40,116 @@ $("#venderCredito").attr('disabled',true);
 
 
 
+$("#pdf").click(function (e) {
+    e.preventDefault();
+
+
+
+    var formaPago = $('#formaPago :selected').val();
+
+    var saldoActual = $('#statusCaja').data('saldo');
+
+
+
+    var cliente = [];
+    var idProducto = [];
+    var existencia = [];
+    var producto = [];
+    var cantidad = [];
+    var precioProducto = [];
+    var subTotal = [];
+    var total  = $("#total label").text() ;
+
+    var creditoActual = $('#Cliente :selected').data('creditoactual');
+
+    creditoActual = parseFloat(creditoActual) + parseFloat(creditoUsado);
+
+    if (creditoUsado == 0){
+
+    }
+    else {
+        formaPago = "Venta a credito";
+    }
+
+    if (formaPago == 0 && formaPago !="Venta a credito" ){
+
+        alert("Elija una forma de pago valida");
+        return false;
+    }
+    if (formaPago == "efectivo"){
+
+
+        saldoActual = parseFloat(saldoActual) + parseFloat(total);
+    }
+    else {
+        saldoActual = parseFloat(saldoActual);
+    }
+
+
+
+    //$("td[id^='cliente']").each(function(){
+    //    var clientes = $(this).data("id");
+    var idCliente = $("#Cliente :selected").data("nombre");
+    cliente.push(idCliente);
+    //});
+
+    $("td[id^='descripcion']").each(function(key,value){
+
+        var productos = $(this).text();
+        producto.push(productos);
+        var ids = $(this).data("id");
+        idProducto.push(ids);
+        var existencias = $(this).data("existencia");
+        existencia.push(existencias);
+
+
+
+    });
+    $('.Cantidad').each(function(key,value){
+
+        var cantidades = $(this).val() ;
+        cantidad.push(cantidades);
+    });
+
+    $("td[id^='precio']").each(function(key,value){
+
+        var precioProductos = $(this).text() ;
+        precioProducto.push(precioProductos);
+    });
+
+    $("td[id^='subTotal']").each(function(key,value){
+
+        var subTotals = $(this).text() ;
+        subTotal.push(subTotals);
+    });
+
+
+    // vendedor
+    // cliente
+    //producto
+    //cantidad
+    //precioProducto
+    //subTotal
+    //total
+    $("#cotizacion input#cliente").val(cliente);
+    $("#cotizacion input#idProdcuto").val(idProducto);
+    $("#cotizacion input#existencias").val(existencia);
+    $("#cotizacion input#producto").val(producto);
+    $("#cotizacion input#cantidad").val(cantidad);
+    $("#cotizacion input#precioProducto").val(precioProducto);
+    $("#cotizacion input#subTotal").val(subTotal);
+    $("#cotizacion input#total").val(total);
+    $("#cotizacion input#saldo").val(saldoActual);
+    $("#cotizacion input#credito").val(creditoActual);
+    $("#cotizacion input#folio").val(folio);
+    $("#cotizacion input#formaPago").val(formaPago);
+
+
+
+    $('#cotizacion').submit();
+
+});
+
 $("#nuevoCliente").click(function (e) {
     e.preventDefault();
 
@@ -478,16 +588,16 @@ function submitForm()
 
 
 
-var cliente = [];
-var idProducto = [];
-var existencia = [];
-var producto = [];
-var cantidad = [];
-var precioProducto = [];
-var subTotal = [];
-var total  = $("#total label").text() ;
+    var cliente = [];
+    var idProducto = [];
+    var existencia = [];
+    var producto = [];
+    var cantidad = [];
+    var precioProducto = [];
+    var subTotal = [];
+    var total  = $("#total label").text() ;
 
-var creditoActual = $('#Cliente :selected').data('creditoactual');
+    var creditoActual = $('#Cliente :selected').data('creditoactual');
 
     creditoActual = parseFloat(creditoActual) + parseFloat(creditoUsado);
 
@@ -503,7 +613,7 @@ var creditoActual = $('#Cliente :selected').data('creditoactual');
         alert("Elija una forma de pago valida");
         return false;
     }
-     if (formaPago == "efectivo"){
+    if (formaPago == "efectivo"){
 
 
         saldoActual = parseFloat(saldoActual) + parseFloat(total);
@@ -517,7 +627,7 @@ var creditoActual = $('#Cliente :selected').data('creditoactual');
     //$("td[id^='cliente']").each(function(){
     //    var clientes = $(this).data("id");
     var idCliente = $("#Cliente :selected").val();
-        cliente.push(idCliente);
+    cliente.push(idCliente);
     //});
 
     $("td[id^='descripcion']").each(function(key,value){
@@ -552,7 +662,7 @@ var creditoActual = $('#Cliente :selected').data('creditoactual');
 
 
     // vendedor
-   // cliente
+    // cliente
     //producto
     //cantidad
     //precioProducto
@@ -570,6 +680,8 @@ var creditoActual = $('#Cliente :selected').data('creditoactual');
     $("#form input#credito").val(creditoActual);
     $("#form input#folio").val(folio);
     $("#form input#formaPago").val(formaPago);
+
+
 
     $('#form').submit();
 }
