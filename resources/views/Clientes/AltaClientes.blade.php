@@ -97,7 +97,7 @@
                   </div>
 
                 </div>
-                
+
             </div>
             @include("partials.direcciones")
             <br>
@@ -148,7 +148,6 @@
                   <th>Numero de Cliente</th>
                   <th>Nombre</th>
                   <th>Razon Social</th>
-                  <th>Contacto</th>
                   <th>Rfc</th>
                   <th>Correo</th>
                   <th>Limite de credito</th>
@@ -165,13 +164,11 @@
                   <td>{{$cliente->id}}</td>
                   <td>{{$cliente->nombre}}</td>
                   <td>{{$cliente->razonSocial}}</td>
-                  <td>{{$cliente->contacto}}</td>
                   <td>{{$cliente->rfc}}</td>
                   <td>{{$cliente->email}}</td>
                   <td>{{$cliente->limiteCredito}}</td>
                   <td>{{$cliente->telefono1}}</td>
                   <td>{{$cliente->consumoTotal}}</td>
-
                   @if($cliente->activo==1)
                   <td>Activo</td>
                   @else
