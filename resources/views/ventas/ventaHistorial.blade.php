@@ -23,28 +23,32 @@
                                 <thead>
                                 <tr>
                                     <th>idVenta</th>
+                                    <th>folio</th>
                                     <th>Vendedor</th>
                                     <th>Cliente</th>
-                                    <th>Producto</th>
-                                    <th>precio</th>
-                                    <th>cantidad</th>
-                                    <th>formaDePago</th>
+                                    <th>Forma de pago</th>
+                                    <th>Total</th>
                                     <th>fecha</th>
-
+                                    <th>Re imprimir ticket</th>
+                                    <th>Re imprimir pdf</th>
+                                    <th>Detalle</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($historial as $historia)
                                     <tr>
                                         <td>{{$historia->id}}</td>
+                                        <td>{{$historia->folio}}</td>
                                         <td>{{$historia->name}}</td>
                                         <td>{{$historia->nombre}}</td>
-                                        <td>{{$historia->Producto}}</td>
-                                        <td>{{$historia->precio}}</td>
-                                        <td>{{$historia->cantidad}}</td>
                                         <td>{{$historia->formaDePago}}</td>
+                                        <td>{{$historia->Total}}</td>
+
                                         <td>{{$historia->created_at}}</td>
 
+                                        <td> {{$historia->created_at}}</td>
+                                        <td>{{$historia->created_at}}</td>
+                                        <td><a href="{{route('ventaHistorialDetalle', ['idVenta' => $historia->id])}}">Detalle</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
