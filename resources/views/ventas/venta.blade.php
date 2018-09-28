@@ -155,7 +155,7 @@
                                 <input type="text" id="formaPago" name="formaPago[]"  />
                             </form>
 
-                            <form hidden  id="cotizacion" method="POST" action="/cotizacion" }}>
+                            <form hidden target="_blank" id="cotizacion" method="POST" action="/cotizacion" }}>
                                 {{ csrf_field() }}
 
                                 <input type="text" id="vendedor" name="vendedor" value="0" />
