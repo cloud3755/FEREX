@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('styles')
-  @parent
+    @parent
+    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrapUtils/css/bootstrap-select.css.map') }}" rel="stylesheet">
 @endsection
 @section('content')
 
@@ -190,4 +193,5 @@
   @section('scripts.personalizados')
   @parent
     <script src="{{ asset('js/productos/productosApp.js') }}"></script>
+    <script src="{{ asset('js/ciudades/ciudades.js') }}"></script>
   @endsection
