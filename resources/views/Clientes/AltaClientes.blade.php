@@ -99,7 +99,7 @@
                 </div>
 
             </div>
-            @include("partials.direcciones")
+            
             <br>
             <div class="row">
               <div class="col-md-4">
