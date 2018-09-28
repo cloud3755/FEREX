@@ -51,6 +51,7 @@
                     <ul class="nav navbar-nav">
                         @guest
                         @else
+                        @if(Auth::user()->permisos==2)
                          <li><a href="/productos"> <i class="fas fa-store-alt"></i> Productos</a></li>
                          <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -63,6 +64,7 @@
                               <li><a href="{{ route('register') }}"> </i>Alta de Vendedores</a></li>
                             </ul>
                           </li>
+                          @endif
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                               <i class="fas fa-money-check-alt"></i> Venta <span class="caret"></span></a>
@@ -78,20 +80,24 @@
 
                             <li>
                             <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                              <i class="fas fa-user-alt"></i> Caja
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="/cajas">Cajas</a></li>
-                              <li><a href="/cajas/historial"> </i>Historial</a></li>
-                           
-                            </ul>
-                          </li>
-                          <li>
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fas fa-user-alt"></i> Caja
+                              <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="/cajas">Cajas</a></li>
+                                <li><a href="/cajas/historial"> </i>Historial</a></li>
+
+                              </ul>
+                            </li>
+
+                            @if(Auth::user()->permisos==2)
+                            <li>
                               <a href="/Dashboard">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                               </a>
                             </li>
+                            @endif  
+
                          @endguest
                     </ul>
 
