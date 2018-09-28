@@ -35,6 +35,7 @@ if ($("#statusCaja").val() == "NI"){
 $("#productosDiv").hide();
 
 $("#agregarEntrada").attr('disabled',true);
+$("#pdf").attr('disabled',true);
 $("#Procesar").attr('disabled',true);
 $("#venderCredito").attr('disabled',true);
 
@@ -260,8 +261,6 @@ $("#fijarCliente").click(function (e) {
 
     $('#Cliente').attr('disabled',true);
     $("#agregarEntrada").attr('disabled',false);
-    $("#Procesar").attr('disabled',false);
-    $("#venderCredito").attr('disabled',false);
     $("#productosDiv").show();
 
 
@@ -326,6 +325,10 @@ $(function(){
 
 function agregarRegistro()
 {
+
+    $("#pdf").attr('disabled',false);
+    $("#Procesar").attr('disabled',false);
+    $("#venderCredito").attr('disabled',false);
     var gin = $('#Cliente').val();
     var cliente = $('#Cliente :selected').data('descripcion');
     var clienteId = $('#Cliente :selected').data('id');

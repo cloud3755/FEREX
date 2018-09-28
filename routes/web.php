@@ -80,6 +80,8 @@ function()
 
         Route::get('/venta', 'ventaController@index')->name('venta');
         Route::get('/venta/historial', 'ventaController@historial')->name('ventaHistorial');
+        Route::get('/venta/historial/{idVenta}', 'ventaController@historialDetalle')->name('ventaHistorialDetalle');
+
         Route::post('/venta', 'ventaController@realizarVenta');
         Route::post('/cotizacion', 'ventaController@generarCotizacion');
 
@@ -95,7 +97,7 @@ function()
         Route::post('register', 'vendedoresController@register1');
 
 
-        // prueba PDF
+
 
     }
 );

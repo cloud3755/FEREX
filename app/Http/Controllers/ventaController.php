@@ -39,13 +39,57 @@ class ventaController extends Controller
 
     }
 
+    public function historialDetalle($idVenta)
+    {
+        $historial = DB::table("ventas")
+        ->join("users", "users.id","=","ventas.idVendedor")
+        ->join("clientes", "clientes.id","=", "ventas.idCliente")
+        ->join("ventas_detalles", "ventas_detalles.idVenta", "=", "ventas.id")
+        ->where("ventas.id", "=", $idVenta)
+        
+        ->select(
+            "ventas.id",
+            "ventas.folio",
+            "users.name as nombreVendedor",
+            "clientes.nombre as nombreCliente",
+            "ventas_detalles.Producto",
+            "ventas_detalles.cantidad",
+            "ventas_detalles.precio",
+            "ventas.formaDePago",
+            "ventas_detalles.created_at",
+            DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
+        )
+        ->get();
+        $vendedor = $historial->pluck('nombreVendedor')->first();
+        $cliente = $historial->pluck('nombreCliente')->first();
+        $formaDePago = $historial->pluck('formaDePago')->first();
+        $folio = $historial->pluck('folio')->first();
+       // $total = $historial->pluck('Total')->first();
+        return view("ventas.ventaHistorialDetalle",
+            compact("historial",
+                    "vendedor",
+                    "cliente",
+                    "formaDePago",
+                    "folio"
+                    ));
+
+    }
+
     public function historial(){
 
-$historial = DB::table("ventas")
-    ->join("ventas_detalles", "ventas_detalles.idVenta", "=", "ventas.id")
+     $historial = DB::table("ventas")
     ->join("clientes", "clientes.id","=", "ventas.idCliente")
     ->join("users", "users.id","=","ventas.idVendedor")
-    ->select("ventas.id","users.name","clientes.nombre","ventas_detalles.Producto","ventas_detalles.cantidad","ventas_detalles.precio","ventas.formaDePago","ventas_detalles.created_at")->get();
+    ->join("ventas_detalles", "ventas_detalles.idVenta", "=", "ventas.id")
+    ->groupBy('ventas.id')
+    ->select(
+        "ventas.id",
+        "ventas.folio",
+        "users.name",
+        "clientes.nombre",
+        "ventas.formaDePago", 
+        "ventas.created_at",
+        DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
 
 
 
