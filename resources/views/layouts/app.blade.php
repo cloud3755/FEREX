@@ -72,6 +72,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="/venta">Realizar venta</a></li>
                                     <li><a href="/venta/historial"> </i>Historial de ventas</a></li>
+                                    <li><a href="/venta/cotizacionHistorial"> </i>Historial de cotizaciones</a></li>
 
                                 </ul>
                             </li>

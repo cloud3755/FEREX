@@ -15,7 +15,7 @@
 
     @foreach($coti as $product)
 
-    {{$product->cliente}}
+    {{$product->nombre}}
     @break
     @endforeach
 
@@ -23,7 +23,7 @@
         <thead>
         <tr>
             <th>CANTIDAD</th>
-            <th>DESCRIPCION</th>
+            <th>PRODUCTO</th>
             <th>PRECIO</th>
             <th>TOTAL</th>
 
@@ -34,20 +34,20 @@
         @foreach($coti as $product)
             <tr>
                 <td>{{ $product->cantidad}}</td>
-                <td>{{ $product->descripcion}}</td>
+                <td>{{ $product->Producto}}</td>
                 <td>{{ $product->precio}}</td>
-                <td>{{ $product->subTotal}}</td>
+                <td>{{ $product->precio*$product->cantidad}}</td>
 
             </tr>
         @endforeach
         </tbody>
     </table>
     <hr>
-    <pre>                                                              Subtotal:$@foreach($coti as $product){{$product->total}}
+    <pre>                                                              Subtotal:$@foreach($coti as $product){{$product->Total}}
             @break
-        @endforeach                                                  IVA(16%):$@foreach($coti as $product){{$product->total*.16}}
+        @endforeach                                                  IVA(16%):$@foreach($coti as $product){{$product->Total*.16}}
         @break
-        @endforeach                                                      Importe total:$ @foreach($coti as $product){{$product->total + ($product->total*.16)}}
+        @endforeach                                                      Importe total:$ @foreach($coti as $product){{$product->Total + ($product->Total*.16)}}
         @break
         @endforeach    </pre>
     <p>

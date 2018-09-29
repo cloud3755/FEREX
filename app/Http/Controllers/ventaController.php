@@ -82,6 +82,7 @@ class ventaController extends Controller
     ->join("users", "users.id","=","ventas.idVendedor")
     ->join("ventas_detalles", "ventas_detalles.idVenta", "=", "ventas.id")
     ->groupBy('ventas.id')
+    ->where("ventas.cotizacion",0)
     ->select(
         "ventas.id",
         "ventas.folio",
@@ -109,81 +110,152 @@ return view("ventas.ventaHistorial",compact("historial"));
     public function generarCotizacion(Request $request){
 
 
-
-
         $cliente = $request->input('cliente');
         $producto = $request->input('producto');
         $cantidad = $request->input('cantidad');
+        $existencia = $request->input('existencias');
         $precioProducto = $request->input('precioProducto');
         $folio = $request->input('folio');
         $idProducto = $request->input('idProdcuto');
-        $subTotal = $request->input('subTotal');
-        $total = $request->input('total');
+        $credito = $request->input('credito');
+        $saldo = $request->input('saldo');
+        $formaPago = $request->input('formaPago');
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",", $producto[0]);
         $cantidades = explode(",", $cantidad[0]);
         $precios = explode(",", $precioProducto[0]);
         $idProductos = explode(",", $idProducto[0]);
-        $subTotal = explode(",", $subTotal[0]);
-        $total = explode(",", $total[0]);
+        $existencias = explode(",", $existencia[0]);
 
 
 
-
-
-        $clienteAdd = $clientes[0];
         $folioAdd = $folio[0];
+        $formaPagoAdd = $formaPago[0];
+        $clienteAdd = $clientes[0];
         $i = count($productos);
 
+        $ventas = new Ventas();
+        $ventas -> folio = $folioAdd;
+        $ventas -> formaDePago = "cotizacion";
+        $ventas -> cotizacion = 1;
+        $ventas -> idVendedor = Auth::user()->id;
+        $ventas -> idCliente= $clienteAdd;
+        $ventas->save();
 
+        $ventaId= $ventas->id;
+        echo $ventaId;
+        for ($a=0; $a<$i; $a++ ) {
 
-
-        for ($a=0; $a<$i; $a++ ){
             $productoAdd = $productos[$a];
             $cantidadAdd = $cantidades[$a];
             $precioAdd = $precios[$a];
-            $subTotalAdd = $subTotal[$a];
-            $totalAdd = $total[0];
+            $idProductoAdd = $idProductos[$a];
+            $existenciaAdd = $existencias[$a];
 
-            $pdf = new generar_pdf();
-            $pdf -> folio = $folioAdd;
-            $pdf -> cliente= $clienteAdd;
-            $pdf -> descripcion= $productoAdd;
-            $pdf -> cantidad= $cantidadAdd;
-            $pdf -> precio = $precioAdd;
-            $pdf -> subTotal = $subTotalAdd;
-            $pdf -> total = $totalAdd;
-            $pdf -> precio = $precioAdd;
+            $creditoAdd = $credito[0];
+            $saldoAdd = $saldo[0];
+            $ventasDetalle = new ventasDetalle();
+            $ventasDetalle->Producto = $productoAdd;
+            $ventasDetalle->cantidad = $cantidadAdd;
+            $ventasDetalle->precio = $precioAdd;
+            $ventasDetalle->idVenta = $ventaId;
+            $ventasDetalle->idProducto = $idProductoAdd;
+            $ventasDetalle->save();
 
-
-            $pdf ->save();
 
         }
 
 
 
+        $coti =    DB::table('ventas')
+            ->join("ventas_detalles", "ventas_detalles.id", "=", "ventas.id" )
+            ->join("clientes","clientes.id","=","ventas.idCliente")
 
-        $coti =    DB::table('generar_pdfs')
-            ->select("generar_pdfs.*")
-            ->where("folio",$folioAdd)
-            ->get();
-
-
-
-
-
-
+            ->where("ventas.folio",$folioAdd)
+            ->select("ventas.folio", "ventas.created_at",
+                "clientes.nombre",
+                "ventas_detalles.cantidad","ventas_detalles.Producto",
+                "ventas_detalles.precio", DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
 
 
 
 
 
+
+
+
+
+
+
+
+
+       $top = TOPDF::loadView('ventas.cotizacion', compact("coti"));
+
+        return $top->stream();
+
+
+    }
+
+
+    public function cotizacionHistorial(){
+
+        $historial = DB::table("ventas")
+            ->join("clientes", "clientes.id","=", "ventas.idCliente")
+            ->join("users", "users.id","=","ventas.idVendedor")
+            ->join("ventas_detalles", "ventas_detalles.idVenta", "=", "ventas.id")
+            ->groupBy('ventas.id')
+            ->where("ventas.cotizacion",1)
+            ->select(
+                "ventas.id",
+                "ventas.folio",
+                "users.name",
+                "clientes.nombre",
+                "ventas.formaDePago",
+                "ventas.created_at",
+                DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
+
+
+
+
+
+
+
+//SELECT ventas.id,users.name,clientes.nombre,ventas_detalles.Producto,ventas_detalles.cantidad,ventas_detalles.precio,ventas.formaDePago, ventas_detalles.created_at FROM `ventas`
+// INNER JOIN ventas_detalles ON ventas.id = ventas_detalles.idVenta
+        //       INNER JOIN clientes ON ventas.idCliente = clientes.id
+//INNER JOIN users ON ventas.idVendedor = users.id
+
+        return view("ventas.cotizacionHistorial",compact("historial"));
+    }
+
+    public function cotizacionHistorialDetalle($folio){
+
+
+        $coti =    DB::table('ventas')
+            ->join("ventas_detalles", "ventas_detalles.id", "=", "ventas.id" )
+            ->join("clientes","clientes.id","=","ventas.idCliente")
+
+            ->where("ventas.folio",$folio)
+            ->select("ventas.folio", "ventas.created_at",
+                "clientes.nombre",
+                "ventas_detalles.cantidad","ventas_detalles.Producto",
+                "ventas_detalles.precio", DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
 
         $top = TOPDF::loadView('ventas.cotizacion', compact("coti"));
 
         return $top->stream();
 
+    }
 
+    public function venderCotizacion(Request $request){
+
+        $folio = $request->input('folio');
+        $formaPago = $request->input('formaPago');
+        $ventas = new Ventas();
+        $ventas::where ("folio",$folio)->update(["formaDePago"=>$formaPago,"cotizacion"=>0]);
+
+        \Session::flash('Guardado','Se guardo correctamente la venta');
+        return redirect()->route("cotizacionHistorial");
     }
 
     public function realizarVenta(Request $request)
@@ -218,6 +290,7 @@ return view("ventas.ventaHistorial",compact("historial"));
         $ventas = new Ventas();
         $ventas -> folio = $folioAdd;
         $ventas -> formaDePago = $formaPagoAdd;
+        $ventas -> cotizacion = 0;
         $ventas -> idVendedor = Auth::user()->id;
         $ventas -> idCliente= $clienteAdd;
         $ventas->save();

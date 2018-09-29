@@ -90,7 +90,7 @@ $("#pdf").click(function (e) {
 
     //$("td[id^='cliente']").each(function(){
     //    var clientes = $(this).data("id");
-    var idCliente = $("#Cliente :selected").data("nombre");
+    var idCliente = $("#Cliente :selected").val();
     cliente.push(idCliente);
     //});
 
@@ -148,6 +148,7 @@ $("#pdf").click(function (e) {
 
 
     $('#cotizacion').submit();
+    location.reload();
 
 });
 
