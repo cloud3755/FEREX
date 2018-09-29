@@ -329,11 +329,18 @@ return view("ventas.ventaHistorial",compact("historial"));
 
         $datosVenta = $this->returnDataVentaPrint($ventaId);
         \Session::flash('Guardado','Se guardo correctamente la venta');
-        \Session::flash('datosVenta',$datosVenta);
+        \Session::flash('idVenta',$ventaId);
        
         return redirect()->route("venta");
     }
 
+    public function printVenta($idVenta)
+    {
+        $datosVenta = $this->returnDataVentaPrint($idVenta);
+        $top = TOPDF::loadView('partials.Print.VentaPdf2', compact("datosVenta"));
+
+        return $top->stream();
+    }
     public function returnDataVentaPrint($idVenta)
     {
         return DB::table('ventas')

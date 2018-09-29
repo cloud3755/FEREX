@@ -85,6 +85,17 @@
 
 
                                 </div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="input-group text-center">
+                                            <input type="radio" class="form-control" name="tipoImpresion" value="pdf"><span>Imprimir PDF</span>
+                        
+                                            <input type="radio" class="form-control" name="tipoImpresion" value="ticket">Imprimir ticket
+                                        </div>
+                                    </div>
+
+
+                                </div>
 
 
                             </div>
@@ -135,6 +146,9 @@
 
                             <div class="table" id="total">
                                Total
+                               @if(Session::has('idVenta'))
+    <a  target="_blank" id="ventaPdf" href="{{route('printVenta', ['idVenta' =>session('idVenta')])}}">blabla</a>
+@endif
                                 <label></label>
                             </div>
                             <form hidden  id="form" method="POST" action="/venta" }}>
@@ -184,8 +198,18 @@
 @endsection
 @section('scripts.personalizados')
     @parent
-
+    
     <script src="{{ asset('js/ventas/ventas.js') }}"></script>
-    @includeWhen(Session::has('datosVenta'), 'partials.Print.VentaTicket', ['datosVenta' => session('datosVenta')])
+    @if(Session::has('idVenta'))
+        <script>
+        $(document).ready(function() {
+            $link = $("#ventaPdf");
+
+
+            $link[0].click();
+});
+            
+        </script>
+    @endif
 
 @endsection

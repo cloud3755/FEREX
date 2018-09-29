@@ -87,6 +87,7 @@ function()
         Route::post('/venta', 'ventaController@realizarVenta');
         Route::post('/cotizacionActualizar', 'ventaController@venderCotizacion');
         Route::post('/cotizacion', 'ventaController@generarCotizacion');
+        Route::get('/printVenta/{idVenta}', 'ventaController@printVenta')->name('printVenta');
 
         //punto de venta
 
