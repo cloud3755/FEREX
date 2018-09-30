@@ -2,34 +2,23 @@
 
 @section('content')
 
-@php
-    $venta = $datosVenta;
-    $folio = $venta->pluck('folio')->first();
-    $nombreCliente = $venta->pluck('nombreCliente')->first();
-    $nombreVendedor = $venta->pluck('nombreVendedor')->first();
-    $numExterior = $venta->pluck('numExterior')->first();
-    $calle = $venta->pluck('calle')->first();
-    $colonia = $venta->pluck('colonia')->first();
-    $cp = $venta->pluck('cp')->first();
-    $ciudad = $venta->pluck('ciudad')->first();
-    $estado = $venta->pluck('estado')->first();
-    $total=0;
-    date_default_timezone_set('America/Mexico_City');
-    $date = date('DD/MM/AAAA h:i:s a', time());
-@endphp
-
-    <img src="http://www.linkbyme.com.mx/staticimg/092013/logo-200197189-156-b.jpg">
-    <pre>                                                       Fecha :   {{$date}}
- 
-                                           Folio:           {{$folio}}
-
-    </pre>
+    
+   <!-- <img src="http://www.linkbyme.com.mx/staticimg/092013/logo-200197189-156-b.jpg">-->
     <h1 class="page-header">Venta</h1>
-    Facturar a:
-    {{$nombreCliente}}
-    {{$numExterior}} {{$calle}} {{$colonia}}    
-    {{$cp}} {{$ciudad}} {{$estado}}
-
+    <pre>
+FEREX<br>
+{{$numExterior}} {{$calle}} {{$colonia}}<br>    
+{{$cp}} {{$ciudad}} {{$estado}}<br>
+    </pre>
+    <pre>
+<b>Fecha de impresi&oacute;n:</b>  {{$fechaImpresion}}<br>
+<b>Fecha de venta:</b>      {{$fechaVenta}}<br>
+<b>Folio:</b>               {{$folio}}<br>
+<b>Cliente:</b>
+{{$nombreCliente}}<br>
+{{$numExteriorCliente}} {{$calleCliente}} {{$coloniaCliente}}<br>    
+{{$cpCliente}} {{$ciudadCliente}} {{$estadoCliente}}<br>
+    </pre>
     <table class="table table-hover table-striped">
         <thead>
         <tr>
@@ -40,13 +29,13 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($venta as $datosVenta)
+        @foreach($datosVenta as $venta)
             <tr>
-                <td>{{ $datosVenta->nombreProducto}}</td>
-                <td>{{intval($datosVenta->cantidad* 1e2) / 1e2}}</td>
-                <td>{{intval($datosVenta->precio* 1e2) / 1e2}}</td>
-                <td>{{intval($datosVenta->totalLinea * 1e2) / 1e2}}</td>
-                @php $total+= $datosVenta->totalLinea @endphp
+                <td>{{ $venta->nombreProducto}}</td>
+                <td>{{intval($venta->cantidad* 1e2) / 1e2}}</td>
+                <td>{{intval($venta->precio* 1e2) / 1e2}}</td>
+                <td>{{intval($venta->totalLinea * 1e2) / 1e2}}</td>
+               
             </tr>
         @endforeach
         </tbody>

@@ -1,27 +1,7 @@
-@php
-    $venta = $datosVenta;
-    $folio = $venta->pluck('folio')->first();
-    $nombreCliente = $venta->pluck('nombreCliente')->first();
-    $nombreVendedor = $venta->pluck('nombreVendedor')->first();
-    $numExterior = $venta->pluck('numExterior')->first();
-    $calle = $venta->pluck('calle')->first();
-    $colonia = $venta->pluck('colonia')->first();
-    $cp = $venta->pluck('cp')->first();
-    $ciudad = $venta->pluck('ciudad')->first();
-    $estado = $venta->pluck('estado')->first();
-    $total=0;
-    function fillString($str,$maxLen, $padType)
-    {
-        return (strlen($str) < $maxLen) ? 
-            str_pad($str, $maxLen, "_",$padType) :
-            substr($str, 0, $maxLen);
-    }
-@endphp
 <div id="print">
     <section id="sheet">
-        <div>********************************</div>
-        <div>{{fillString("FEREX", 32, STR_PAD_BOTH)}}</div>
-        <div>{{fillString($calle, 32, STR_PAD_BOTH)}}</div>
+        <div>Ferex</div>
+        <div>{{$calle}}</div>
         <div>{{fillString($numExterior, 32, STR_PAD_BOTH)}}</div>
         <div>{{fillString($colonia, 32, STR_PAD_BOTH)}}</div>
         <div>{{fillString($cp, 32, STR_PAD_BOTH)}}</div>

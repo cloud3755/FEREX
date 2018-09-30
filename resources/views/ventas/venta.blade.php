@@ -146,9 +146,7 @@
 
                             <div class="table" id="total">
                                Total
-                               @if(Session::has('idVenta'))
-    <a  target="_blank" id="ventaPdf" href="{{route('printVenta', ['idVenta' =>session('idVenta')])}}">blabla</a>
-@endif
+
                                 <label></label>
                             </div>
                             <form hidden  id="form" method="POST" action="/venta" }}>
@@ -194,7 +192,9 @@
             </div>
         </div>
     </div>
-
+@if(Session::has('idVenta'))
+    <a  target="_blank" id="ventaImpresion" href="/venta/imprimir/{{session('idVenta')}}/{{session('tipoImpresion')}}"></a>
+@endif
 @endsection
 @section('scripts.personalizados')
     @parent
@@ -203,7 +203,7 @@
     @if(Session::has('idVenta'))
         <script>
         $(document).ready(function() {
-            $link = $("#ventaPdf");
+            $link = $("#ventaImpresion");
 
 
             $link[0].click();

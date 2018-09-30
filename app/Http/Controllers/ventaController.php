@@ -261,7 +261,7 @@ return view("ventas.ventaHistorial",compact("historial"));
     public function realizarVenta(Request $request)
     {
 
-
+        $tipoImpresion = $request->tipoImpresion;
 
         $cliente = $request->input('cliente');
         $producto = $request->input('producto');
@@ -296,7 +296,7 @@ return view("ventas.ventaHistorial",compact("historial"));
         $ventas->save();
 
         $ventaId= $ventas->id;
-        echo $ventaId;
+        
             for ($a=0; $a<$i; $a++ ){
 
                 $productoAdd = $productos[$a];
@@ -327,20 +327,81 @@ return view("ventas.ventaHistorial",compact("historial"));
         $saldo = new caja();
         $saldo::where("id",Auth::user()->idSucursal)->update(["saldo"=>$saldoAdd]);
 
-        $datosVenta = $this->returnDataVentaPrint($ventaId);
+        
         \Session::flash('Guardado','Se guardo correctamente la venta');
         \Session::flash('idVenta',$ventaId);
-       
+        \Session::flash('tipoImpresion',$tipoImpresion);
+        
         return redirect()->route("venta");
     }
 
-    public function printVenta($idVenta)
+    public function printVenta($idVenta, $tipoImpresion)
     {
+        $view = 'partials.Print.VentaPdf2';
         $datosVenta = $this->returnDataVentaPrint($idVenta);
-        $top = TOPDF::loadView('partials.Print.VentaPdf2', compact("datosVenta"));
+       // $fechaImpresion = date('d/m/a', time());
+        
+        $fechaImpresion = date('d/m/y', time());
+        $folio=  $datosVenta->pluck('folio')->first();
+        $nombreCliente=  $datosVenta->pluck('nombreCliente')->first();
+        $nombreVendedor=  $datosVenta->pluck('nombreVendedor')->first();
+        $numExterior=  $datosVenta->pluck('numExterior')->first();
+        $calle=  $datosVenta->pluck('calle')->first();
+        $colonia=  $datosVenta->pluck('colonia')->first();
+        $cp=  $datosVenta->pluck('cp')->first();
+        $ciudad=  $datosVenta->pluck('ciudad')->first();
+        $estado=  $datosVenta->pluck('estado')->first();
+        $numExteriorCliente=  $datosVenta->pluck('numExteriorCliente')->first();
+        $calleCliente=  $datosVenta->pluck('calleCliente')->first();
+        $coloniaCliente=  $datosVenta->pluck('coloniaCliente')->first();
+        $cpCliente=  $datosVenta->pluck('cpCliente')->first();
+        $ciudadCliente=  $datosVenta->pluck('ciudadCliente')->first();
+        $estadoCliente=  $datosVenta->pluck('estadoCliente')->first();
+        $title = "Venta";
+        $fechaVenta=  \Carbon\Carbon::parse($datosVenta->pluck('created_at')->first())->format('d/m/y');
+        //$fechaVenta=  date('d/m/a', strtotime($datosVenta->pluck('created_at')->first()));
+        $total=  $datosVenta->sum('totalLinea');
+        switch($tipoImpresion)
+        {
+            case 'pdf':
+            $view = 'partials.Print.VentaPdf2';
+            $top = TOPDF::loadView( $view, 
+            compact(    
+                "calleCliente",
+                "coloniaCliente",
+                "cpCliente",
+                "ciudadCliente",
+                "estadoCliente",
+                "numExteriorCliente",
+                "title",        
+                "datosVenta" ,
+                "fechaImpresion" ,
+                "folio",
+                "nombreCliente",
+                "nombreVendedor",
+                "numExterior",
+                "calle",
+                "colonia",
+                "cp",
+                "ciudad",
+                "estado",
+                "fechaVenta",
+                "total"
+            ));
+        
 
+        
         return $top->stream();
+            break;
+            case 'ticket':
+            $view = 'partials.Print.VentaTicket';
+            break;
+        }
+        
+
+        
     }
+
     public function returnDataVentaPrint($idVenta)
     {
         return DB::table('ventas')
@@ -350,11 +411,14 @@ return view("ventas.ventaHistorial",compact("historial"));
         ->join("sucursales_direcciones", "sucursales_direcciones.idSucursal", "=", "sucursales.id")
         ->join("direcciones", "direcciones.id", "=", "sucursales_direcciones.idDireccion")
         ->leftjoin("clientes", "ventas.idCliente", "=", "clientes.id")
+        ->leftjoin("clientes_direcciones", "clientes.id", "=", "clientes_direcciones.idCliente")
+        ->leftjoin("direcciones as dirCliente", "dirCliente.id", "=", "clientes_direcciones.idDireccion")
         ->whereRaw("ventas.id = ".$idVenta)
         ->select(
             "clientes.nombre as nombreCliente",
             "ventas.formaDePago as formaDePago",
             "ventas.folio",
+            "ventas.created_at",
             "ventas_detalles.Producto as nombreProducto",
             "ventas_detalles.cantidad",
             "ventas_detalles.precio",
@@ -365,9 +429,17 @@ return view("ventas.ventaHistorial",compact("historial"));
             "direcciones.cp",
             "direcciones.ciudad",
             "direcciones.estado",
+            "dirCliente.numExterior as numExteriorCliente",
+            "dirCliente.calle as calleCliente",
+            "dirCliente.colonia as coloniaCliente",
+            "dirCliente.cp as cpCliente",
+            "dirCliente.ciudad as ciudadCliente",
+            "dirCliente.estado as estadoCliente",
             DB::raw("(ventas_detalles.cantidad * ventas_detalles.precio) as totalLinea")
             )
         ->get();
+        
+        
     }
 
 }
