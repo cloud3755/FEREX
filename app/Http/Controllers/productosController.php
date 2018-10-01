@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use App\Models\Inventario;
@@ -41,7 +42,7 @@ class productosController extends Controller
         else
             $productos = Producto::all();
 
-        return Datatables::of($productos)
+        return  Datatables::of($productos)
         ->addColumn('Acciones', 
             function($productos) 
             {
@@ -56,7 +57,22 @@ class productosController extends Controller
                 // return "HOLA";
                 return '<a data-code="'.$productos->codigoBarras.'" href="#" data-toggle="modal" data-target="#modalBarras" class="codigoBarras btn btn-default"><i class="glyphicon glyphicon-barcode"></i></a> '.$productos->codigoBarras;
             })
-        ->rawColumns(['Acciones', 'codigoBarras'])
+            ->addColumn('Existencias',
+            function($productos)
+            {
+                $inventario = DB::table("inventarios")
+                ->join("sucursales", "sucursales.id","=" ,"inventarios.idSucursal")
+                ->whereRaw("inventarios.idProducto=". $productos->id)
+                ->select("sucursales.nombre", "inventarios.cantidad")->get();
+              // dd($inventario);
+                $strDatos = "";
+                foreach($inventario as $inv)
+                {
+                    $strDatos .="<span>".$inv->nombre." ".$inv->cantidad."</span>";
+                }
+                return $strDatos;
+            }) 
+        ->rawColumns(['Acciones', 'codigoBarras', 'Existencias'])
         ->make(true);
     }
 

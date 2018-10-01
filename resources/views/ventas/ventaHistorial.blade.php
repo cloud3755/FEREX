@@ -47,7 +47,8 @@
                                         <td>{{$historia->created_at}}</td>
 
                                         <td> {{$historia->created_at}}</td>
-                                        <td>{{$historia->created_at}}</td>
+                                        <td><a  target="_blank"  href="/venta/imprimir/{{$historia->id}}/pdf">PDF</a>
+</td>
                                         <td><a href="{{route('ventaHistorialDetalle', ['idVenta' => $historia->id])}}">Detalle</a></td>
                                     </tr>
                                 @endforeach

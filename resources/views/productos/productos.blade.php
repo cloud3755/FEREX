@@ -215,7 +215,7 @@
                             <th>Precio B</th>
                             <th>Precio C</th>
                             <th>Codigo de barras</th>
-                            
+                            <th>Existencias</th>
                           </tr>
                         </thead>
                         <tbody>

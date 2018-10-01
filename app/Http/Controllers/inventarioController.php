@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Inventario;
 use App\Models\Sucursal;
+use Illuminate\Support\Facades\DB;
 
 class inventarioController extends Controller
 {
@@ -15,6 +16,8 @@ class inventarioController extends Controller
         $productos = Producto::where('activo', true)->get();
         return view('inventario.agregarInventarioManual', compact('sucursales', 'productos'));
     }
+
+    
 
     public function manual(Request $request)
     {

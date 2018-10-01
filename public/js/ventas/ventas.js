@@ -672,6 +672,10 @@ function submitForm()
     //precioProducto
     //subTotal
     //total
+    var tipoImpresion = $("<input>")
+               .attr("type", "hidden")
+               .attr("name", "tipoImpresion").val($("input:radio[name='tipoImpresion']:checked").val());
+$('#form').append(tipoImpresion);
     $("#form input#cliente").val(cliente);
     $("#form input#idProdcuto").val(idProducto);
     $("#form input#existencias").val(existencia);

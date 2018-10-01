@@ -280,7 +280,7 @@ $id = $ventas ->id;
     {
 
         $tipoImpresion = $request->tipoImpresion;
-
+        //dd($request);
         $cliente = $request->input('cliente');
         $producto = $request->input('producto');
         $cantidad = $request->input('cantidad');

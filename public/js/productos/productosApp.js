@@ -2,6 +2,7 @@
 $(function(){
 thedataTables("dataTable", '/productos/get',
 [
+    
     {data: 'Acciones', name: 'Acciones', orderable: false, searchable: false},
     {data: 'nombre', name: 'nombre'},
     {data: 'descripcion', name: 'descripcion'},
@@ -9,7 +10,9 @@ thedataTables("dataTable", '/productos/get',
     {data: 'precioA', name: 'precioA'},
     {data: 'precioB', name: 'precioB'},
     {data: 'precioC', name: 'precioC'},
-    {data: 'codigoBarras', name: 'codigoBarras'}
+    {data: 'codigoBarras', name: 'codigoBarras'},
+    {data: 'Existencias', name: 'Existencias'}
+    
 
 ]
 );
