@@ -165,31 +165,36 @@ return view("ventas.ventaHistorial",compact("historial"));
 
         }
 
+$id = $ventas ->id;
 
-
-        $coti =    DB::table('ventas')
-            ->join("ventas_detalles", "ventas_detalles.id", "=", "ventas.id" )
+        $total =    DB::table('ventas_detalles')
+            ->join("ventas", "ventas.id", "=", "ventas_detalles.idVenta" )
             ->join("clientes","clientes.id","=","ventas.idCliente")
 
-            ->where("ventas.folio",$folioAdd)
+            ->where("ventas.id",$id)
+            ->select(DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
+
+
+
+
+
+
+
+        $coti =    DB::table('ventas_detalles')
+            ->join("ventas", "ventas.id", "=", "ventas_detalles.idVenta" )
+            ->join("clientes","clientes.id","=","ventas.idCliente")
+
+            ->where("ventas.id",$id)
             ->select("ventas.folio", "ventas.created_at",
                 "clientes.nombre",
                 "ventas_detalles.cantidad","ventas_detalles.Producto",
-                "ventas_detalles.precio", DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
+                "ventas_detalles.precio")->get();
 
 
 
 
 
-
-
-
-
-
-
-
-
-       $top = TOPDF::loadView('ventas.cotizacion', compact("coti"));
+       $top = TOPDF::loadView('ventas.cotizacion', compact("coti","total"));
 
         return $top->stream();
 
@@ -228,20 +233,33 @@ return view("ventas.ventaHistorial",compact("historial"));
         return view("ventas.cotizacionHistorial",compact("historial"));
     }
 
-    public function cotizacionHistorialDetalle($folio){
+    public function cotizacionHistorialDetalle($id){
 
 
-        $coti =    DB::table('ventas')
-            ->join("ventas_detalles", "ventas_detalles.id", "=", "ventas.id" )
+        $total =    DB::table('ventas_detalles')
+            ->join("ventas", "ventas.id", "=", "ventas_detalles.idVenta" )
             ->join("clientes","clientes.id","=","ventas.idCliente")
 
-            ->where("ventas.folio",$folio)
+            ->where("ventas.id",$id)
+            ->select(DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
+
+
+
+
+
+
+
+        $coti =    DB::table('ventas_detalles')
+            ->join("ventas", "ventas.id", "=", "ventas_detalles.idVenta" )
+            ->join("clientes","clientes.id","=","ventas.idCliente")
+
+            ->where("ventas.id",$id)
             ->select("ventas.folio", "ventas.created_at",
                 "clientes.nombre",
                 "ventas_detalles.cantidad","ventas_detalles.Producto",
-                "ventas_detalles.precio", DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
+                "ventas_detalles.precio")->get();
 
-        $top = TOPDF::loadView('ventas.cotizacion', compact("coti"));
+        $top = TOPDF::loadView('ventas.cotizacion', compact("coti","total"));
 
         return $top->stream();
 

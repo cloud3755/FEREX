@@ -45,7 +45,7 @@
                                         <td>{{$historia->formaDePago}}</td>
                                         <td>{{$historia->Total}}</td>
                                         <td>{{$historia->created_at}}</td>
-                                        <td><a id="folios" target="_blank" href="{{route('cotizacionHistorialDetalle', ['folio' => $historia->folio])}}">Detalle</a></td>
+                                        <td><a id="folios" target="_blank" href="{{route('cotizacionHistorialDetalle', ['folio' => $historia->id])}}">Detalle</a></td>
                                         <td><button type="button" id="vender" class="btn btn-success" data-toggle="modal" data-target="#modalVenta">
                                                 Vender
                                             </button>
