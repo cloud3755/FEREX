@@ -28,8 +28,20 @@ class DashboardController extends Controller
                      ->join('clientes', 'clientes.id', '=', 'ventas.idCliente')
                      ->select(DB::raw('nombre,count(*) as total_compras,sum(precio) as Compra'))
                      ->groupBy('idCliente','nombre')
-                     ->get();               
+                     ->get();
 
-      return view('dashboard.dashboard',compact('ventasMes','detalleCliente'));
+      $detalleVendedor =DB::table('ventas')
+                     ->join('ventas_detalles','ventas_detalles.idVenta','=','ventas.id')
+                     ->join('users', 'users.id', '=', 'ventas.idVendedor')
+                     ->select(DB::raw('name,count(*) as numeroVentas,sum(precio) as ventas'))
+                     ->groupBy('idVendedor','name')
+                     ->get();
+
+      $sumasDatos =DB::table('ventas_detalles')->select(DB::raw('count(*) as totalVentas,(select count(*) from clientes)
+                                as Clientes,(select count(*) from users) as Vendedores'))
+                                ->get();
+
+
+      return view('dashboard.dashboard',compact('ventasMes','detalleCliente','detalleVendedor','sumasDatos'));
     }
 }

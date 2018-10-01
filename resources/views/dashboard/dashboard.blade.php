@@ -16,7 +16,7 @@
                               <i class="fa fa-comments fa-5x"></i>
                           </div>
                           <div class="col-xs-9 text-right">
-                              <div class="huge">26</div>
+                              <div class="huge">{{$sumasDatos[0]->totalVentas}}</div>
                               <div>Total de ventas</div>
                           </div>
                       </div>
@@ -38,7 +38,7 @@
                             <i class="fa fa-tasks fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
+                            <div class="huge">{{$sumasDatos[0]->Vendedores}}</div>
                             <div>Ventas por vendedor</div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             <i class="fa fa-shopping-cart fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
+                            <div class="huge">{{$sumasDatos[0]->Clientes}}</div>
                             <div>Historial de clientes</div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                             <i class="fas fa-life-ring fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">13</div>
+                            <div class="huge">10</div>
                             <div>Productos mas vendidos</div>
                         </div>
                     </div>
@@ -160,11 +160,13 @@
 <!-- SE PASA EL ARREGLO GLOBAL A LOS ARREGLOS -->
 <?php
   $graficaTotalVentas=json_encode($ventasMes);
+  $graficaTotalVendedor=json_encode($detalleVendedor);
 
  ?>
 
  <script type="text/javascript">
   var ventasMes = eval(<?php echo $graficaTotalVentas ?>);
+  var ventasVendedor = eval(<?php echo $graficaTotalVendedor ?>);
  </script>
 
 @endsection
