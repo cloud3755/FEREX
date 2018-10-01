@@ -21,11 +21,11 @@
     <pre>                                                       Fecha :   @foreach($coti as $product){{$product->created_at}}
             @break
         @endforeach
-                                           Cotizacion NO:    @foreach($coti as $product) {{$product->folio}}
+                                           Cotización NO:    @foreach($coti as $product) {{$product->folio}}
             @break
         @endforeach
     </pre>
-    <h1 class="page-header">Cotazacion</h1>
+    <h1 class="page-header">Cotización</h1>
     Facturar a:
 
     @foreach($coti as $product)
