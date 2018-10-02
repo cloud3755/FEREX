@@ -20,7 +20,7 @@ function agregarRegistro()
     var cantidad;  
 
     var descripcion = $('#Productos :selected').data('descripcion');
-    var producto = $('#Productos').text();
+    var producto = $('#Productos :selected').text();
     cantidad = $('#Cantidad').val();
     var sucursal =  $('#Sucursal').text();
     var idSucursal = $('#Sucursal :selected').data('id');
