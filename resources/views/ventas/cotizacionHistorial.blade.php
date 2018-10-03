@@ -68,6 +68,7 @@
                                                         {{ csrf_field() }}
                                                     <input  type="hidden" id="folioModal" name="folio"  />
                                                     <input  type="hidden" id="formaPagoModal" name="formaPago"  />
+                                                        <input  type="hidden" id="totalModal" name="total"  />
                                                     <select class="form-control selectpicker formaPago"   id="formaPago" name="formaPago" data-live-search="true" data-width="100%" required>
 
 

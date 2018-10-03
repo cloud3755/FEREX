@@ -183,9 +183,9 @@ $id = $ventas ->id;
         $coti =    DB::table('ventas_detalles')
             ->join("ventas", "ventas.id", "=", "ventas_detalles.idVenta" )
             ->join("clientes","clientes.id","=","ventas.idCliente")
-
+            ->join("users","users.id","=","ventas.idVendedor")
             ->where("ventas.id",$id)
-            ->select("ventas.folio", "ventas.created_at",
+            ->select("ventas.folio", "users.idSucursal","ventas.created_at",
                 "clientes.nombre",
                 "ventas_detalles.cantidad","ventas_detalles.Producto",
                 "ventas_detalles.precio")->get();
@@ -252,9 +252,9 @@ $id = $ventas ->id;
         $coti =    DB::table('ventas_detalles')
             ->join("ventas", "ventas.id", "=", "ventas_detalles.idVenta" )
             ->join("clientes","clientes.id","=","ventas.idCliente")
-
+            ->join("users","users.id","=","ventas.idVendedor")
             ->where("ventas.id",$id)
-            ->select("ventas.folio", "ventas.created_at",
+            ->select("ventas.folio","users.idSucursal", "ventas.created_at",
                 "clientes.nombre",
                 "ventas_detalles.cantidad","ventas_detalles.Producto",
                 "ventas_detalles.precio")->get();
@@ -268,10 +268,39 @@ $id = $ventas ->id;
     public function venderCotizacion(Request $request){
 
         $folio = $request->input('folio');
+        $total = $request->input('total');
         $formaPago = $request->input('formaPago');
         $ventas = new Ventas();
         $ventas::where ("folio",$folio)->update(["formaDePago"=>$formaPago,"cotizacion"=>0]);
 
+
+
+        $producto =    DB::table('ventas')
+            ->join("ventas_detalles", "ventas.id", "=", "ventas_detalles.idVenta" )
+            ->join("inventarios", "ventas_detalles.idProducto", "=", "inventarios.idProducto" )
+            ->select("ventas_detalles.idProducto", "ventas_detalles.cantidad AS cantidadVendida","inventarios.cantidad AS cantidadInventario")
+            ->where("folio",$folio)
+            ->get();
+
+
+
+        $inventario = new Inventario();
+        $existenciaActual = intval($producto[0]->cantidadInventario);
+        $cantidadRestar =  intval($producto[0]->cantidadVendida);
+        $idProductoAdd = $producto[0]->idProducto;
+        $existenciaAdd = $existenciaActual -  $cantidadRestar;
+        $inventario::where("idProducto",$idProductoAdd)->where("idSucursal",Auth::user()->idSucursal)-> update(["cantidad"=>$existenciaAdd]);
+
+
+        $status = new caja();
+        $status = $status->all();
+if ($formaPago == "efectivo") {
+    $saldoAdd = $total + $status[0]->saldo;
+    $saldo = new caja();
+    $saldo::where("id", Auth::user()->idSucursal)->update(["saldo" => $saldoAdd]);
+
+
+}
         \Session::flash('Guardado','Se guardo correctamente la venta');
         return redirect()->route("cotizacionHistorial");
     }

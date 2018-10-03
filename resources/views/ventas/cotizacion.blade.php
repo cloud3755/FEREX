@@ -18,11 +18,14 @@
     </style>
 
     <img src="http://www.linkbyme.com.mx/staticimg/092013/logo-200197189-156-b.jpg">
-    <pre>                                                       Fecha :   @foreach($coti as $product){{$product->created_at}}
+    <pre>                                                  Fecha :   @foreach($coti as $product){{$product->created_at}}
             @break
         @endforeach
-                                           Cotización NO:    @foreach($coti as $product) {{$product->folio}}
+                                      Cotización NO:    @foreach($coti as $product) {{$product->folio}}
             @break
+        @endforeach
+                                      Sucursal :    @foreach($coti as $product) @if($product->idSucursal==1)Av Mariano Otero #5099 @else($product->idSucursal==2)Periferico Sur @endif
+        @break
         @endforeach
     </pre>
     <h1 class="page-header">Cotización</h1>
