@@ -102,7 +102,7 @@
                 </div>
 
             </div>
-            
+
             <br>
             <div class="row">
               <div class="col-md-4">
@@ -145,7 +145,7 @@
 
       <div class="panel-body">
           <div class="table-responsive">
-            <table class="table">
+            <table class="table" id="tablaclientes">
               <thead>
                 <tr>
                   <th>Numero de Cliente</th>
@@ -187,6 +187,33 @@
   </div>
 
 </div>
+
+<script language="JavaScript" type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+
+<script type="text/javascript">
+
+      $(document).ready(function () {
+
+        // se obtiene el registro al dar click
+
+        $("#tablaclientes tbody tr").click(function() {
+          var nombre = $(this).find("td:eq(1)").text();
+          var empenos = $(this).find("td:eq(3)").text();
+          var desempenos = $(this).find("td:eq(4)").text();
+          var prestamo = $(this).find("td:eq(5)").text();
+          var intereses = $(this).find("td:eq(6)").text();
+          var eventa = $(this).find("td:eq(7)").text();
+          var totalventa = $(this).find("td:eq(8)").text();
+
+          console.log(nombre);
+
+          // $("#myModal").modal()
+          // document.getElementById('nombre').innerHTML=nombre;
+
+        });
+    });
+
+</script>
 
 
 @endsection

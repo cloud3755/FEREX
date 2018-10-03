@@ -30,7 +30,7 @@ class altaclientesController extends Controller
       $clientenuevo = new Clientes();
       $clientenuevo->nombre = $request->nombre;
       $clientenuevo->razonSocial = $request->RazonSocial;
-      
+
       $clientenuevo->rfc = $request->Rfc;
       $clientenuevo->email = $request->Correo;
       $clientenuevo->limiteCredito = $request->LimiteDeCredito;
@@ -38,7 +38,7 @@ class altaclientesController extends Controller
       $clientenuevo->telefono1 = $request->Telefono1;
 
       $clientenuevo->consumoTotal = 0;
- 
+
       $clientenuevo->save();
 
       $direcciones = new direcciones();
