@@ -47,12 +47,17 @@
                                             @endforeach
                                         </select> <button id="fijarCliente" class="btn btn-secondary">Fijar cliente</button>
                                     </div>
+                                    <div id="ventaCoti">
+                                        <button id="fijarVenta" class="btn btn-secondary">Venta</button>
+                                        <button id="fijarCotizacion" class="btn btn-secondary">Cotizacion</button>
+                                    </div>
+
                                 </div>
 
                                 <br><br><br><br><br>
-                                <div class="col-xs-4">
+                                <div id="productosDiv" class="col-xs-4">
 
-                                    <div id="productosDiv" class="input-group">
+                                    <div  class="input-group">
                                         <label class="sr-only" for="Productos">Productos</label>
 
                                         <select class="form-control selectpicker producto"   id="Productos" name="Productos" data-live-search="true" data-width="100%" required>
@@ -64,6 +69,7 @@
                                         <button id="precioC" class="btn btn-secondary">Precio C</button>
 
                                     </div>
+                                    <div id="formaPagoSelect">
                                     <select class="form-control selectpicker formaPago"   id="formaPago" name="formaPago" data-live-search="true" data-width="100%" required>
                                         <option     value="0"  >Selecione la forma de pago</option>
                                         <option    value="efectivo"  >Efectivo</option>
@@ -72,6 +78,10 @@
                                         <option    value="Transeferencia"  >Transeferencia</option>
                                         <option    value="cheque"  >Cheque</option>
                                     </select>
+                                    </div>
+                                    <input type="radio" class="form-control" name="tipoImpresion" value="pdf"><span>Imprimir PDF</span>
+
+                                    <input type="radio" class="form-control" name="tipoImpresion" value="ticket">Imprimir ticket
                                 </div>
 
 
@@ -85,17 +95,7 @@
 
 
                                 </div>
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <div class="input-group text-center">
-                                            <input type="radio" class="form-control" name="tipoImpresion" value="pdf"><span>Imprimir PDF</span>
-                        
-                                            <input type="radio" class="form-control" name="tipoImpresion" value="ticket">Imprimir ticket
-                                        </div>
-                                    </div>
 
-
-                                </div>
 
 
                             </div>

@@ -34,6 +34,8 @@ if ($("#statusCaja").val() == "NI"){
 
 $("#productosDiv").hide();
 
+$("#ventaCoti").hide();
+
 $("#agregarEntrada").attr('disabled',true);
 $("#pdf").attr('disabled',true);
 $("#Procesar").attr('disabled',true);
@@ -261,11 +263,38 @@ $("#fijarCliente").click(function (e) {
     e.preventDefault();
 
     $('#Cliente').attr('disabled',true);
-    $("#agregarEntrada").attr('disabled',false);
-    $("#productosDiv").show();
+    //$("#agregarEntrada").attr('disabled',false);
+    //$("#productosDiv").show();
+    $("#ventaCoti").show();
 
 
 });
+
+$("#fijarVenta").click(function (e) {
+    e.preventDefault();
+
+     //$('#Cliente').attr('disabled',true);
+    $("#agregarEntrada").attr('disabled',false);
+    $("#productosDiv").show();
+    $("#ventaCoti").hide();
+    $("#pdf").hide();
+
+});
+
+$("#fijarCotizacion").click(function (e) {
+    e.preventDefault();
+
+    //$('#Cliente').attr('disabled',true);
+    $("#agregarEntrada").attr('disabled',false);
+    $("#productosDiv").show();
+    $("#ventaCoti").hide();
+    $("#Procesar").hide();
+    $("#venderCredito").hide();
+    $("#IVA").hide();
+    $('#formaPago :selected').val("cotizacion");
+    $("#formaPagoSelect").hide();
+});
+
 
 $("#precioB.btn").click(function (e) {
     e.preventDefault();
