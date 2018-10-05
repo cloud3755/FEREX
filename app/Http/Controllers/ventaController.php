@@ -184,9 +184,10 @@ $id = $ventas ->id;
             ->join("ventas", "ventas.id", "=", "ventas_detalles.idVenta" )
             ->join("clientes","clientes.id","=","ventas.idCliente")
             ->join("users","users.id","=","ventas.idVendedor")
+            ->join("productos","productos.id","=","ventas_detalles.idProducto")
             ->where("ventas.id",$id)
             ->select("ventas.folio", "users.idSucursal","ventas.created_at",
-                "clientes.nombre",
+                "clientes.nombre","productos.nombre AS nombreProducto",
                 "ventas_detalles.cantidad","ventas_detalles.Producto",
                 "ventas_detalles.precio")->get();
 
@@ -252,10 +253,11 @@ $id = $ventas ->id;
         $coti =    DB::table('ventas_detalles')
             ->join("ventas", "ventas.id", "=", "ventas_detalles.idVenta" )
             ->join("clientes","clientes.id","=","ventas.idCliente")
+            ->join("productos","productos.id","=","ventas_detalles.idProducto")
             ->join("users","users.id","=","ventas.idVendedor")
             ->where("ventas.id",$id)
             ->select("ventas.folio","users.idSucursal", "ventas.created_at",
-                "clientes.nombre",
+                "clientes.nombre","productos.nombre AS nombreProducto",
                 "ventas_detalles.cantidad","ventas_detalles.Producto",
                 "ventas_detalles.precio")->get();
 

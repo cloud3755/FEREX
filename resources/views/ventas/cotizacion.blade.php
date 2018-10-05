@@ -52,7 +52,7 @@
         @foreach($coti as $product)
             <tr>
                 <td>{{ $product->cantidad}}</td>
-                <td>{{ $product->Producto}}</td>
+                <td>{{$product->nombreProducto}}  -   {{ $product->Producto}}</td>
                 <td>{{ $product->precio}}</td>
                 <td>{{ $product->precio*$product->cantidad}}</td>
 
