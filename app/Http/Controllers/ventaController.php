@@ -27,6 +27,9 @@ class ventaController extends Controller
 
         $productos =    DB::table('productos')
             ->join("inventarios", "inventarios.idProducto", "=", "productos.id" )
+            ->join("sucursales", "sucursales.id", "=", "inventarios.idSucursal" )
+            ->join("users", "users.idSucursal", "=", "sucursales.id" )
+            ->where("users.id", "=",  Auth::user()->id )
             ->select("productos.*", "inventarios.cantidad")
             ->get();
 
