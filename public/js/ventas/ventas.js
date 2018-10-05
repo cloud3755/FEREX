@@ -382,11 +382,11 @@ function agregarRegistro()
 
 
     if (cantidad >0){
-        var productoSelecionado = $(".producto :selected").data("codigo");
+        var productoSelecionado = $(".producto :selected").data("id");
         var cantidadSelecionada= $("#cantidad").val();
-        $("td[id^='codigoBarras']").each(function(){
+        $("td[id^='descripcion']").each(function(){
 
-            var productoAgregado = $(this).text();
+            var productoAgregado = $(this).data("id");
 
 
             if(productoSelecionado == productoAgregado){
@@ -450,7 +450,7 @@ function agregarRegistro()
 
         '<td data-id="'+clienteId+'" id="cliente'+contador+'">'+cliente+'</td>'+
         '<td  id="codigoBarras'+contador+'">'+codigoBarras+'</td>'+
-        '<td  data-existencia = '+existencia+'  data-id = '+ idProducto + '  id="descripcion'+contador+'">'+descripcion+'</td>'+
+        '<td  id="descripcion'+contador+'" data-existencia = '+existencia+'  data-id = '+ idProducto + '  id="descripcion'+contador+'">'+descripcion+'</td>'+
         '<td id="cantidad'+contador+'"><input class="Cantidad overCero" data-existencia='+existencia+' type="number" id="cantidad2'+contador+'" value="'+cantidad+'" /></td>'+
         '<td data-precioiva='+precio+' id="precio'+contador+'">'+precio+'</td>'+
         '<td id="subTotal'+contador+'">'+subTotal+'</td>'+
