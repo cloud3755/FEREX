@@ -124,7 +124,7 @@ return view("ventas.ventaHistorial",compact("historial"));
         $saldo = $request->input('saldo');
         $formaPago = $request->input('formaPago');
         $clientes = explode(",", $cliente[0]);
-        $productos = explode(",", $producto[0]);
+        $productos = explode(",,", $producto[0]);
         $cantidades = explode(",", $cantidad[0]);
         $precios = explode(",", $precioProducto[0]);
         $idProductos = explode(",", $idProducto[0]);
@@ -325,8 +325,10 @@ if ($formaPago == "efectivo") {
         $credito = $request->input('credito');
         $saldo = $request->input('saldo');
         $formaPago = $request->input('formaPago');
+
+
         $clientes = explode(",", $cliente[0]);
-        $productos = explode(",", $producto[0]);
+        $productos = explode(",,", $producto[0]);
         $cantidades = explode(",", $cantidad[0]);
         $precios = explode(",", $precioProducto[0]);
         $idProductos = explode(",", $idProducto[0]);

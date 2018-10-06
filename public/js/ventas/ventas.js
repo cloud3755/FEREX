@@ -99,7 +99,7 @@ $("#pdf").click(function (e) {
     $("td[id^='descripcion']").each(function(key,value){
 
         var productos = $(this).text();
-        producto.push(productos);
+        producto.push(productos+",");
         var ids = $(this).data("id");
         idProducto.push(ids);
         var existencias = $(this).data("existencia");
@@ -666,7 +666,7 @@ function submitForm()
     $("td[id^='descripcion']").each(function(key,value){
 
         var productos = $(this).text();
-        producto.push(productos);
+        producto.push(productos+",");
         var ids = $(this).data("id");
         idProducto.push(ids);
         var existencias = $(this).data("existencia");
@@ -704,7 +704,7 @@ function submitForm()
     var tipoImpresion = $("<input>")
                .attr("type", "hidden")
                .attr("name", "tipoImpresion").val($("input:radio[name='tipoImpresion']:checked").val());
-$('#form').append(tipoImpresion);
+    $('#form').append(tipoImpresion);
     $("#form input#cliente").val(cliente);
     $("#form input#idProdcuto").val(idProducto);
     $("#form input#existencias").val(existencia);
