@@ -13,6 +13,17 @@ class altaclientesController extends Controller
 {
     public function index()
     {
+
+      //prueba para validar la forma de hacer update
+      $prueba=DB::table('clientes')
+      ->join('clientes_direcciones', 'clientes.id', '=', 'clientes_direcciones.idcliente')
+      ->join('direcciones', 'direcciones.id', '=', 'clientes_direcciones.iddireccion')
+	    ->where('clientes.id',2)
+      ->update(['rfc' => 'testartur','nombre'=>'arturo']);
+
+      dd($prueba);
+
+
       // $cliente = new Clientes;
       // $clientes = $cliente->all();
       $clientes = DB::table('clientes')
