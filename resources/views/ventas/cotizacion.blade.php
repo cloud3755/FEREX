@@ -15,16 +15,27 @@
             height:50px; /*alto del div*/
             z-index:0;
         }
+        .background {
+
+            background-color: #FFFFFF;
+
+        }
     </style>
 
-    <img src="http://www.linkbyme.com.mx/staticimg/092013/logo-200197189-156-b.jpg">
-    <pre>                                                  Fecha :   @foreach($coti as $product){{$product->created_at}}
+    <img width="700" height="150" src="http://www.ferex.com.mx/images/logo1abc.png">
+    <pre class="background">
+Ferex
+www.ferex.com.mx  ferexbriones@yahoo.com.mx Fernando Augusto Briones Martinez
+Av Mariano Otero 5091 Col. la calma CP45070
+Zapopan, Jalisco BIM810313836 30701462 16685860
+    </pre>
+    <pre class="background">                                                  Fecha :   @foreach($coti as $product){{$product->created_at}}
             @break
         @endforeach
                                       Cotización NO:    @foreach($coti as $product) {{$product->folio}}
             @break
         @endforeach
-                                      Sucursal :    @foreach($coti as $product) @if($product->idSucursal==1)Av Mariano Otero #5099 @else($product->idSucursal==2)Periferico Sur @endif
+                                      Sucursal :    @foreach($coti as $product) @if($product->idSucursal==1)Av Mariano Otero #5091 @else($product->idSucursal==2)Periferico Sur @endif
         @break
         @endforeach
     </pre>

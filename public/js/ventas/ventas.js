@@ -5,6 +5,7 @@ var contador = 0;
 var creditoUsado = 0;
 var contadorParaIva = 0;
 
+var esCotizacion = 0;
 
 $("#precioB.btn").append("  "+$('#Productos :selected').data('preciob'));
 
@@ -293,6 +294,7 @@ $("#fijarCotizacion").click(function (e) {
     $("#IVA").hide();
     $('#formaPago :selected').val("cotizacion");
     $("#formaPagoSelect").hide();
+    esCotizacion = 1;
 });
 
 
@@ -373,7 +375,7 @@ function agregarRegistro()
 
 
 
-    if (existencia < cantidad ){
+    if (existencia < cantidad  && esCotizacion == 0){
 
         alert("Solo quedan "+existencia+" "+ descripcion);
         return false;
