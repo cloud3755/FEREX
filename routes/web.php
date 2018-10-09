@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group( ['middleware' => ['auth']],
 function()
 {
-       
+
         //productos*******************************************
 
         Route::get('/productos', 'productosController@index')->name('productos');
@@ -59,6 +59,7 @@ function()
         //---------------------------------------------------MODULO DE CLIENTES INICIO---------------------------------------------------------------------------------------------------------------------
         Route::get('/AltaClientes', 'altaclientesController@index')->name('AltaClientes');
         Route::post('/AltaCliente/nuevo', 'altaclientesController@nuevo');
+        Route::post('/AltaCliente/editar', 'altaclientesController@editar');
         //---------------------------------------------------MODULO DE CLIENTES FIN---------------------------------------------------------------------------------------------------------------------
 
         //---------------------------------------------------MODULO DE SUCURSALES INICIO---------------------------------------------------------------------------------------------------------------------
@@ -69,7 +70,7 @@ function()
         Route::post('/sucursales/nuevo', 'sucursalesController@nueva');
         Route::post('/sucursales/editar', 'sucursalesController@editar');
 
-        
+
 
         //---------------------------------------------------MODULO DE SUCURSALES FIN---------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------MODULO DE DASHBOARD---------------------------------------------------------------------------------------------------------------------

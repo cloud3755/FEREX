@@ -208,11 +208,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form" method="POST" action="/AltaCliente/nuevo">
+        <form class="form" method="POST" action="/AltaCliente/editar">
          {{ csrf_field() }}
+         <input type="hidden" id="idcliente" name="idcliente" readonly style="width:5%;">
           <div class="row">
             <div class="col-md-6">
-
               <div class="input-group">
                 <label class="sr-only" for="nombre">Nombre</label>
                 <div class="input-group-addon">Nombre</div>
@@ -420,14 +420,12 @@
           <br>
           <br/>
           <div class="text-center">
-            <button type="submit"  class="btn btn-info">Agregar</button>
-            <button class="btn btn-warning" onclick="$('form').reset">Limpiar datos</button>
+            <button type="submit"  class="btn btn-info">Editar</button>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -459,6 +457,7 @@
           var cp = $(this).find("td:eq(16)").text();
           var estado = $(this).find("td:eq(18)").text();
           var ciudad = $(this).find("td:eq(17)").text();
+          var idClientes = $(this).find("td:eq(0)").text();
 
 
           $("#myModal").modal()
@@ -493,6 +492,7 @@
            document.getElementById('CPeditar').value=cp;
            document.getElementById('estadoEditar').value=estado;
            document.getElementById('ciudadEditar').value=ciudad;
+           document.getElementById('idcliente').value=idClientes;
 
 
         });

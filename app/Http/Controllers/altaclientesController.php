@@ -13,17 +13,6 @@ class altaclientesController extends Controller
 {
     public function index()
     {
-
-      //prueba para validar la forma de hacer update
-      $prueba=DB::table('clientes')
-      ->join('clientes_direcciones', 'clientes.id', '=', 'clientes_direcciones.idcliente')
-      ->join('direcciones', 'direcciones.id', '=', 'clientes_direcciones.iddireccion')
-	    ->where('clientes.id',2)
-      ->update(['rfc' => 'testartur','nombre'=>'arturo']);
-
-      dd($prueba);
-
-
       // $cliente = new Clientes;
       // $clientes = $cliente->all();
       $clientes = DB::table('clientes')
@@ -76,6 +65,23 @@ class altaclientesController extends Controller
       $clientes_direcciones->idCliente = $clientenuevo->id;
       $clientes_direcciones->idDireccion = $direcciones->id;
       $clientes_direcciones->save();
+
+      return redirect()->route("AltaClientes");
+    }
+
+    public function editar(Request $request)
+    {
+      //prueba para validar la forma de hacer update
+      $prueba=DB::table('clientes')
+      ->join('clientes_direcciones', 'clientes.id', '=', 'clientes_direcciones.idcliente')
+      ->join('direcciones', 'direcciones.id', '=', 'clientes_direcciones.iddireccion')
+      ->where('clientes.id',$request->idcliente)
+      ->update(['rfc' => $request->Rfc,'nombre'=>$request->nombre,'razonSocial'=>$request->RazonSocial,
+                'email'=>$request->Correo,'telefono1'=>$request->Telefono1.",".$request->Telefono2.",".$request->Telefono3,
+                'limiteCredito'=>$request->LimiteDeCredito,'numInterior'=>$request->numInterior,'numExterior'=>$request->numExterior,
+                'calle'=>$request->calle,'entre1'=>$request->entre1,'entre2'=>$request->entre2,'referencia'=>$request->referencia,
+                'colonia'=>$request->colonia,'CP'=>$request->CP,'ciudad'=>$request->ciudad,'estado'=>$request->estado
+              ]);
 
       return redirect()->route("AltaClientes");
     }
