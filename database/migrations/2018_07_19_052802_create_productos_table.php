@@ -19,9 +19,9 @@ class CreateProductosTable extends Migration
             $table->string('descripcion')->nullable()->default("");
             $table->string('claveProdServ')->nullable()->default("");
             $table->integer('minimoAlarma')->nullable();
-            $table->string('codigoBarras')->unique()->nullable();
+            $table->string('codigoBarras')->nullable();
             $table->boolean('activo')->default(true);
-            $table->decimal('precioA',10,2)->default(0)->nullable();;
+            $table->decimal('precioA',10,2)->default(0);
             $table->decimal('precioB',10,2)->default(0)->nullable();;
             $table->decimal('precioC',10,2)->default(0)->nullable();;
             $table->decimal('Costo',10,2)->default(0)->nullable();;
