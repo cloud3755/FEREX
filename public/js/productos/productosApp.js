@@ -1,21 +1,48 @@
 
 $(function(){
-thedataTables("dataTable", '/productos/get',
-[
-    
-    {data: 'Acciones', name: 'Acciones', orderable: false, searchable: false},
-    {data: 'nombre', name: 'nombre'},
-    {data: 'descripcion', name: 'descripcion'},
-    {data: 'claveProdServ', name: 'claveProdServ'},
-    {data: 'precioA', name: 'PrecioA'},
-    {data: 'precioB', name: 'precioB'},
-    {data: 'precioC', name: 'precioC'},
-    {data: 'codigoBarras', name: 'codigoBarras'},
-    {data: 'Existencias', name: 'Existencias'}
-    
 
-]
-);
+function getSucursales()
+{
+    var encabezados = [];
+    
+  /*  $.get( "/sucursales/get")
+    .done(function( data ) {
+       
+        for(var sucursal in data.data)
+        {
+            //$('#dataTable>thead>tr').append('<th>'+data.data[sucursal].nombre+'</th>');
+            encabezados.push(
+                {
+                    data: data.data[sucursal].nombre, 
+                    name: data.data[sucursal].nombre,
+                    mData: data.data[sucursal].nombre,
+                    sName: data.data[sucursal].nombre
+                }
+            );
+        }
+    })*/
+    encabezados = encabezados.concat(
+        [
+            {data: 'Acciones', name: 'Acciones', orderable: false, searchable: false},
+            {data: 'nombre', name: 'nombre'},
+            {data: 'descripcion', name: 'descripcion'},
+            {data: 'claveProdServ', name: 'claveProdServ'},
+            {data: 'precioA', name: 'PrecioA'},
+            {data: 'precioB', name: 'precioB'},
+            {data: 'precioC', name: 'precioC'},
+            {data: 'codigoBarras', name: 'codigoBarras'},
+            {data: 'Matriz', name: 'Matriz'},
+            {data: 'peri', name: 'peri'},
+            
+        ]
+    );
+    thedataTables("dataTable", '/productos/get',encabezados);
+
+}
+//var sucursalesEncabezado = getSucursales();
+
+//console.log(sucursalesEncabezado);
+getSucursales();
 
 $("#btnAgregar").on('click', showPanelAgregar);
 $("#btnCerrar").on('click', hidePanelAgregar);

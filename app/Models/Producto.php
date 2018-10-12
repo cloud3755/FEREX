@@ -20,4 +20,8 @@ class Producto extends Model implements Inactivable
         $this->Costo = $request->Costo;
         $this->urlImagen = $request->urlImagen;
     }
+
+    public function sucursales() {
+        return $this->belongsToMany('App\Models\Sucursal', 'inventarios', 'idProducto', 'idSucursal')->withPivot('cantidad');
+    }
 }

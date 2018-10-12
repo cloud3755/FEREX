@@ -214,8 +214,10 @@
                             <th>Precio A</th>
                             <th>Precio B</th>
                             <th>Precio C</th>
-                            <th>Codigo de barras</th>
-                            <th>Existencias</th>
+                            <th>Codigo de barras</th>  
+                            @foreach($sucursales as $sucursal)
+                              <th>{{$sucursal->nombre}}</th>
+                            @endforeach
                           </tr>
                         </thead>
                         <tbody>

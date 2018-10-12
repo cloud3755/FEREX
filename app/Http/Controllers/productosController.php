@@ -37,43 +37,58 @@ class productosController extends Controller
     public function getProductos($activos = true)
     {
         $productos;
+        $inventarioProductos = array();
+        $rawColumns = array('Acciones', 'codigoBarras');
         if($activos)
             $productos = Producto::where('activo', true)->get();
         else
             $productos = Producto::all();
+        
+        foreach($productos as $product)
+        {
+            $sucursalesInventario = $product->sucursales;
+            $datosProducto = 
+            array(
+                "id" => $product->id,
+                "nombre" => $product->nombre,
+                "descripcion"=> $product->descripcion,
+                "claveProdServ" => $product->claveProdServ,
+                "precioA" => $product->precioA,
+                "precioB" => $product->precioB,
+                "precioC" => $product->precioC,
+                "codigoBarras" =>$product->codigoBarras
+            );
+            foreach($sucursalesInventario as $sucInv)
+            {
+                $sucursal = $sucInv->nombre;
+               // if(!in_array($sucursal, $rawColumns))
+               //     array_push($rawColumns,$sucursal);
+                $datosProducto[$sucursal] = $sucInv->pivot->cantidad;
+            }
+            array_push($inventarioProductos,$datosProducto);
+            
+        }
 
-        return  Datatables::of($productos)
+       // return Datatables::of($inventarioProductos)->make();
+        $table = Datatables::of($inventarioProductos)
         ->addColumn('Acciones', 
-            function($productos) 
+            function($inventarioProductos) 
             {
                 // return "HOLA";
-                return '<a data-id="'.$productos->id.'" href="#" class="Editar btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                 <a data-id="'.$productos->id.'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                return '<a data-id="'.$inventarioProductos["id"].'" href="#" class="Editar btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                 <a data-id="'.$inventarioProductos["id"].'" href="#" class="Desactivar btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
             })
             
             ->addColumn('codigoBarras', 
-            function($productos) 
+            function($inventarioProductos) 
             {
                 // return "HOLA";
-                return '<a data-code="'.$productos->codigoBarras.'" href="#" data-toggle="modal" data-target="#modalBarras" class="codigoBarras btn btn-default"><i class="glyphicon glyphicon-barcode"></i></a> '.$productos->codigoBarras;
+                return '<a data-code="'.$inventarioProductos["codigoBarras"].'" href="#" data-toggle="modal" data-target="#modalBarras" class="codigoBarras btn btn-default"><i class="glyphicon glyphicon-barcode"></i></a> '.$inventarioProductos["codigoBarras"];
             })
-            ->addColumn('Existencias',
-            function($productos)
-            {
-                $inventario = DB::table("inventarios")
-                ->join("sucursales", "sucursales.id","=" ,"inventarios.idSucursal")
-                ->whereRaw("inventarios.idProducto=". $productos->id)
-                ->select("sucursales.nombre", "inventarios.cantidad")->get();
-              // dd($inventario);
-                $strDatos = "";
-                foreach($inventario as $inv)
-                {
-                    $strDatos .="<span>".$inv->nombre." ".$inv->cantidad."</span>";
-                }
-                return $strDatos;
-            }) 
-        ->rawColumns(['Acciones', 'codigoBarras', 'Existencias'])
+        ->rawColumns($rawColumns)
         ->make(true);
+        return $table;
+        
     }
 
     public function nuevo(Request $request)

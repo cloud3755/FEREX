@@ -12,7 +12,7 @@ function thedataTables($id = "dataTable" ,  ajaxRoute = "", columns="")
     processing: false,
     
     searching: true,
-    pageLength: 5,
+    pageLength: 15,
     paging: true,
     order: [[ 2, "desc" ]],
     "language":
@@ -29,11 +29,10 @@ function thedataTables($id = "dataTable" ,  ajaxRoute = "", columns="")
     if(ajaxRoute)
     {
         dtObject["serverSide"] = true;
-       
-        dtObject["ajax"] = ajaxRoute;
         dtObject["columns"] = columns;
+        dtObject["ajax"] = ajaxRoute;
     }
-    
+    console.log(dtObject);
 $('#dataTable').DataTable().destroy();
 $('#dataTable').DataTable(dtObject);
 
