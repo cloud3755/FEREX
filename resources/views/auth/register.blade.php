@@ -41,7 +41,7 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Sucursal</label>
-                           
+
                             <div class="col-md-6">
                                 <select class="form-control" id="sucursal" name="sucursal">
                                  @foreach($sucursales as $sucursal)
@@ -101,7 +101,7 @@
 
         <div class="panel-body">
             <div class="table-responsive">
-              <table class="table">
+              <table class="table table-hover">
                 <thead>
                   <tr>
                     <th>Numero de usuario</th>

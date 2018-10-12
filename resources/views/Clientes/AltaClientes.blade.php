@@ -137,7 +137,7 @@
 
       <div class="panel-body">
           <div class="table-responsive">
-            <table class="table" id="tablaclientes">
+            <table class="table table-hover" id="tablaclientes">
               <thead>
                 <tr>
                   <th>Numero de Cliente</th>
@@ -202,7 +202,7 @@
   <div class="modal-dialog" role="document" style="width:80%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edditar Cliente.</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Editar Cliente.</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
