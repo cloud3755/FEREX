@@ -538,7 +538,8 @@ cantidad = parseFloat(cantidad);
         e.off( event );
     }
 
-    if(exitenciaPorFila < cantidad){
+
+    if(exitenciaPorFila < cantidad && esCotizacion == 0){
         alert("sobre pasa tu inventario");
         e.val(exitenciaPorFila);
         e.off( event );
