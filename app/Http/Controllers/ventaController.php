@@ -93,6 +93,8 @@ class ventaController extends Controller
         "clientes.nombre",
         "ventas.formaDePago", 
         "ventas.created_at",
+        "ventas.comentarioPublico",
+        "ventas.comentarioPrivado",
         DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
 
 
@@ -123,6 +125,9 @@ return view("ventas.ventaHistorial",compact("historial"));
         $credito = $request->input('credito');
         $saldo = $request->input('saldo');
         $formaPago = $request->input('formaPago');
+        $comentarioPublico = $request->input( "comentarioPublico");
+        $comentarioPrivado = $request->input( "comentarioPrivado");
+
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",,", $producto[0]);
         $cantidades = explode(",", $cantidad[0]);
@@ -143,6 +148,8 @@ return view("ventas.ventaHistorial",compact("historial"));
         $ventas -> cotizacion = 1;
         $ventas -> idVendedor = Auth::user()->id;
         $ventas -> idCliente= $clienteAdd;
+        $ventas -> comentarioPublico = $comentarioPublico;
+        $ventas -> comentarioPrivado = $comentarioPrivado;
         $ventas->save();
 
         $ventaId= $ventas->id;
@@ -221,18 +228,11 @@ $id = $ventas ->id;
                 "clientes.nombre",
                 "ventas.formaDePago",
                 "ventas.created_at",
+                "ventas.comentarioPublico",
+                "ventas.comentarioPrivado",
                 DB::raw("SUM(ventas_detalles.cantidad * ventas_detalles.precio) as Total"))->get();
 
 
-
-
-
-
-
-//SELECT ventas.id,users.name,clientes.nombre,ventas_detalles.Producto,ventas_detalles.cantidad,ventas_detalles.precio,ventas.formaDePago, ventas_detalles.created_at FROM `ventas`
-// INNER JOIN ventas_detalles ON ventas.id = ventas_detalles.idVenta
-        //       INNER JOIN clientes ON ventas.idCliente = clientes.id
-//INNER JOIN users ON ventas.idVendedor = users.id
 
         return view("ventas.cotizacionHistorial",compact("historial"));
     }
@@ -325,7 +325,8 @@ if ($formaPago == "efectivo") {
         $credito = $request->input('credito');
         $saldo = $request->input('saldo');
         $formaPago = $request->input('formaPago');
-
+        $comentarioPublico = $request->input( "comentarioPublico");
+        $comentarioPrivado = $request->input( "comentarioPrivado");
 
         $clientes = explode(",", $cliente[0]);
         $productos = explode(",,", $producto[0]);
@@ -347,6 +348,8 @@ if ($formaPago == "efectivo") {
         $ventas -> cotizacion = 0;
         $ventas -> idVendedor = Auth::user()->id;
         $ventas -> idCliente= $clienteAdd;
+        $ventas -> comentarioPublico = $comentarioPublico;
+        $ventas -> comentarioPrivado = $comentarioPrivado;
         $ventas->save();
 
         $ventaId= $ventas->id;

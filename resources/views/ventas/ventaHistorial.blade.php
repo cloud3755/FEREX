@@ -28,6 +28,8 @@
                                     <th>Cliente</th>
                                     <th>Forma de pago</th>
                                     <th>Total</th>
+                                    <th>Comentario Publico</th>
+                                    <th>Comentario Privado</th>
                                     <th>fecha</th>
                                     <th>Re imprimir ticket</th>
                                     <th>Re imprimir pdf</th>
@@ -43,7 +45,8 @@
                                         <td>{{$historia->nombre}}</td>
                                         <td>{{$historia->formaDePago}}</td>
                                         <td>{{$historia->Total}}</td>
-
+                                        <td>{{$historia->comentarioPublico}}</td>
+                                        <td>{{$historia->comentarioPrivado}}</td>
                                         <td>{{$historia->created_at}}</td>
 
                                         <td> {{$historia->created_at}}</td>

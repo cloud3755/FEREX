@@ -31,7 +31,9 @@
                                     <th>Cliente</th>
                                     <th>Forma de pago</th>
                                     <th>Total</th>
-                                    <th>fecha</th>
+                                    <th>Comentario Publico</th>
+                                    <th>Comentario Privado</th>
+                                    <th>Fecha</th>
                                     <th>Detalle</th>
                                     <th>Vender</th>
                                 </tr>
@@ -44,6 +46,8 @@
                                         <td>{{$historia->nombre}}</td>
                                         <td>{{$historia->formaDePago}}</td>
                                         <td>{{$historia->Total}}</td>
+                                        <td>{{$historia->comentarioPublico}}</td>
+                                        <td>{{$historia->comentarioPrivado}}</td>
                                         <td>{{$historia->created_at}}</td>
                                         <td><a id="folios" target="_blank" href="{{route('cotizacionHistorialDetalle', ['folio' => $historia->id])}}">Detalle</a></td>
                                         <td><button type="button" id="vender" class="btn btn-success" data-toggle="modal" data-target="#modalVenta">

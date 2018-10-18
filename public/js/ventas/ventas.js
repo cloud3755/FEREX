@@ -4,7 +4,7 @@ var subTotalArr = new Array();
 var contador = 0;
 var creditoUsado = 0;
 var contadorParaIva = 0;
-
+var porFuera = 0;
 var esCotizacion = 0;
 
 $("#precioB.btn").append("  "+$('#Productos :selected').data('preciob'));
@@ -34,7 +34,7 @@ if ($("#statusCaja").val() == "NI"){
 
 
 $("#productosDiv").hide();
-
+$("#productoFuera").hide();
 $("#ventaCoti").hide();
 
 $("#agregarEntrada").attr('disabled',true);
@@ -127,6 +127,8 @@ $("#pdf").click(function (e) {
         subTotal.push(subTotals);
     });
 
+    var comentarioPublico = $("#comentarioPublico").val();
+    var comentarioPrivado = $("#comentarioPrivado").val();
 
     // vendedor
     // cliente
@@ -147,7 +149,8 @@ $("#pdf").click(function (e) {
     $("#cotizacion input#credito").val(creditoActual);
     $("#cotizacion input#folio").val(folio);
     $("#cotizacion input#formaPago").val(formaPago);
-
+    $("#cotizacion input#comentarioPublico").val(comentarioPublico);
+    $("#cotizacion input#comentarioPrivado").val(comentarioPrivado);
 
 
     $('#cotizacion').submit();
@@ -158,6 +161,17 @@ $("#pdf").click(function (e) {
 $("#nuevoCliente").click(function (e) {
     e.preventDefault();
 
+});
+
+$("#productoFuera").click(function (e) {
+    e.preventDefault();
+
+    $("#productosDiv").hide();
+    $("#productoFuera").hide();
+
+
+    $("#productoFueraDiv").append('<div id="fueraTemporal"> nombre <input id="nombreFuera" type="text"> </input>  Precio<input id="precioFuera" type="text"> </div>');
+    porFuera = 1;
 });
 $("#reset").click(function (e) {
     e.preventDefault();
@@ -277,6 +291,8 @@ $("#fijarVenta").click(function (e) {
      //$('#Cliente').attr('disabled',true);
     $("#agregarEntrada").attr('disabled',false);
     $("#productosDiv").show();
+    $("#productoFuera").show();
+
     $("#ventaCoti").hide();
     $("#pdf").hide();
 
@@ -288,6 +304,7 @@ $("#fijarCotizacion").click(function (e) {
     //$('#Cliente').attr('disabled',true);
     $("#agregarEntrada").attr('disabled',false);
     $("#productosDiv").show();
+    $("#productoFuera").show();
     $("#ventaCoti").hide();
     $("#Procesar").hide();
     $("#venderCredito").hide();
@@ -336,7 +353,7 @@ $( "#venderCredito" ).click(function(e) {
 
 $(function(){
     $('body').keyup(function(e) {
-        if(e.which == 13){
+        if(e.which == 13 && $("#comentarioPublico").val()=="" && $("#comentarioPrivado").val()==""){
 
             $(".producto > button").click();
             agregarRegistro();
@@ -361,16 +378,33 @@ function agregarRegistro()
     $("#pdf").attr('disabled',false);
     $("#Procesar").attr('disabled',false);
     $("#venderCredito").attr('disabled',false);
+
     var gin = $('#Cliente').val();
     var cliente = $('#Cliente :selected').data('descripcion');
     var clienteId = $('#Cliente :selected').data('id');
     var cantidad = $('#cantidad').val();
     var arrayGin = {};
-    var idProducto = $('#Productos :selected').data('id');
-    var descripcion = $('#Productos :selected').data('descripcion');
-    var codigoBarras = $('#Productos :selected').data('codigo');
-    var precio = $('#Productos :selected').val();
-    var existencia = $('#Productos :selected').data('existencia');
+    if (porFuera == 1){
+        var idProducto = 0;
+        var descripcion = $('#nombreFuera').val();
+        var codigoBarras = "" ;
+        var precio = $('#precioFuera').val();
+        var existencia = 10000;
+        $("#productosDiv").show();
+        $("#productoFuera").show();
+        $('#fueraTemporal').remove();
+
+        porFuera =0;
+    }
+    else {
+
+
+        var idProducto = $('#Productos :selected').data('id');
+        var descripcion = $('#Productos :selected').data('descripcion');
+        var codigoBarras = $('#Productos :selected').data('codigo');
+        var precio = $('#Productos :selected').val();
+        var existencia = $('#Productos :selected').data('existencia');
+    }
     var subTotal = cantidad *  precio;
 
 
@@ -622,7 +656,8 @@ function submitForm()
 
     var saldoActual = $('#statusCaja').data('saldo');
 
-
+    var comentarioPublico = $("#comentarioPublico").val();
+    var comentarioPrivado = $("#comentarioPrivado").val();
 
     var cliente = [];
     var idProducto = [];
@@ -720,6 +755,8 @@ function submitForm()
     $("#form input#credito").val(creditoActual);
     $("#form input#folio").val(folio);
     $("#form input#formaPago").val(formaPago);
+    $("#form input#comentarioPublico").val(comentarioPublico);
+    $("#form input#comentarioPrivado").val(comentarioPrivado);
 
 
 

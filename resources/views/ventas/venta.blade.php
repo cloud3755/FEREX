@@ -69,6 +69,7 @@
                                         <button id="precioC" class="btn btn-secondary">Precio C</button>
 
                                     </div>
+
                                     <div id="formaPagoSelect">
                                     <select class="form-control selectpicker formaPago"   id="formaPago" name="formaPago" data-live-search="true" data-width="100%" required>
                                         <option     value="0"  >Selecione la forma de pago</option>
@@ -79,12 +80,16 @@
                                         <option    value="cheque"  >Cheque</option>
                                     </select>
                                     </div>
+
+                                    Comentario a publico<textarea rows="4" cols="50" class="form-control" name="comentarioPublico" id="comentarioPublico"></textarea>
+                                    Comentario privado<textarea rows="4" cols="50" class="form-control" name="comentarioPrivado" id="comentarioPrivado"></textarea>
                                     <input type="radio" class="form-control" name="tipoImpresion" value="pdf"><span>Imprimir PDF</span>
 
                                     <input type="radio" class="form-control" name="tipoImpresion" value="ticket">Imprimir ticket
                                 </div>
-
-
+<!-- <div id="productoFueraDiv">
+                                <button id="productoFuera" class="btn btn-primary">Producto por fuera</button>
+</div> -->
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="input-group">
@@ -163,8 +168,10 @@
                                 <input type="text" id="total" name="total[]"  />
                                 <input type="text" id="saldo" name="saldo[]"  />
                                 <input type="text" id="folio" name="folio[]"  />
-
                                 <input type="text" id="formaPago" name="formaPago[]"  />
+                                <input type="text" id="comentarioPublico" name="comentarioPublico"  />
+                                <input type="text" id="comentarioPrivado" name="comentarioPrivado"  />
+
                             </form>
 
                             <form hidden target="_blank" id="cotizacion" method="POST" action="/cotizacion" }}>
@@ -182,8 +189,9 @@
                                 <input type="text" id="total" name="total[]"  />
                                 <input type="text" id="saldo" name="saldo[]"  />
                                 <input type="text" id="folio" name="folio[]"  />
-
                                 <input type="text" id="formaPago" name="formaPago[]"  />
+                                <input type="text" id="comentarioPublico" name="comentarioPublico"  />
+                                <input type="text" id="comentarioPrivado" name="comentarioPrivado"  />
 
                             </form>
                         </div>

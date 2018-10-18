@@ -20,7 +20,8 @@ class CreateVentasTable extends Migration
         $table->string('folio');//Checar si es necesario, si no se puede manejar el id
         $table->string('idVendedor');
         $table->string('idCliente');
-        
+        $table->string("comentarioPublico")->nullable();
+        $table->string("comentarioPrivado")->nullable();
         $table->timestamps();
 
         });
