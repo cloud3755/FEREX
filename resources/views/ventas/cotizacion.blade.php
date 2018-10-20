@@ -73,11 +73,11 @@ Zapopan, Jalisco BIM810313836 30701462 16685860
     </table>
     <hr>
     <div id="inferior">
-    <pre>                                                              Subtotal:$@foreach($total as $product){{$product->Total}}
+    <pre>                                                              Subtotal:$@foreach($total as $product){{sprintf('%0.2f',$product->Total)}}
             @break
-        @endforeach                                                  IVA(16%):$@foreach($total as $product){{$product->Total*.16}}
+        @endforeach                                                  IVA(16%):$@foreach($total as $product){{sprintf('%0.2f',$product->Total*.16)}}
         @break
-        @endforeach                                                      Importe total:$ @foreach($total as $product){{$product->Total + ($product->Total*.16)}}
+        @endforeach                                                      Importe total:$ @foreach($total as $product){{sprintf('%0.2f',$product->Total + ($product->Total*.16))}}
         @break
         @endforeach    </pre>
     </div>
