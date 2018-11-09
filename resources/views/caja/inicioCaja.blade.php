@@ -82,10 +82,16 @@
   </div>
 </div>
 
-
+@if(Session::has('idCorte'))
+    <a  target="_blank" id="imprimirClick" href="/cajas/imprimir/{{session('idCorte')}}/{{session('tipoImpresion')}}"></a>
+@endif
 
 @endsection
 @section('scripts.personalizados')
 @parent
 <script src="{{ asset('js/cajas/cajasApp.js') }}"></script>
+
+    @if(Session::has('idCorte'))
+        <script src="{{ asset('js/utils/imprimirUtilclick.js') }}"></script>
+    @endif
 @endsection

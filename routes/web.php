@@ -42,6 +42,8 @@ function()
 
         Route::get('/cajas', 'cajaController@index')->name('cajas');
         Route::get('/cajas/historial', 'cajaController@historial');
+        Route::get('/cajas/imprimir/{idCorte}/{tipoImpresion}', 'cajaController@printCorte');
+
         Route::post('/cajas/cambioStatus', 'cajaController@cambioEstadoCaja');
 
         //---------------------------------------------------MODULO DE Cajas FIN---------------------------------------------------------------------------------------------------------------------
