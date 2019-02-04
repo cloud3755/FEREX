@@ -22,7 +22,7 @@
         }
     </style>
 
-    <img width="700" height="150" src="http://www.ferex.com.mx/images/logo1abc.png">
+    <img width="600" height="200" src="http://drive.google.com/uc?export=view&id=151DqDQF2i4Mq88OPIBYKdYeMascULy8j">
     <pre class="background">
 Ferex
 www.ferex.com.mx  ferexbriones@yahoo.com.mx Fernando Augusto Briones Martinez
