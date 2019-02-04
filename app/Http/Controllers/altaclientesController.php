@@ -72,6 +72,7 @@ class altaclientesController extends Controller
     public function editar(Request $request)
     {
       //prueba para validar la forma de hacer update
+      // prueba de comentario
       $prueba=DB::table('clientes')
       ->join('clientes_direcciones', 'clientes.id', '=', 'clientes_direcciones.idcliente')
       ->join('direcciones', 'direcciones.id', '=', 'clientes_direcciones.iddireccion')

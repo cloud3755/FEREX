@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\caja;
 use App\Models\corteCaja;
+use App\Models\Ventas;
+
+use Barryvdh\DomPDF\Facade as TOPDF;
+
 
 
 class cajaController extends Controller
@@ -56,6 +60,47 @@ class cajaController extends Controller
         return view('caja.inicioCaja', compact('cajas'));
     }
 
+    function printCorte($idCorte, $tipoImpresion)
+    {
+        $corteCaja = corteCaja::find($idCorte);
+        $openCaja = corteCaja::whereDate("created_at", "<", $corteCaja->created_at)
+        ->where("idCaja",  $corteCaja->idCaja)
+        ->where("tipo", "I")
+        ->orderBy('created_at', 'desc')
+        ->first();
+
+        $Ventas =  Ventas::whereBetween('created_at', [$openCaja->created_at,$corteCaja->created_at])
+        ->where("formaDePago", "efectivo")
+        ->get();
+        
+
+        $fechaImpresion = date('d/m/y', time());
+
+        switch($tipoImpresion)
+        {
+            case 'pdf': default:
+            $view = 'partials.Print.corteCaja';
+            
+            $top = TOPDF::loadView( $view, 
+            compact(    
+                "corteCaja",
+                "openCaja",
+                "Ventas",
+                "fechaImpresion"
+            ));
+            
+        
+
+        
+        return $top->stream();
+            break;
+            case 'ticket':
+            $view = 'partials.Print.VentaTicket';
+            break;
+        }
+
+    }
+
     function historial()
     {
         $historialCaja = DB::table("corte_cajas")
@@ -65,6 +110,7 @@ class cajaController extends Controller
         ->select("users.name as nombreUsuario",
         "sucursales.nombre as nombreSucursal",
         "cajas.nombre as nombreCaja",
+        "corte_cajas.id as idCorte",
         DB::raw("case when tipo = 'A' THEN 'ARQUEO'
         WHEN tipo = 'C' THEN 'Corte'
         WHEN tipo = 'I' THEN 'Inicio' END as tipoNombre"),
@@ -108,8 +154,9 @@ class cajaController extends Controller
                 $caja->save();
                 $corte = new corteCaja();
                 $corte->setByRequest($datosCaja);
-
                 $corte->save();
+                \Session::flash('idCorte',$corte->id);
+                \Session::flash('tipoImpresion',"PDF");
             break;
 
         }

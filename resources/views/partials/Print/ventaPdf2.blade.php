@@ -3,7 +3,7 @@
 @section('content')
 
     
-   <!-- <img src="http://www.linkbyme.com.mx/staticimg/092013/logo-200197189-156-b.jpg">-->
+    <img width="700" height="150" src="http://www.ferex.com.mx/images/logo1abc.png">
     <h1 class="page-header">Venta</h1>
     <pre>
 FEREX<br>

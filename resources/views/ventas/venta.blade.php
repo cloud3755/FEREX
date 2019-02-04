@@ -201,7 +201,7 @@
         </div>
     </div>
 @if(Session::has('idVenta'))
-    <a  target="_blank" id="ventaImpresion" href="/venta/imprimir/{{session('idVenta')}}/{{session('tipoImpresion')}}"></a>
+    <a  target="_blank" id="imprimirClick" href="/venta/imprimir/{{session('idVenta')}}/{{session('tipoImpresion')}}"></a>
 @endif
 @endsection
 @section('scripts.personalizados')
@@ -209,15 +209,7 @@
     
     <script src="{{ asset('js/ventas/ventas.js') }}"></script>
     @if(Session::has('idVenta'))
-        <script>
-        $(document).ready(function() {
-            $link = $("#ventaImpresion");
-
-
-            $link[0].click();
-});
-            
-        </script>
+        <script src="{{ asset('js/utils/imprimirUtilclick.js') }}"></script>
     @endif
 
 @endsection

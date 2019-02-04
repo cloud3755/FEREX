@@ -37,7 +37,12 @@
                                 <tr>
                                     <td>{{$historial->nombreSucursal}}</td>
                                     <td>{{$historial->nombreCaja}}</td>
-                                    <td>{{$historial->tipoNombre}}</td>
+                                    <td>
+                                        {{$historial->tipoNombre}}
+                                        @if($historial->tipoNombre=="Corte")
+                                            <a class="btn btn-default" target="_blank"  href="/cajas/imprimir/{{$historial->idCorte}}/pdf">Imprimir pdf</a>
+                                        @endif
+                                    </td>
                                     <td>{{$historial->saldoSistema}}</td>
                                     <td>{{$historial->saldoCapturado}}</td>
                                     <td>{{$historial->diferencia}}</td>
