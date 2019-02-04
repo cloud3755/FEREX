@@ -41,7 +41,6 @@ class DashboardController extends Controller
                                 as Clientes,(select count(*) from users) as Vendedores'))
                                 ->get();
 
-
       return view('dashboard.dashboard',compact('ventasMes','detalleCliente','detalleVendedor','sumasDatos'));
     }
 }
